@@ -1,5 +1,6 @@
 package pl.poznan.put.fc.antipaymentGuard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,20 +28,20 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, AddPayCardActivity.class));
             }
         });
 
         PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(this);
 
-        Log.d("Insert", "Inserting ...");
+        /*Log.d("Insert", "Inserting ...");
         payCardDatabaseHelper.createPayCard(new PayCard("Test1", "000000"));
         payCardDatabaseHelper.createPayCard(new PayCard("Test2", "000001"));
-        payCardDatabaseHelper.createPayCard(new PayCard("Test3", "000002"));
+        payCardDatabaseHelper.createPayCard(new PayCard("Test3", "000002"));*/
 
         Log.d("Read", "Reading ...");
         List<PayCard> payCards = payCardDatabaseHelper.getAllPayCards();

@@ -18,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddPayCardActivity"
+            android:label="@string/title_activity_add_pay_card"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.poznan.put.fc.antipaymentGuard.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
