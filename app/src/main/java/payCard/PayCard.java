@@ -14,6 +14,8 @@ public class PayCard {
     private double balance;
     //private List<Transaction> transactionsHistory;
 
+    public PayCard() {}
+
     public PayCard(String name, String no) {
         this.name = name;
         this.no = no;
@@ -21,5 +23,27 @@ public class PayCard {
         //this.transactionsHistory = new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getNo() {
+        return no;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }
