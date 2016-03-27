@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import java.util.List;
 
 import payCard.PayCard;
+import payCard.PayCardAdapter;
 import payCard.PayCardDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         for(PayCard payCard: payCards) {
             Log.d("PayCard", payCard.getName()+ " " + payCard.getNo() + " " + payCard.getBalance());
         }
+
+        ListView payCardsListView = (ListView) findViewById(R.id.payCardsListView);
+        PayCardAdapter payCardAdapter = new PayCardAdapter(this, getLayoutInflater(), payCards);
+        payCardsListView.setAdapter(payCardAdapter);
     }
 
     @Override
