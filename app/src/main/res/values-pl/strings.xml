@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Antipayment Guard</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="hint_activity_add_pay_card_balance">Saldo</string>
+    <string name="hint_activity_add_pay_card_name">Nazwa</string>
+    <string name="hint_activity_add_pay_card_no">Numer karty</string>
+    <string name="title_activity_add_pay_card">Dodaj kartę płatniczą</string>
+    <string name="hint_activity_add_pay_card_bank_name">Nazwa banku</string>
+    <string name="hint_activity_add_pay_card_expiration_date">Data ważności</string>
+    <string name="button_activity_add_pay_card_add">Dodaj</string>
+    <string name="condition_transactions_amount">Kwota transakcji</string>
+    <string name="condition_transactions_number">Liczba transakcji</string>
+    <string name="condition_prompt">Wybierz warunek</string>
+</resources>

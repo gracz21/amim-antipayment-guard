@@ -49,7 +49,7 @@ public class PayCardDatabaseHelper extends DatabaseHelper {
                 PayCard payCard = new PayCard();
                 payCard.setName(cursor.getString(1));
                 payCard.setNo(cursor.getString(2));
-                payCard.setBalance(Double.parseDouble(cursor.getString(3)));
+                payCard.setBalance(Float.parseFloat(cursor.getString(3)));
                 payCards.add(payCard);
             } while (cursor.moveToNext());
         }

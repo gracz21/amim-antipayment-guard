@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="conditions_array">
+        <item>@string/condition_transactions_number</item>
+        <item>@string/condition_transactions_amount</item>
+    </string-array>
+</resources>
