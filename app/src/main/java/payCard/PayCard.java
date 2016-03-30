@@ -35,7 +35,7 @@ public class PayCard {
         return no;
     }
 
-    public double getBalance() {
+    public float getBalance() {
         return balance;
     }
 

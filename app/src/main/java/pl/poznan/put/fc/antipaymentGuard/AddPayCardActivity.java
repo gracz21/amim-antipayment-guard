@@ -1,13 +1,39 @@
 package pl.poznan.put.fc.antipaymentGuard;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import payCard.PayCard;
+import payCard.PayCardDatabaseHelper;
 
 public class AddPayCardActivity extends AppCompatActivity {
+    private final String LOG_TAG = AddPayCardActivity.class.getSimpleName();
+
+    private Button addPayCardButton;
+
+    private EditText nameEditText;
+    private EditText noEditText;
+    private EditText bankNameEditText;
+    private EditText balanceEditText;
+    private EditText expirationDateEditText;
+
+    private DatePickerDialog expirationDatePicker;
+
+    private SimpleDateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,20 +43,69 @@ public class AddPayCardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Button addPayCardButton = (Button) findViewById(R.id.addPayCardButton);
-        if (addPayCardButton != null) {
-            addPayCardButton.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
-                            String no = ((EditText) findViewById(R.id.noEditText)).getText().toString();
-                            String bankName = ((EditText) findViewById(R.id.bankNameEditText)).getText().toString();
-                            Float balance = Float.parseFloat(((EditText) findViewById(R.id.balanceEditText)).getText().toString());
-                        }
-                    }
-            );
-        }
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+        findViewsByIds();
+        setupDatePickerDialog();
+        setListeners();
     }
 
+    private void findViewsByIds() {
+        addPayCardButton = (Button) findViewById(R.id.addPayCardButton);
+
+        nameEditText = (EditText) findViewById(R.id.nameEditText);
+        noEditText = (EditText) findViewById(R.id.noEditText);
+        bankNameEditText = (EditText) findViewById(R.id.bankNameEditText);
+        balanceEditText = (EditText) findViewById(R.id.balanceEditText);
+        expirationDateEditText = (EditText) findViewById(R.id.expirationDateEditText);
+    }
+
+    private void setupDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        expirationDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                expirationDateEditText.setText(dateFormatter.format(newDate.getTime()));
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    private void setListeners() {
+        addPayCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewPayCard();
+            }
+        });
+
+        expirationDateEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    expirationDatePicker.show();
+                }
+                v.clearFocus();
+            }
+        });
+    }
+
+    private void addNewPayCard() {
+        String name = nameEditText.getText().toString();
+        String no = noEditText.getText().toString();
+        String bankName = bankNameEditText.getText().toString();
+        Float balance = Float.parseFloat(balanceEditText.getText().toString());
+        try {
+            Date expirationDate = dateFormatter.parse(expirationDateEditText.getText().toString());
+            PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate);
+            PayCardDatabaseHelper dbHelper = new PayCardDatabaseHelper(getApplicationContext());
+            dbHelper.createPayCard(payCard);
+            dbHelper.close();
+            Toast.makeText(getApplicationContext(), "New Pay Card added", Toast.LENGTH_SHORT).show();
+            finish();
+        } catch (ParseException e) {
+            Log.e(LOG_TAG, e.getMessage(), e);
+        }
+    }
 }

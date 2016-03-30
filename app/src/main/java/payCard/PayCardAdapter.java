@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
@@ -15,62 +18,42 @@ import pl.poznan.put.fc.antipaymentGuard.R;
 /**
  * @author Kamil Walkowiak
  */
-public class PayCardAdapter extends BaseAdapter {
-
-    private Context mContext;
-    private LayoutInflater mInflater;
-    private List<PayCard> mPayCardList;
-
-    public PayCardAdapter(Context mContext, LayoutInflater mInflater, List<PayCard> mPayCardList) {
-        this.mContext = mContext;
-        this.mInflater = mInflater;
-        this.mPayCardList = mPayCardList;
-    }
-
-    @Override
-    public int getCount() {
-        return mPayCardList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return mPayCardList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.row_pay_cards, null);
-
-            holder = new ViewHolder();
-            holder.nameTextView = (TextView) convertView.findViewById(R.id.nameTextView);
-            holder.noTextView = (TextView) convertView.findViewById(R.id.noTextView);
-            holder.balanceTextView = (TextView) convertView.findViewById(R.id.balanceTextView);
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-
-        PayCard payCard = (PayCard) getItem(position);
-
-        holder.nameTextView.setText(payCard.getName());
-        holder.noTextView.setText(payCard.getNo());
-        holder.balanceTextView.setText(NumberFormat.getInstance().format(payCard.getBalance()));
-
-        return convertView;
-    }
-
+public class PayCardAdapter extends ArrayAdapter {
     private static class ViewHolder {
         public TextView nameTextView;
         public TextView noTextView;
         public TextView balanceTextView;
+    }
+
+    public PayCardAdapter(Context context, ArrayList<PayCard> payCards) {
+        super(context, R.layout.row_pay_cards, payCards);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        PayCard payCard = (PayCard) getItem(position);
+        ViewHolder viewHolder;
+
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.row_pay_cards, parent, false);
+            viewHolder.nameTextView = (TextView) convertView.findViewById(R.id.nameTextView);
+            viewHolder.noTextView = (TextView) convertView.findViewById(R.id.noTextView);
+            viewHolder.balanceTextView = (TextView) convertView.findViewById(R.id.balanceTextView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        DecimalFormat df = new DecimalFormat();
+        df.setMinimumFractionDigits(2);
+        df.setMaximumFractionDigits(2);
+
+        viewHolder.nameTextView.setText(payCard.getName());
+        viewHolder.noTextView.setText(payCard.getNo());
+        viewHolder.balanceTextView.setText(df.format(payCard.getBalance()));
+
+        return convertView;
     }
 }

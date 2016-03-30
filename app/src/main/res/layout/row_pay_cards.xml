@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:textColor="@color/black"
         android:layout_marginLeft="55dp"
         android:layout_marginStart="55dp" />
 
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/noTextView"
+        android:textColor="@color/black"
         android:layout_below="@+id/nameTextView"
         android:layout_alignLeft="@+id/nameTextView"
         android:layout_alignStart="@+id/nameTextView" />
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/balanceTextView"
+        android:textColor="@color/black"
         android:layout_alignBottom="@+id/imageButton"
         android:layout_alignLeft="@+id/noTextView"
         android:layout_alignStart="@+id/noTextView" />

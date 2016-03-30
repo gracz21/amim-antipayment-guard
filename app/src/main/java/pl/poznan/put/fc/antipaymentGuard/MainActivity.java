@@ -1,6 +1,7 @@
 package pl.poznan.put.fc.antipaymentGuard;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import payCard.PayCard;
@@ -19,6 +21,7 @@ import payCard.PayCardAdapter;
 import payCard.PayCardDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
+    private PayCardAdapter payCardAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AddPayCardActivity.class));
             }
         });
-
-        PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(this);
-
-        /*Log.d("Insert", "Inserting ...");
-        payCardDatabaseHelper.createPayCard(new PayCard("Test1", "000000"));
-        payCardDatabaseHelper.createPayCard(new PayCard("Test2", "000001"));
-        payCardDatabaseHelper.createPayCard(new PayCard("Test3", "000002"));*/
-
-        Log.d("Read", "Reading ...");
-        List<PayCard> payCards = payCardDatabaseHelper.getAllPayCards();
-
-        for(PayCard payCard: payCards) {
-            Log.d("PayCard", payCard.getName()+ " " + payCard.getNo() + " " + payCard.getBalance());
-        }
-
         ListView payCardsListView = (ListView) findViewById(R.id.payCardsListView);
-        PayCardAdapter payCardAdapter = new PayCardAdapter(this, getLayoutInflater(), payCards);
+        payCardAdapter = new PayCardAdapter(getApplicationContext(), new ArrayList<PayCard>());
         payCardsListView.setAdapter(payCardAdapter);
     }
 
@@ -75,5 +63,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        /*Log.d("Insert", "Inserting ...");
+        payCardDatabaseHelper.createPayCard(new PayCard("Test1", "000000"));
+        payCardDatabaseHelper.createPayCard(new PayCard("Test2", "000001"));
+        payCardDatabaseHelper.createPayCard(new PayCard("Test3", "000002"));*/
+
+        (new FetchPayCardsTask()).execute();
+    }
+
+    private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {
+
+        @Override
+        protected List<PayCard> doInBackground(Void... params) {
+            PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(getApplicationContext());
+            List<PayCard> payCards = payCardDatabaseHelper.getAllPayCards();
+            payCardDatabaseHelper.close();
+            return payCards;
+        }
+
+        @Override
+        protected void onPostExecute(List<PayCard> payCards) {
+            payCardAdapter.clear();
+            payCardAdapter.addAll(payCards);
+        }
     }
 }

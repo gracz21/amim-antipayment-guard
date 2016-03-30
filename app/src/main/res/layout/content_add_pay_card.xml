@@ -93,7 +93,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
+            android:inputType="none"
             android:ems="10"
             android:id="@+id/expirationDateEditText"
             android:hint="@string/hint_activity_add_pay_card_expiration_date"
