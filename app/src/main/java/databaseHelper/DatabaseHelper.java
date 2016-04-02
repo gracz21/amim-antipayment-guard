@@ -71,7 +71,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(DROP_TABLE_TRANSACTIONS);
             //db.execSQL(DROP_TABLE_CONDITIONS);
         }
-
         onCreate(db);
     }
 }

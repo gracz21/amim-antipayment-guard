@@ -1,16 +1,17 @@
 package pl.poznan.put.fc.antipaymentGuard;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -41,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
         ListView payCardsListView = (ListView) findViewById(R.id.payCardsListView);
         payCardAdapter = new PayCardAdapter(getApplicationContext(), new ArrayList<PayCard>());
         payCardsListView.setAdapter(payCardAdapter);
+        payCardsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showPayCardsOptionsDialog((PayCard) payCardAdapter.getItem(position));
+                return true;
+            }
+        });
     }
 
     @Override
@@ -75,6 +83,19 @@ public class MainActivity extends AppCompatActivity {
         payCardDatabaseHelper.createPayCard(new PayCard("Test3", "000002"));*/
 
         (new FetchPayCardsTask()).execute();
+    }
+
+    private void showPayCardsOptionsDialog(PayCard selectedPayCard) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(selectedPayCard.getName());
+        builder.setItems(R.array.pay_cards_options_list, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {

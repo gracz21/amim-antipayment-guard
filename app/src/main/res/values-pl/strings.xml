@@ -13,4 +13,7 @@
     <string name="condition_transactions_number">Liczba transakcji</string>
     <string name="condition_prompt">Wybierz warunek</string>
     <string name="hint_activity_add_pay_card_condition_value">Wartość warunku</string>
+    <string name="dialog_pay_cards_options_activity_main_delete">Usuń</string>
+    <string name="dialog_pay_cards_options_activity_main_edit">Edytuj</string>
+    <string name="dialog_pay_cards_options_activity_main_cancel">Anuluj</string>
 </resources>

@@ -82,4 +82,10 @@ public class PayCardDatabaseHelper {
 
         return payCards;
     }
+
+    public boolean deletePayCard(int id) {
+        SQLiteDatabase db = this.databaseHelper.getWritableDatabase();
+
+        return db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{Integer.toString(id)}) > 0;
+    }
 }

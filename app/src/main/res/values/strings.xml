@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name" translatable="false">Antipayment Guard</string>
     <string name="action_settings">Settings</string>
+
+    <string name="dialog_pay_cards_options_activity_main_edit">Edit</string>
+    <string name="dialog_pay_cards_options_activity_main_delete">Delete</string>
+    <string name="dialog_pay_cards_options_activity_main_cancel">Cancel</string>
+
     <string name="title_activity_add_pay_card">Add Pay Card</string>
     <string name="hint_activity_add_pay_card_name">Name</string>
     <string name="hint_activity_add_pay_card_bank_name">Bank name</string>
