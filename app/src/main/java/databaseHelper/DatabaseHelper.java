@@ -16,14 +16,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     private static final String DATABASE_NAME = "antiPaymentGuard.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 5;
 
     private static final String CREATE_TABLE_PAY_CARDS = "CREATE TABLE " + PayCardDatabaseHelper.TABLE_NAME + "(" +
             PayCardDatabaseHelper.COLUMN_ID + " INTEGER PRIMARY KEY, " +
             PayCardDatabaseHelper.COLUMN_NAME + " TEXT NOT NULL, " +
             PayCardDatabaseHelper.COLUMN_NO + " TEXT NOT NULL, " +
-            PayCardDatabaseHelper.COLUMN_BALANCE + " FLOAT NOT NULL)";
-    private static final String CREATE_TABLE_TRANSACTIONS = "";
+            PayCardDatabaseHelper.COLUMN_BANK_NAME + " TEXT, " +
+            PayCardDatabaseHelper.COLUMN_BALANCE + " DOUBLE NOT NULL, " +
+            PayCardDatabaseHelper.COLUMN_EXPIRATION_DATE + " DATE)";
+    private static final String CREATE_TABLE_TRANSACTIONS = "CREATE TABLE " + TransactionDatabaseHelper.TABLE_NAME + "(" +
+            TransactionDatabaseHelper.COLUMN_ID + " INTEGER PRIMARY KEY, " +
+            TransactionDatabaseHelper.COLUMN_DATE + " DATE NOT NULL, " +
+            TransactionDatabaseHelper.COLUMN_AMOUNT + " DOUBLE NOT NULL,  " +
+            TransactionDatabaseHelper.COLUMN_PLACE + " TEXT NOT NULL, " +
+            TransactionDatabaseHelper.COLUMN_DESCRIPTION + " TEXT, " +
+            TransactionDatabaseHelper.COLUMN_PAY_CARD_ID + " INTEGER NOT NULL, " +
+            "FOREIGN KEY(" + TransactionDatabaseHelper.COLUMN_PAY_CARD_ID + ") REFERENCES " +
+            PayCardDatabaseHelper.TABLE_NAME + "(" + PayCardDatabaseHelper.COLUMN_ID + ")" + ")";
     private static final String CREATE_TABLE_CONDITIONS = "";
 
     private static final String DROP_TABLE_PAY_CARDS = "DROP TABLE IF EXISTS " + PayCardDatabaseHelper.TABLE_NAME;
@@ -50,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_PAY_CARDS);
-        //db.execSQL(CREATE_TABLE_TRANSACTIONS);
+        db.execSQL(CREATE_TABLE_TRANSACTIONS);
         //db.execSQL(CREATE_TABLE_CONDITIONS);
     }
 
@@ -58,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             db.execSQL(DROP_TABLE_PAY_CARDS);
-            //db.execSQL(DROP_TABLE_TRANSACTIONS);
+            db.execSQL(DROP_TABLE_TRANSACTIONS);
             //db.execSQL(DROP_TABLE_CONDITIONS);
         }
 

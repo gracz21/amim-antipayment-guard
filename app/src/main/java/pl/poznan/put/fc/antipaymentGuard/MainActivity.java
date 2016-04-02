@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         protected List<PayCard> doInBackground(Void... params) {
             PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(getApplicationContext());
             List<PayCard> payCards = payCardDatabaseHelper.getAllPayCards();
-            payCardDatabaseHelper.close();
             return payCards;
         }
 

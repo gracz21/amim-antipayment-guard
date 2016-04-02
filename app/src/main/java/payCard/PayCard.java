@@ -1,10 +1,6 @@
 package payCard;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import transaction.Transaction;
 
 /**
  * @author Kamil Walkowiak
@@ -13,13 +9,11 @@ public class PayCard {
     private String name;
     private String no;
     private String bankName;
-    private float balance;
+    private double balance;
     private Date expirationDate;
     //private List<Transaction> transactionsHistory;
 
-    public PayCard() {}
-
-    public PayCard(String name, String no, String bankName, float balance, Date expirationDate) {
+    public PayCard(String name, String no, String bankName, double balance, Date expirationDate) {
         this.name = name;
         this.no = no;
         this.bankName = bankName;
@@ -35,7 +29,7 @@ public class PayCard {
         return no;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
