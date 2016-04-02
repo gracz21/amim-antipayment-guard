@@ -16,4 +16,5 @@
     <string name="dialog_pay_cards_options_activity_main_delete">Usuń</string>
     <string name="dialog_pay_cards_options_activity_main_edit">Edytuj</string>
     <string name="dialog_pay_cards_options_activity_main_cancel">Anuluj</string>
+    <string name="dialog_pay_cards_options_activity_main_view">Wyberz</string>
 </resources>

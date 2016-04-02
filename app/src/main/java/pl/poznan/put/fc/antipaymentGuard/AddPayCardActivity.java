@@ -101,7 +101,7 @@ public class AddPayCardActivity extends AppCompatActivity {
             PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate);
             PayCardDatabaseHelper dbHelper = new PayCardDatabaseHelper(getApplicationContext());
             dbHelper.createPayCard(payCard);
-            Toast.makeText(getApplicationContext(), "New Pay Card added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "New pay card has been added", Toast.LENGTH_SHORT).show();
             finish();
         } catch (ParseException e) {
             Log.e(LOG_TAG, e.getMessage(), e);

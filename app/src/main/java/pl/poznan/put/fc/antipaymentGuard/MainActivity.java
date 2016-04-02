@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,21 +77,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        /*Log.d("Insert", "Inserting ...");
-        payCardDatabaseHelper.createPayCard(new PayCard("Test1", "000000"));
-        payCardDatabaseHelper.createPayCard(new PayCard("Test2", "000001"));
-        payCardDatabaseHelper.createPayCard(new PayCard("Test3", "000002"));*/
-
         (new FetchPayCardsTask()).execute();
     }
 
-    private void showPayCardsOptionsDialog(PayCard selectedPayCard) {
+    private void showPayCardsOptionsDialog(final PayCard selectedPayCard) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(selectedPayCard.getName());
         builder.setItems(R.array.pay_cards_options_list, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 2: {
+                        PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(getApplicationContext());
+                        if(payCardDatabaseHelper.deletePayCard(selectedPayCard.getNo())) {
+                            payCardAdapter.remove(selectedPayCard);
+                            Toast.makeText(getApplicationContext(), "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Problems occurred while removing pay card", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
             }
         });
 
