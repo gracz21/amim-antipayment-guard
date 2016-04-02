@@ -23,8 +23,9 @@ import payCard.PayCardDatabaseHelper;
 public class AddPayCardActivity extends AppCompatActivity {
     private final String LOG_TAG = AddPayCardActivity.class.getSimpleName();
 
-    private Button addPayCardButton;
+    private Toolbar toolbar;
 
+    private Button addPayCardButton;
     private EditText nameEditText;
     private EditText noEditText;
     private EditText bankNameEditText;
@@ -39,20 +40,22 @@ public class AddPayCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pay_card);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        findViewsByIds();
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-        findViewsByIds();
         setupDatePickerDialog();
         setListeners();
     }
 
     private void findViewsByIds() {
-        addPayCardButton = (Button) findViewById(R.id.addPayCardButton);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        addPayCardButton = (Button) findViewById(R.id.addPayCardButton);
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         noEditText = (EditText) findViewById(R.id.noEditText);
         bankNameEditText = (EditText) findViewById(R.id.bankNameEditText);

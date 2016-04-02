@@ -23,33 +23,24 @@ import payCard.PayCardAdapter;
 import payCard.PayCardDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
+    private Toolbar toolbar;
+    private FloatingActionButton floatingActionButton;
+    private ListView payCardsListView;
     private PayCardAdapter payCardAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        findViewsById();
+
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddPayCardActivity.class));
-            }
-        });
-        ListView payCardsListView = (ListView) findViewById(R.id.payCardsListView);
         payCardAdapter = new PayCardAdapter(getApplicationContext(), new ArrayList<PayCard>());
         payCardsListView.setAdapter(payCardAdapter);
-        payCardsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showPayCardsOptionsDialog((PayCard) payCardAdapter.getItem(position));
-                return true;
-            }
-        });
+
+        setListeners();
     }
 
     @Override
@@ -78,6 +69,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         (new FetchPayCardsTask()).execute();
+    }
+
+    private void findViewsById() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        payCardsListView = (ListView) findViewById(R.id.payCardsListView);
+    }
+
+    private void setListeners() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AddPayCardActivity.class));
+            }
+        });
+
+        payCardsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showPayCardsOptionsDialog((PayCard) payCardAdapter.getItem(position));
+                return true;
+            }
+        });
     }
 
     private void showPayCardsOptionsDialog(final PayCard selectedPayCard) {
