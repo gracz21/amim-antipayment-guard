@@ -1,4 +1,4 @@
-package dbAdapter;
+package databaseHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +11,9 @@ import transaction.TransactionDatabaseHelper;
  * @author Kamil Walkowiak
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String LOG_TAG = DatabaseHelper.class.getSimpleName();
+    private static final String LOG_TAG = DatabaseHelper.class.getSimpleName();
+
+    private static DatabaseHelper sInstance;
 
     private static final String DATABASE_NAME = "antiPaymentGuard.db";
     private static final int DATABASE_VERSION = 1;
@@ -28,8 +30,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DROP_TABLE_TRANSACTIONS = "DROP TABLE IF EXISTS " + TransactionDatabaseHelper.TABLE_NAME;
     //private static final String DROP_TABLE_CONDITIONS = "DROP TABLE IF EXISTS " + TABLE_CONDITIONS;
 
-    public DatabaseHelper(Context context) {
+    private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static DatabaseHelper getInstance(Context context) {
+        if(sInstance == null) {
+            sInstance = new DatabaseHelper(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
     }
 
     @Override
@@ -41,9 +56,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DROP_TABLE_PAY_CARDS);
-        //db.execSQL(DROP_TABLE_TRANSACTIONS);
-        //db.execSQL(DROP_TABLE_CONDITIONS);
+        if (oldVersion != newVersion) {
+            db.execSQL(DROP_TABLE_PAY_CARDS);
+            //db.execSQL(DROP_TABLE_TRANSACTIONS);
+            //db.execSQL(DROP_TABLE_CONDITIONS);
+        }
 
         onCreate(db);
     }

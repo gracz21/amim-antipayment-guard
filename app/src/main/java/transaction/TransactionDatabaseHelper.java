@@ -2,15 +2,17 @@ package transaction;
 
 import android.content.Context;
 
-import dbAdapter.DatabaseHelper;
+import databaseHelper.DatabaseHelper;
 
 /**
  * @author Kamil Walkowiak
  */
-public class TransactionDatabaseHelper extends DatabaseHelper {
+public class TransactionDatabaseHelper {
+    private DatabaseHelper databaseHelper;
+
     public static final String TABLE_NAME = "transactions";
 
     public TransactionDatabaseHelper(Context context) {
-        super(context);
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 }

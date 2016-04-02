@@ -8,12 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import dbAdapter.DatabaseHelper;
+import databaseHelper.DatabaseHelper;
 
 /**
  * @author Kamil Walkowiak
  */
-public class PayCardDatabaseHelper extends DatabaseHelper {
+public class PayCardDatabaseHelper {
+    private DatabaseHelper databaseHelper;
+
     public static final String TABLE_NAME = "payCards";
 
     public static final String COLUMN_ID = "_id";
@@ -22,11 +24,11 @@ public class PayCardDatabaseHelper extends DatabaseHelper {
     public static final String COLUMN_BALANCE = "balance";
 
     public PayCardDatabaseHelper(Context context) {
-        super(context);
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
     public void createPayCard(PayCard payCard) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.databaseHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, payCard.getName());
@@ -41,7 +43,7 @@ public class PayCardDatabaseHelper extends DatabaseHelper {
         List<PayCard> payCards = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.databaseHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if(cursor.moveToFirst()) {
