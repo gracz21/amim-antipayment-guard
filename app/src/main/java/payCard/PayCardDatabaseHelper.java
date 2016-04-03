@@ -31,6 +31,7 @@ public class PayCardDatabaseHelper {
     public static final String COLUMN_BANK_NAME = "bankName";
     public static final String COLUMN_BALANCE = "balance";
     public static final String COLUMN_EXPIRATION_DATE = "expirationDate";
+    public static final String COLUMN_CONDITION_ID = "conditionId";
 
     public PayCardDatabaseHelper(Context context) {
         databaseHelper = DatabaseHelper.getInstance(context);

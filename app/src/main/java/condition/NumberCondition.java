@@ -3,6 +3,16 @@ package condition;
 /**
  * @author Kamil Walkowiak
  */
-public class NumberCondition {
+public class NumberCondition extends Condition {
     private int numberOfTransactions;
+
+    public NumberCondition(int id, int numberOfTransactions) {
+        super(id);
+        this.numberOfTransactions = numberOfTransactions;
+    }
+
+    @Override
+    public boolean checkCondition() {
+        return false;
+    }
 }

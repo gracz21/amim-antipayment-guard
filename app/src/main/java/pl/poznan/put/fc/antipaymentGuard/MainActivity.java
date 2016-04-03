@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton floatingActionButton;
     private ListView payCardsListView;
+
     private PayCardAdapter payCardAdapter;
 
     @Override
@@ -119,12 +120,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {
-
         @Override
         protected List<PayCard> doInBackground(Void... params) {
             PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(getApplicationContext());
-            List<PayCard> payCards = payCardDatabaseHelper.getAllPayCards();
-            return payCards;
+            return payCardDatabaseHelper.getAllPayCards();
         }
 
         @Override

@@ -4,7 +4,17 @@ package condition;
  * @author Kamil Walkowiak
  */
 public abstract class Condition {
-    public boolean checkCondition() {
+    protected int id;
+
+    protected Condition(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean checkCondition(){
         return false;
     }
 }

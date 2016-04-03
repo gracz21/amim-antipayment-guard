@@ -99,8 +99,11 @@ public class AddPayCardActivity extends AppCompatActivity {
         String no = noEditText.getText().toString();
         String bankName = bankNameEditText.getText().toString();
         Float balance = Float.parseFloat(balanceEditText.getText().toString());
+        Date expirationDate = null;
         try {
-            Date expirationDate = dateFormatter.parse(expirationDateEditText.getText().toString());
+            if(!expirationDateEditText.getText().toString().isEmpty()) {
+                expirationDate = dateFormatter.parse(expirationDateEditText.getText().toString());
+            }
             PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate);
             PayCardDatabaseHelper dbHelper = new PayCardDatabaseHelper(getApplicationContext());
             dbHelper.createPayCard(payCard);
