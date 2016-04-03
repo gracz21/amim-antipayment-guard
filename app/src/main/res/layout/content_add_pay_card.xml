@@ -108,7 +108,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
+            android:id="@+id/conditionTypeSpinner"
             android:entries="@array/conditions_array"
             android:prompt="@string/condition_prompt"
             android:layout_below="@+id/layout5"
@@ -119,8 +119,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout5"
-            android:layout_toRightOf="@+id/spinner"
-            android:layout_toEndOf="@+id/spinner"
+            android:layout_toRightOf="@+id/conditionTypeSpinner"
+            android:layout_toEndOf="@+id/conditionTypeSpinner"
             android:id="@+id/view">
 
             <EditText

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -17,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import pl.poznan.put.fc.antipaymentGuard.condition.Condition;
+import pl.poznan.put.fc.antipaymentGuard.condition.ConditionDatabaseHelper;
 import pl.poznan.put.fc.antipaymentGuard.payCard.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardDatabaseHelper;
 
@@ -31,6 +34,8 @@ public class AddPayCardActivity extends AppCompatActivity {
     private EditText bankNameEditText;
     private EditText balanceEditText;
     private EditText expirationDateEditText;
+    private EditText conditionValueEditText;
+    private Spinner conditionTypeSpinner;
 
     private DatePickerDialog expirationDatePicker;
 
@@ -61,6 +66,8 @@ public class AddPayCardActivity extends AppCompatActivity {
         bankNameEditText = (EditText) findViewById(R.id.bankNameEditText);
         balanceEditText = (EditText) findViewById(R.id.balanceEditText);
         expirationDateEditText = (EditText) findViewById(R.id.expirationDateEditText);
+        conditionValueEditText = (EditText) findViewById(R.id.conditionValueEditText);
+        conditionTypeSpinner = (Spinner) findViewById(R.id.conditionTypeSpinner);
     }
 
     private void setupDatePickerDialog() {
@@ -104,7 +111,19 @@ public class AddPayCardActivity extends AppCompatActivity {
             if(!expirationDateEditText.getText().toString().isEmpty()) {
                 expirationDate = dateFormatter.parse(expirationDateEditText.getText().toString());
             }
-            PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate);
+
+            String conditionValue = conditionValueEditText.getText().toString();
+            ConditionDatabaseHelper conditionDatabaseHelper = new ConditionDatabaseHelper(getApplicationContext());
+            Condition condition;
+            if((conditionTypeSpinner.getSelectedItem()).equals(getString(R.string.condition_transactions_amount))) {
+                Double conditionAmount = Double.parseDouble(conditionValue);
+                condition = conditionDatabaseHelper.getOrCreateAmountCondition(conditionAmount);
+            } else {
+                int conditionNumber = Integer.parseInt(conditionValue);
+                condition = conditionDatabaseHelper.getOrCreateNumberCondition(conditionNumber);
+            }
+
+            PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate, condition);
             PayCardDatabaseHelper dbHelper = new PayCardDatabaseHelper(getApplicationContext());
             dbHelper.createPayCard(payCard);
             Toast.makeText(getApplicationContext(), "New pay card has been added", Toast.LENGTH_SHORT).show();

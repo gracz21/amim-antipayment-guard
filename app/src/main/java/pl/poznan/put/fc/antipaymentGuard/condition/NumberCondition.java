@@ -6,7 +6,7 @@ package pl.poznan.put.fc.antipaymentGuard.condition;
 public class NumberCondition extends Condition {
     private int numberOfTransactions;
 
-    public NumberCondition(int id, int numberOfTransactions) {
+    public NumberCondition(long id, int numberOfTransactions) {
         super(id);
         this.numberOfTransactions = numberOfTransactions;
     }

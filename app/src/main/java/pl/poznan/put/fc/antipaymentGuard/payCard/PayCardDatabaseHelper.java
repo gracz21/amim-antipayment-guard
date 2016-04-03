@@ -13,6 +13,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import pl.poznan.put.fc.antipaymentGuard.condition.AmountCondition;
+import pl.poznan.put.fc.antipaymentGuard.condition.Condition;
+import pl.poznan.put.fc.antipaymentGuard.condition.ConditionDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.condition.NumberCondition;
 import pl.poznan.put.fc.antipaymentGuard.databaseHelper.DatabaseHelper;
 
 /**
@@ -47,6 +51,7 @@ public class PayCardDatabaseHelper {
         values.put(COLUMN_BANK_NAME, payCard.getBankName());
         values.put(COLUMN_BALANCE, payCard.getBalance());
         values.put(COLUMN_EXPIRATION_DATE, dateFormat.format(payCard.getExpirationDate()));
+        values.put(COLUMN_CONDITION_ID, payCard.getCondition().getId());
 
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -56,7 +61,8 @@ public class PayCardDatabaseHelper {
         List<PayCard> payCards = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
-        String selectQuery = "SELECT * FROM " + TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " a JOIN " + ConditionDatabaseHelper.TABLE_NAME + " b ON a." +
+                COLUMN_CONDITION_ID + " = b." + ConditionDatabaseHelper.COLUMN_ID;
         SQLiteDatabase db = this.databaseHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -73,7 +79,13 @@ public class PayCardDatabaseHelper {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
 
-                PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate);
+                Condition condition;
+                if(cursor.getString(10).equals(AmountCondition.class.getSimpleName())) {
+                    condition = new AmountCondition(cursor.getLong(7), cursor.getDouble(8));
+                } else {
+                    condition = new NumberCondition(cursor.getLong(7), cursor.getInt(9));
+                }
+                PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate, condition);
                 payCards.add(payCard);
             } while (cursor.moveToNext());
         }

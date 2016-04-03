@@ -39,7 +39,7 @@ public class ConditionDatabaseHelper {
             ContentValues values = new ContentValues();
             values.put(COLUMN_TRANSACTIONS_AMOUNT, transactionsAmount);
             values.put(COLUMN_TYPE, AmountCondition.class.getSimpleName());
-            int id = (int) db.insert(TABLE_NAME, null, values);
+            long id = db.insert(TABLE_NAME, null, values);
             db.close();
             return new AmountCondition(id, transactionsAmount);
         }
@@ -60,7 +60,7 @@ public class ConditionDatabaseHelper {
             ContentValues values = new ContentValues();
             values.put(COLUMN_TRANSACTIONS_NUMBER, transactionsNumber);
             values.put(COLUMN_TYPE, NumberCondition.class.getSimpleName());
-            int id = (int) db.insert(TABLE_NAME, null, values);
+            long id = db.insert(TABLE_NAME, null, values);
             db.close();
             return new NumberCondition(id, transactionsNumber);
         }

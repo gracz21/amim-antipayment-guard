@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -130,6 +131,9 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<PayCard> payCards) {
             payCardAdapter.clear();
             payCardAdapter.addAll(payCards);
+            for(PayCard payCard: payCards) {
+                Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
+            }
         }
     }
 }

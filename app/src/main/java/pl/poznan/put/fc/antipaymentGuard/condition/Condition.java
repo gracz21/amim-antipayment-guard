@@ -4,13 +4,13 @@ package pl.poznan.put.fc.antipaymentGuard.condition;
  * @author Kamil Walkowiak
  */
 public abstract class Condition {
-    protected int id;
+    protected long id;
 
-    protected Condition(int id) {
+    protected Condition(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

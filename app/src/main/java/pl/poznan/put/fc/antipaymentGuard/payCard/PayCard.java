@@ -2,18 +2,20 @@ package pl.poznan.put.fc.antipaymentGuard.payCard;
 
 import java.util.Date;
 
+import pl.poznan.put.fc.antipaymentGuard.condition.Condition;
+
 /**
  * @author Kamil Walkowiak
  */
 public class PayCard {
-    private int id;
+    private long id;
     private String name;
     private String no;
     private String bankName;
     private double balance;
     private Date expirationDate;
+    private Condition condition;
     //private List<Transaction> transactionsHistory;
-
 
     public PayCard(String name, String no, String bankName, double balance, Date expirationDate) {
         this.name = name;
@@ -23,12 +25,22 @@ public class PayCard {
         this.expirationDate = expirationDate;
     }
 
-    public PayCard(int id, String name, String no, String bankName, double balance, Date expirationDate) {
-        this(name, no, bankName, balance, expirationDate);
+
+    public PayCard(String name, String no, String bankName, double balance, Date expirationDate, Condition condition) {
+        this.name = name;
+        this.no = no;
+        this.bankName = bankName;
+        this.balance = balance;
+        this.expirationDate = expirationDate;
+        this.condition = condition;
+    }
+
+    public PayCard(long id, String name, String no, String bankName, double balance, Date expirationDate, Condition condition) {
+        this(name, no, bankName, balance, expirationDate, condition);
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -52,23 +64,7 @@ public class PayCard {
         return expirationDate;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
-    }
-
-    public void setBalance(float balance) {
-        this.balance = balance;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public Condition getCondition() {
+        return condition;
     }
 }

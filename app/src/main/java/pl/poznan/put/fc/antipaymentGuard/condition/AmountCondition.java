@@ -6,7 +6,7 @@ package pl.poznan.put.fc.antipaymentGuard.condition;
 public class AmountCondition extends Condition {
     private double amount;
 
-    public AmountCondition(int id, double amount) {
+    public AmountCondition(long id, double amount) {
         super(id);
         this.amount = amount;
     }
