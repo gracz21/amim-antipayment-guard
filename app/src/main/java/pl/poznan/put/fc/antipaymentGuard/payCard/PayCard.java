@@ -1,4 +1,4 @@
-package payCard;
+package pl.poznan.put.fc.antipaymentGuard.payCard;
 
 import java.util.Date;
 

@@ -1,8 +1,8 @@
-package transaction;
+package pl.poznan.put.fc.antipaymentGuard.transaction;
 
 import android.content.Context;
 
-import databaseHelper.DatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.databaseHelper.DatabaseHelper;
 
 /**
  * @author Kamil Walkowiak

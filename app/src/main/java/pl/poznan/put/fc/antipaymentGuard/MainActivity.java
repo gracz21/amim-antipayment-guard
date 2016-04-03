@@ -18,9 +18,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import payCard.PayCard;
-import payCard.PayCardAdapter;
-import payCard.PayCardDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.payCard.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardAdapter;
+import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;

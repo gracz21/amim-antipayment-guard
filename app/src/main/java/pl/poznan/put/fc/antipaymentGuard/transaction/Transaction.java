@@ -1,4 +1,4 @@
-package transaction;
+package pl.poznan.put.fc.antipaymentGuard.transaction;
 
 import java.util.Date;
 

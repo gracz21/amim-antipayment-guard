@@ -17,8 +17,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import payCard.PayCard;
-import payCard.PayCardDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.payCard.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardDatabaseHelper;
 
 public class AddPayCardActivity extends AppCompatActivity {
     private final String LOG_TAG = AddPayCardActivity.class.getSimpleName();

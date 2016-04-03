@@ -1,14 +1,14 @@
-package databaseHelper;
+package pl.poznan.put.fc.antipaymentGuard.databaseHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import condition.AmountCondition;
-import condition.ConditionDatabaseHelper;
-import condition.NumberCondition;
-import payCard.PayCardDatabaseHelper;
-import transaction.TransactionDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.condition.AmountCondition;
+import pl.poznan.put.fc.antipaymentGuard.condition.ConditionDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.condition.NumberCondition;
+import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.transaction.TransactionDatabaseHelper;
 
 /**
  * @author Kamil Walkowiak

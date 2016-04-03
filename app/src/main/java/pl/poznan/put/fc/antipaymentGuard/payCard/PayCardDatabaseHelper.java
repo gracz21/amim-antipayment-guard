@@ -1,4 +1,4 @@
-package payCard;
+package pl.poznan.put.fc.antipaymentGuard.payCard;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import databaseHelper.DatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.databaseHelper.DatabaseHelper;
 
 /**
  * @author Kamil Walkowiak
