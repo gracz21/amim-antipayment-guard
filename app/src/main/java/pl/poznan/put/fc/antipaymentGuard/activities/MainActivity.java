@@ -7,29 +7,31 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardsAdapter;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
-import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardAdapter;
 import pl.poznan.put.fc.antipaymentGuard.databaseHelpers.PayCardDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton floatingActionButton;
-    private ListView payCardsListView;
+    private RecyclerView rvPayCards;
 
-    private PayCardAdapter payCardAdapter;
+    private PayCardsAdapter payCardAdapter;
+
+    private List<PayCard> payCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        payCardAdapter = new PayCardAdapter(getApplicationContext(), new ArrayList<PayCard>());
-        payCardsListView.setAdapter(payCardAdapter);
+        payCards = new ArrayList<>();
+        payCardAdapter = new PayCardsAdapter(payCards);
+        rvPayCards.setAdapter(payCardAdapter);
+        rvPayCards.setLayoutManager(new LinearLayoutManager(this));
 
         setListeners();
     }
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private void findViewsById() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        payCardsListView = (ListView) findViewById(R.id.payCardsListView);
+        rvPayCards = (RecyclerView) findViewById(R.id.rvPayCards);
     }
 
     private void setListeners() {
@@ -88,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        payCardsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showPayCardsOptionsDialog((PayCard) payCardAdapter.getItem(position));
-                return true;
-            }
-        });
+//        rvPayCards.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                showPayCardsOptionsDialog((PayCard) payCardAdapter.getItem(position));
+//                return true;
+//            }
+//        });
     }
 
     private void showPayCardsOptionsDialog(final PayCard selectedPayCard) {
@@ -107,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     case 2: {
                         PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(getApplicationContext());
                         if(payCardDatabaseHelper.deletePayCard(selectedPayCard.getNo())) {
-                            payCardAdapter.remove(selectedPayCard);
+                            //payCardAdapter.remove(selectedPayCard);
                             Toast.makeText(getApplicationContext(), "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Problems occurred while removing pay card", Toast.LENGTH_SHORT).show();
@@ -129,10 +133,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<PayCard> payCards) {
-            payCardAdapter.clear();
-            payCardAdapter.addAll(payCards);
-            for(PayCard payCard: payCards) {
+        protected void onPostExecute(List<PayCard> loadedPayCards) {
+            int curSize = payCardAdapter.getItemCount();
+            payCards.addAll(loadedPayCards);
+            payCardAdapter.notifyItemRangeInserted(curSize, loadedPayCards.size());
+            for(PayCard payCard: loadedPayCards) {
                 Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
             }
         }
