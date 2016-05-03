@@ -1,4 +1,4 @@
-package pl.poznan.put.fc.antipaymentGuard.condition;
+package pl.poznan.put.fc.antipaymentGuard.models.condition;
 
 /**
  * @author Kamil Walkowiak

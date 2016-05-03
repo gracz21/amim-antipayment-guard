@@ -1,8 +1,8 @@
-package pl.poznan.put.fc.antipaymentGuard.payCard;
+package pl.poznan.put.fc.antipaymentGuard.models;
 
 import java.util.Date;
 
-import pl.poznan.put.fc.antipaymentGuard.condition.Condition;
+import pl.poznan.put.fc.antipaymentGuard.models.condition.Condition;
 
 /**
  * @author Kamil Walkowiak

@@ -1,4 +1,4 @@
-package pl.poznan.put.fc.antipaymentGuard;
+package pl.poznan.put.fc.antipaymentGuard.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,9 +19,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.poznan.put.fc.antipaymentGuard.payCard.PayCard;
-import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardAdapter;
-import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardAdapter;
+import pl.poznan.put.fc.antipaymentGuard.databaseHelpers.PayCardDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;

@@ -1,4 +1,4 @@
-package pl.poznan.put.fc.antipaymentGuard.transaction;
+package pl.poznan.put.fc.antipaymentGuard.adapters;
 
 /**
  * @author Kamil Walkowiak

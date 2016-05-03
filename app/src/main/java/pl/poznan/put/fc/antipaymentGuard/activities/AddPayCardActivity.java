@@ -1,4 +1,4 @@
-package pl.poznan.put.fc.antipaymentGuard;
+package pl.poznan.put.fc.antipaymentGuard.activities;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -18,10 +18,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import pl.poznan.put.fc.antipaymentGuard.condition.Condition;
-import pl.poznan.put.fc.antipaymentGuard.condition.ConditionDatabaseHelper;
-import pl.poznan.put.fc.antipaymentGuard.payCard.PayCard;
-import pl.poznan.put.fc.antipaymentGuard.payCard.PayCardDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.models.condition.Condition;
+import pl.poznan.put.fc.antipaymentGuard.models.condition.ConditionDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.databaseHelpers.PayCardDatabaseHelper;
 
 public class AddPayCardActivity extends AppCompatActivity {
     private final String LOG_TAG = AddPayCardActivity.class.getSimpleName();

@@ -1,4 +1,4 @@
-package pl.poznan.put.fc.antipaymentGuard.payCard;
+package pl.poznan.put.fc.antipaymentGuard.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 
 /**
  * @author Kamil Walkowiak

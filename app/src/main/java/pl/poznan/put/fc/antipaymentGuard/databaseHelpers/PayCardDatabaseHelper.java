@@ -1,4 +1,4 @@
-package pl.poznan.put.fc.antipaymentGuard.payCard;
+package pl.poznan.put.fc.antipaymentGuard.databaseHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,11 +13,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import pl.poznan.put.fc.antipaymentGuard.condition.AmountCondition;
-import pl.poznan.put.fc.antipaymentGuard.condition.Condition;
-import pl.poznan.put.fc.antipaymentGuard.condition.ConditionDatabaseHelper;
-import pl.poznan.put.fc.antipaymentGuard.condition.NumberCondition;
-import pl.poznan.put.fc.antipaymentGuard.databaseHelper.DatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.models.condition.AmountCondition;
+import pl.poznan.put.fc.antipaymentGuard.models.condition.Condition;
+import pl.poznan.put.fc.antipaymentGuard.models.condition.ConditionDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.models.condition.NumberCondition;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 
 /**
  * @author Kamil Walkowiak
