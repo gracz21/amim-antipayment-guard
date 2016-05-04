@@ -1,7 +1,5 @@
 package pl.poznan.put.fc.antipaymentGuard.activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +20,7 @@ import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardsAdapter;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.databaseHelpers.PayCardDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.decorators.DividerItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -46,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         payCardAdapter = new PayCardsAdapter(payCards);
         rvPayCards.setAdapter(payCardAdapter);
         rvPayCards.setLayoutManager(new LinearLayoutManager(this));
+        rvPayCards.setHasFixedSize(true);
+        rvPayCards.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
         setListeners();
     }
@@ -75,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        int size = payCards.size();
+        if(size != 0) {
+            payCards.clear();
+            payCardAdapter.notifyItemRangeRemoved(0, size);
+        }
         (new FetchPayCardsTask()).execute();
     }
 
@@ -91,38 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AddPayCardActivity.class));
             }
         });
-
-//        rvPayCards.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                showPayCardsOptionsDialog((PayCard) payCardAdapter.getItem(position));
-//                return true;
-//            }
-//        });
-    }
-
-    private void showPayCardsOptionsDialog(final PayCard selectedPayCard) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(selectedPayCard.getName());
-        builder.setItems(R.array.pay_cards_options_list, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 2: {
-                        PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(getApplicationContext());
-                        if(payCardDatabaseHelper.deletePayCard(selectedPayCard.getNo())) {
-                            //payCardAdapter.remove(selectedPayCard);
-                            Toast.makeText(getApplicationContext(), "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Problems occurred while removing pay card", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {
@@ -134,9 +107,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<PayCard> loadedPayCards) {
-            int curSize = payCardAdapter.getItemCount();
             payCards.addAll(loadedPayCards);
-            payCardAdapter.notifyItemRangeInserted(curSize, loadedPayCards.size());
+            payCardAdapter.notifyItemRangeInserted(0, loadedPayCards.size());
             for(PayCard payCard: loadedPayCards) {
                 Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
             }
