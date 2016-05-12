@@ -18,4 +18,6 @@
     <string name="condition_transactions_number">Transactions number</string>
     <string name="condition_transactions_amount">Transactions amount</string>
     <string name="hint_activity_add_pay_card_condition_value">Condition value</string>
+    <string name="pay_card_information">Pay card information</string>
+    <string name="condition_information">Condition information</string>
 </resources>
