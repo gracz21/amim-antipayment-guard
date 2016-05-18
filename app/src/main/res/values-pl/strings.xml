@@ -20,4 +20,7 @@
     <string name="pay_card_information">Informacje o karcie płatniczej</string>
     <string name="condition_information">Informacje o warunku</string>
     <string name="pay_card_created">Nowa karta płatnicza została dodana</string>
+    <string name="title_activity_pay_card_details"></string>
+    <string name="title_fragment_pay_card_details">Szczegóły</string>
+    <string name="title_fragment_transactions_list">Transakcje</string>
 </resources>

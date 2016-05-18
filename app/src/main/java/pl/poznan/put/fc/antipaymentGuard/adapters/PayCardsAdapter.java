@@ -15,7 +15,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
-import pl.poznan.put.fc.antipaymentGuard.activities.PayCardDetailsActivity;
+import pl.poznan.put.fc.antipaymentGuard.activities.PayCardActivity;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 
 /**
@@ -60,9 +60,17 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which) {
+                        case 0: {
+                            PayCard selectedPayCard = payCards.get(getLayoutPosition());
+                            Intent intent = new Intent(context, PayCardActivity.class);
+                            intent.putExtra("payCardId", selectedPayCard.getId());
+                            context.startActivity(intent);
+                            break;
+                        }
                         case 2: {
                             selectedPayCard.delete();
                             Toast.makeText(context, "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
+                            break;
                         }
                     }
                 }
@@ -75,7 +83,10 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            v.getContext().startActivity(new Intent(v.getContext(), PayCardDetailsActivity.class));
+            PayCard selectedPayCard = payCards.get(getLayoutPosition());
+            Intent intent = new Intent(v.getContext(), PayCardActivity.class);
+            intent.putExtra("payCardId", selectedPayCard.getId());
+            v.getContext().startActivity(intent);
         }
     }
 

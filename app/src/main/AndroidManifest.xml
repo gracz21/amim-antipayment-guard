@@ -40,7 +40,7 @@
             android:value="pl.poznan.put.fc.antipaymentGuard.models.PayCard,             pl.poznan.put.fc.antipaymentGuard.models.Transaction,             pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition,             pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition" />
 
         <activity
-            android:name=".activities.PayCardDetailsActivity"
+            android:name=".activities.PayCardActivity"
             android:label="@string/title_activity_pay_card_details"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
