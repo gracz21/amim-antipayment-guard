@@ -3,6 +3,7 @@ package pl.poznan.put.fc.antipaymentGuard.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.activities.PayCardDetailsActivity;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 
 /**
@@ -73,6 +75,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
+            v.getContext().startActivity(new Intent(v.getContext(), PayCardDetailsActivity.class));
         }
     }
 

@@ -21,4 +21,6 @@
     <string name="pay_card_information">Pay card information</string>
     <string name="condition_information">Condition information</string>
     <string name="pay_card_created">New pay card has been added</string>
+    <string name="title_activity_pay_card_details">PayCardDetailsActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
