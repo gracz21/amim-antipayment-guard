@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
-import pl.poznan.put.fc.antipaymentGuard.databaseHelpers.PayCardDatabaseHelper;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 
 /**
@@ -41,7 +39,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
         public void bind(PayCard payCard) {
             nameTextView.setText(payCard.getName());
-            noTextView.setText(payCard.getNo());
+            noTextView.setText(payCard.getCardNumber());
 
             DecimalFormat df = new DecimalFormat();
             df.setMinimumFractionDigits(2);
@@ -61,15 +59,8 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which) {
                         case 2: {
-                            PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(context);
-                            if(payCardDatabaseHelper.deletePayCard(selectedPayCard.getNo())) {
-                                int position = payCards.indexOf(selectedPayCard);
-                                payCardDatabaseHelper.deletePayCard(selectedPayCard.getNo());
-                                notifyItemRemoved(position);
-                                Toast.makeText(context, "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(context, "Problems occurred while removing pay card", Toast.LENGTH_SHORT).show();
-                            }
+                            selectedPayCard.delete();
+                            Toast.makeText(context, "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

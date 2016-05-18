@@ -19,10 +19,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
-import pl.poznan.put.fc.antipaymentGuard.models.condition.Condition;
-import pl.poznan.put.fc.antipaymentGuard.models.condition.ConditionDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
-import pl.poznan.put.fc.antipaymentGuard.databaseHelpers.PayCardDatabaseHelper;
+import pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition;
 
 public class AddPayCardActivity extends AppCompatActivity {
     private final String LOG_TAG = AddPayCardActivity.class.getSimpleName();
@@ -112,22 +111,22 @@ public class AddPayCardActivity extends AppCompatActivity {
             if(!expirationDateEditText.getText().toString().isEmpty()) {
                 expirationDate = dateFormatter.parse(expirationDateEditText.getText().toString());
             }
-
             String conditionValue = conditionValueEditText.getText().toString();
-            ConditionDatabaseHelper conditionDatabaseHelper = new ConditionDatabaseHelper(getApplicationContext());
-            Condition condition;
+
             if((conditionTypeSpinner.getSelectedItem()).equals(getString(R.string.condition_transactions_amount))) {
                 Double conditionAmount = Double.parseDouble(conditionValue);
-                condition = conditionDatabaseHelper.getOrCreateAmountCondition(conditionAmount);
+                AmountCondition condition = new AmountCondition(conditionAmount);
+                condition.save();
+                PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate, condition);
+                payCard.save();
             } else {
                 int conditionNumber = Integer.parseInt(conditionValue);
-                condition = conditionDatabaseHelper.getOrCreateNumberCondition(conditionNumber);
+                NumberCondition condition = new NumberCondition(conditionNumber);
+                condition.save();
+                PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate, condition);
+                payCard.save();
             }
-
-            PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate, condition);
-            PayCardDatabaseHelper dbHelper = new PayCardDatabaseHelper(getApplicationContext());
-            dbHelper.createPayCard(payCard);
-            Toast.makeText(getApplicationContext(), "New pay card has been added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.pay_card_created, Toast.LENGTH_SHORT).show();
             finish();
         } catch (ParseException e) {
             Log.e(LOG_TAG, e.getMessage(), e);

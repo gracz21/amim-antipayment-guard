@@ -20,4 +20,5 @@
     <string name="hint_activity_add_pay_card_condition_value">Condition value</string>
     <string name="pay_card_information">Pay card information</string>
     <string name="condition_information">Condition information</string>
+    <string name="pay_card_created">New pay card has been added</string>
 </resources>

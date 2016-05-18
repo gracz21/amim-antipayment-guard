@@ -19,4 +19,5 @@
     <string name="dialog_pay_cards_options_activity_main_view">Wyberz</string>
     <string name="pay_card_information">Informacje o karcie płatniczej</string>
     <string name="condition_information">Informacje o warunku</string>
+    <string name="pay_card_created">Nowa karta płatnicza została dodana</string>
 </resources>

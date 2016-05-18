@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,6 @@ import java.util.List;
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardsAdapter;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
-import pl.poznan.put.fc.antipaymentGuard.databaseHelpers.PayCardDatabaseHelper;
 import pl.poznan.put.fc.antipaymentGuard.decorators.DividerItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
@@ -101,8 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {
         @Override
         protected List<PayCard> doInBackground(Void... params) {
-            PayCardDatabaseHelper payCardDatabaseHelper = new PayCardDatabaseHelper(getApplicationContext());
-            return payCardDatabaseHelper.getAllPayCards();
+            return new Select().from(PayCard.class).execute();
         }
 
         @Override
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             payCardAdapter.notifyItemRangeInserted(0, loadedPayCards.size());
             for(PayCard payCard: loadedPayCards) {
                 Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
+                Toast.makeText(getApplicationContext(), payCard.getCondition().getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
             }
         }
     }
