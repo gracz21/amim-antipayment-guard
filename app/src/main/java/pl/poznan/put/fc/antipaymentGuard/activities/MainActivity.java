@@ -22,7 +22,6 @@ import java.util.List;
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardsAdapter;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
-import pl.poznan.put.fc.antipaymentGuard.decorators.DividerItemDecoration;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         rvPayCards.setAdapter(payCardAdapter);
         rvPayCards.setLayoutManager(new LinearLayoutManager(this));
         rvPayCards.setHasFixedSize(true);
-        rvPayCards.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
         setListeners();
     }
