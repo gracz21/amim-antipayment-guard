@@ -64,13 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        int size = payCards.size();
-        if(size != 0) {
-            payCards.clear();
-            payCardAdapter.notifyItemRangeRemoved(0, size);
-        }
+    protected void onResume() {
+        super.onResume();
         (new FetchPayCardsTask()).execute();
     }
 
@@ -97,12 +92,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<PayCard> loadedPayCards) {
+            int size = payCards.size();
+            if(size != 0) {
+                payCards.clear();
+                payCardAdapter.notifyItemRangeRemoved(0, size);
+            }
             payCards.addAll(loadedPayCards);
             payCardAdapter.notifyItemRangeInserted(0, loadedPayCards.size());
-            for(PayCard payCard: loadedPayCards) {
-                Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
-                Toast.makeText(getApplicationContext(), payCard.getCondition().getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
-            }
+//            for(PayCard payCard: loadedPayCards) {
+//                Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
+//                Toast.makeText(getApplicationContext(), payCard.getCondition().getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 }
