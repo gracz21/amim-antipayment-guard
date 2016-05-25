@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Antipayment Guard</string>
     <string name="action_settings">Ustawienia</string>
     <string name="hint_activity_add_pay_card_balance">Saldo</string>
     <string name="hint_activity_add_pay_card_name">Nazwa</string>
@@ -20,7 +19,7 @@
     <string name="pay_card_information">Informacje o karcie płatniczej</string>
     <string name="condition_information">Informacje o warunku</string>
     <string name="pay_card_created">Nowa karta płatnicza została dodana</string>
-    <string name="title_activity_pay_card_details"></string>
+    <string name="title_activity_pay_card_details">Szczegóły karty płatniczej</string>
     <string name="title_fragment_pay_card_details">Szczegóły</string>
     <string name="title_fragment_transactions_list">Transakcje</string>
 </resources>
