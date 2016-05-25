@@ -104,7 +104,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View payCardView = inflater.inflate(R.layout.item_pay_cards, parent, false);
+        View payCardView = inflater.inflate(R.layout.item_pay_card, parent, false);
         return new ViewHolder(payCardView);
     }
 
