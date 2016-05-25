@@ -23,6 +23,7 @@ import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
  */
 public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHolder> {
     private List<PayCard> payCards;
+    private Context context;
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView nameTextView;
@@ -41,12 +42,15 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
         public void bind(PayCard payCard) {
             nameTextView.setText(payCard.getName());
-            noTextView.setText(payCard.getCardNumber());
+
+            String no = context.getString(R.string.card_no) + ": " + payCard.getCardNumber();
+            noTextView.setText(no);
 
             DecimalFormat df = new DecimalFormat();
             df.setMinimumFractionDigits(2);
             df.setMaximumFractionDigits(2);
-            balanceTextView.setText(df.format(payCard.getBalance()));
+            String balance = context.getString(R.string.balance) + ": " + df.format(payCard.getBalance());
+            balanceTextView.setText(balance);
         }
 
         @Override
@@ -90,8 +94,9 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
         }
     }
 
-    public PayCardsAdapter(List<PayCard> payCards) {
+    public PayCardsAdapter(List<PayCard> payCards, Context context) {
         this.payCards = payCards;
+        this.context = context;
     }
 
     @Override

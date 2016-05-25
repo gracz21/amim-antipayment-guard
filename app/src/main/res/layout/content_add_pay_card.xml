@@ -74,7 +74,7 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/noEditText"
-                android:hint="@string/hint_activity_add_pay_card_no"
+                android:hint="@string/card_no"
                 android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>
@@ -91,7 +91,7 @@
                 android:inputType="numberDecimal"
                 android:ems="10"
                 android:id="@+id/balanceEditText"
-                android:hint="@string/hint_activity_add_pay_card_balance"
+                android:hint="@string/balance"
                 android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>

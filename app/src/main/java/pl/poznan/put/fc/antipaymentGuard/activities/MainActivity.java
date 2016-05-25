@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         payCards = new ArrayList<>();
-        payCardAdapter = new PayCardsAdapter(payCards);
+        payCardAdapter = new PayCardsAdapter(payCards, this);
         rvPayCards.setAdapter(payCardAdapter);
         rvPayCards.setLayoutManager(new LinearLayoutManager(this));
         rvPayCards.setHasFixedSize(true);
