@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,7 +30,6 @@ public class AddPayCardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    private Button addPayCardButton;
     private EditText nameEditText;
     private EditText noEditText;
     private EditText bankNameEditText;
@@ -57,10 +58,25 @@ public class AddPayCardActivity extends AppCompatActivity {
         setListeners();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_pay_card, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_add) {
+            addNewPayCard();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void findViewsByIds() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        addPayCardButton = (Button) findViewById(R.id.addPayCardButton);
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         noEditText = (EditText) findViewById(R.id.noEditText);
         bankNameEditText = (EditText) findViewById(R.id.bankNameEditText);
@@ -83,13 +99,6 @@ public class AddPayCardActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        addPayCardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewPayCard();
-            }
-        });
-
         expirationDateEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

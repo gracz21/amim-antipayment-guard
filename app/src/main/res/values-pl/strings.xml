@@ -22,4 +22,5 @@
     <string name="title_activity_pay_card_details">Szczegóły karty płatniczej</string>
     <string name="title_fragment_pay_card_details">Szczegóły</string>
     <string name="title_fragment_transactions_list">Transakcje</string>
+    <string name="add">Dodaj</string>
 </resources>
