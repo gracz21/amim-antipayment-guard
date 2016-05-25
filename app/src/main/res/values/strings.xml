@@ -9,10 +9,10 @@
 
     <string name="title_activity_add_pay_card">Add Pay Card</string>
     <string name="hint_activity_add_pay_card_name">Name</string>
-    <string name="hint_activity_add_pay_card_bank_name">Bank name</string>
+    <string name="bank" translatable="false">Bank</string>
     <string name="card_no">Card no</string>
     <string name="balance">Balance</string>
-    <string name="hint_activity_add_pay_card_expiration_date">Expiration date</string>
+    <string name="expiration_date">Expiration date</string>
     <string name="button_activity_add_pay_card_add">Add</string>
     <string name="condition_prompt">Select condition</string>
     <string name="condition_transactions_number">Transactions number</string>

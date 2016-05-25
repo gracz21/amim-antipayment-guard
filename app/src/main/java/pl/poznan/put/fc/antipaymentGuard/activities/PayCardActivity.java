@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardSectionAdapter;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 
 public class PayCardActivity extends AppCompatActivity {
     private PayCardSectionAdapter mSectionsPagerAdapter;
@@ -34,7 +35,9 @@ public class PayCardActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mSectionsPagerAdapter = new PayCardSectionAdapter(getSupportFragmentManager(), this);
+
+        PayCard payCard = (PayCard) getIntent().getSerializableExtra("payCard");
+        mSectionsPagerAdapter = new PayCardSectionAdapter(getSupportFragmentManager(), this, payCard);
 
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

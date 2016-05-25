@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/payCardIcon"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="16dp"
+
+        android:src="@drawable/ic_credit_card_48dp" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_toRightOf="@+id/payCardIcon"
+        android:layout_marginBottom="6dip"
+
+        android:textSize="48sp"
+        android:singleLine="true"
+        android:text="New Text" />
+
+    <TextView
+        android:id="@+id/balanceLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/payCardIcon"
+        android:layout_marginBottom="17dip"
+
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="@string/balance" />
+
+    <TextView
+        android:id="@+id/balanceTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/payCardIcon"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="17dip"
+
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/noLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/balanceLabelTextView"
+
+        android:textStyle="bold"
+        android:text="@string/card_no" />
+
+    <TextView
+        android:id="@+id/noTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/balanceTextView"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/bankNameLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/noLabelTextView"
+
+        android:textStyle="bold"
+        android:text="@string/bank" />
+
+    <TextView
+        android:id="@+id/bankNameTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/noTextView" />
+
+    <TextView
+        android:id="@+id/expirationDateLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/bankNameLabelTextView"
+
+        android:textStyle="bold"
+        android:text="@string/expiration_date" />
+
+    <TextView
+        android:id="@+id/expirationDateTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/bankNameTextView" />
+
+
+</RelativeLayout>

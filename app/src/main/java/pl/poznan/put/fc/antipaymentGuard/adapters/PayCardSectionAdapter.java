@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.fragments.PayCardDetailsFragment;
 import pl.poznan.put.fc.antipaymentGuard.fragments.TransactionsListFragment;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 
 /**
  * @author Kamil Walkowiak
@@ -15,17 +16,19 @@ import pl.poznan.put.fc.antipaymentGuard.fragments.TransactionsListFragment;
 public class PayCardSectionAdapter extends FragmentPagerAdapter {
     final int pageCount = 2;
     private Context context;
+    private PayCard payCard;
 
-    public PayCardSectionAdapter(FragmentManager fm, Context context) {
+    public PayCardSectionAdapter(FragmentManager fm, Context context, PayCard payCard) {
         super(fm);
         this.context = context;
+        this.payCard = payCard;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new PayCardDetailsFragment();
+                return PayCardDetailsFragment.newInstance(payCard);
             case 1:
                 return new TransactionsListFragment();
         }

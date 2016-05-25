@@ -34,7 +34,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
             super(itemView);
 
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
-            noTextView = (TextView) itemView.findViewById(R.id.noTextView);
+            noTextView = (TextView) itemView.findViewById(R.id.noLabelTextView);
             balanceTextView = (TextView) itemView.findViewById(R.id.balanceTextView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -67,7 +67,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                         case 0: {
                             PayCard selectedPayCard = payCards.get(getLayoutPosition());
                             Intent intent = new Intent(context, PayCardActivity.class);
-                            intent.putExtra("payCardId", selectedPayCard.getId());
+                            intent.putExtra("payCard", selectedPayCard);
                             context.startActivity(intent);
                             break;
                         }
@@ -89,7 +89,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
         public void onClick(View v) {
             PayCard selectedPayCard = payCards.get(getLayoutPosition());
             Intent intent = new Intent(v.getContext(), PayCardActivity.class);
-            intent.putExtra("payCardId", selectedPayCard.getId());
+            intent.putExtra("payCard", selectedPayCard);
             v.getContext().startActivity(intent);
         }
     }

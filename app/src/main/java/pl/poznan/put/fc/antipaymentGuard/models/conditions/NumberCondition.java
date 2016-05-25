@@ -4,11 +4,13 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.io.Serializable;
+
 /**
  * @author Kamil Walkowiak
  */
 @Table(name = "NumberConditions")
-public class NumberCondition  extends Condition {
+public class NumberCondition  extends Condition implements Serializable {
     @Column(name = "NumberOfTransactions")
     private int numberOfTransactions;
 

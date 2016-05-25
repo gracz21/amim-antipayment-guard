@@ -43,7 +43,7 @@
             android:text="Large Text" />
 
         <TextView
-            android:id="@+id/noTextView"
+            android:id="@+id/noLabelTextView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
 
             android:layout_toRightOf="@id/imageButton"
             android:layout_toEndOf="@id/imageButton"
-            android:layout_below="@id/noTextView"
+            android:layout_below="@id/noLabelTextView"
 
             android:text="New Text" />
     </RelativeLayout>

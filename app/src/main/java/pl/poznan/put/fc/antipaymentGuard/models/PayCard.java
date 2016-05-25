@@ -4,6 +4,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition;
  * @author Kamil Walkowiak
  */
 @Table(name = "PayCards")
-public class PayCard extends Model {
+public class PayCard extends Model implements Serializable {
     @Column(name = "Name")
     private String name;
     @Column(name = "CardNumber")

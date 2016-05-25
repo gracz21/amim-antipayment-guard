@@ -28,17 +28,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="apg4.db" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1" />
-        <meta-data
-            android:name="AA_MODELS"
-            android:value="pl.poznan.put.fc.antipaymentGuard.models.PayCard,             pl.poznan.put.fc.antipaymentGuard.models.Transaction,             pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition,             pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition" />
-
         <activity
             android:name=".activities.PayCardActivity"
             android:label="@string/title_activity_pay_card_details"
@@ -48,6 +37,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.poznan.put.fc.antipaymentGuard.activities.MainActivity" />
         </activity>
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="apg4.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="pl.poznan.put.fc.antipaymentGuard.models.PayCard,
+            pl.poznan.put.fc.antipaymentGuard.models.Transaction,
+            pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition,
+            pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition" />
     </application>
 
 </manifest>

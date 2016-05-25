@@ -40,7 +40,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/nameEditText"
                 android:hint="@string/hint_activity_add_pay_card_name"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:drawableLeft="@drawable/ic_add_24dp"
+                android:drawablePadding="10dp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/bankNameEditText"
                 android:singleLine="true"
-                android:hint="@string/hint_activity_add_pay_card_bank_name" />
+                android:hint="@string/bank" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -108,7 +110,7 @@
                 android:inputType="date"
                 android:ems="10"
                 android:id="@+id/expirationDateEditText"
-                android:hint="@string/hint_activity_add_pay_card_expiration_date"
+                android:hint="@string/expiration_date"
                 android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>
