@@ -37,10 +37,29 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.poznan.put.fc.antipaymentGuard.activities.MainActivity" />
         </activity>
-        <meta-data android:name="DATABASE" android:value="apg6.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="pl.poznan.put.fc.antipaymentGuard.models" />
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="apg6.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="pl.poznan.put.fc.antipaymentGuard.models" />
+
+        <activity
+            android:name=".activities.AddPayCardTransaction"
+            android:label="@string/title_activity_add_pay_card_transaction"
+            android:parentActivityName=".activities.PayCardActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.poznan.put.fc.antipaymentGuard.activities.PayCardActivity" />
+        </activity>
     </application>
 
 </manifest>
