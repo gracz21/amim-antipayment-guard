@@ -10,6 +10,7 @@ import java.util.Date;
  * @author Kamil Walkowiak
  */
 public class PayCardTransaction extends SugarRecord implements Serializable {
+    private String name;
     private Date date;
     private Double amount;
     private String place;
@@ -21,12 +22,17 @@ public class PayCardTransaction extends SugarRecord implements Serializable {
 
     }
 
-    public PayCardTransaction(Date date, Double amount, String place, String description, PayCard payCard) {
+    public PayCardTransaction(String name, Date date, Double amount, String place, String description, PayCard payCard) {
+        this.name = name;
         this.date = date;
         this.amount = amount;
         this.place = place;
         this.description = description;
         this.payCard = payCard;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Date getDate() {
@@ -54,6 +60,10 @@ public class PayCardTransaction extends SugarRecord implements Serializable {
         df.setMinimumFractionDigits(2);
         df.setMaximumFractionDigits(2);
         return df.format(amount) + " " + payCard.getCurrencyName();
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDate(Date date) {

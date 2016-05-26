@@ -8,7 +8,7 @@
     <string name="dialog_pay_cards_options_activity_main_cancel">Cancel</string>
 
     <string name="title_activity_add_pay_card">Add Pay Card</string>
-    <string name="hint_activity_add_pay_card_name">Name</string>
+    <string name="name">Name</string>
     <string name="bank" translatable="false">Bank</string>
     <string name="card_no">Card no</string>
     <string name="balance">Balance</string>
@@ -28,4 +28,7 @@
     <string name="amount">Amount</string>
     <string name="transactionDate">Transaction date</string>
     <string name="title_activity_add_pay_card_transaction">Add Transaction</string>
+    <string name="date">Date</string>
+    <string name="place">Place</string>
+    <string name="description">Description</string>
 </resources>

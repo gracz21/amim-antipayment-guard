@@ -12,4 +12,109 @@
     tools:context="pl.poznan.put.fc.antipaymentGuard.activities.AddPayCardTransaction"
     tools:showIn="@layout/activity_add_pay_card_transaction">
 
+    <ImageView
+        android:id="@+id/dateIconImageView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+
+        android:src="@drawable/ic_date_24dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/dateTextInputLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_toRightOf="@id/dateIconImageView"
+        android:layout_toEndOf="@id/dateIconImageView"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/dateEditText"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:inputType="date"
+            android:ems="10"
+
+            android:hint="@string/expiration_date"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/placeIconImageView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/dateTextInputLayout"
+
+        android:src="@drawable/ic_place_24dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/placeTextInputLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/dateTextInputLayout"
+        android:layout_toRightOf="@id/placeIconImageView"
+        android:layout_toEndOf="@id/placeIconImageView"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/placeEditText"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:singleLine="true"
+            android:hint="@string/place" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/descriptionIconImageView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/placeTextInputLayout"
+
+        android:src="@drawable/ic_description_24dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/descriptionTextInputLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/placeTextInputLayout"
+        android:layout_toRightOf="@id/placeIconImageView"
+        android:layout_toEndOf="@id/placeIconImageView"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/descriptionEditText"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:inputType="textMultiLine"
+            android:hint="@string/description" />
+
+    </android.support.design.widget.TextInputLayout>
+
 </RelativeLayout>

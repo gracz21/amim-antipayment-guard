@@ -79,10 +79,10 @@ public class AddPayCardActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         nameEditText = (EditText) findViewById(R.id.nameEditText);
-        noEditText = (EditText) findViewById(R.id.noEditText);
-        bankNameEditText = (EditText) findViewById(R.id.bankNameEditText);
+        noEditText = (EditText) findViewById(R.id.amountEditText);
+        bankNameEditText = (EditText) findViewById(R.id.placeEditText);
         balanceEditText = (EditText) findViewById(R.id.balanceEditText);
-        expirationDateEditText = (EditText) findViewById(R.id.expirationDateEditText);
+        expirationDateEditText = (EditText) findViewById(R.id.dateEditText);
         conditionValueEditText = (EditText) findViewById(R.id.conditionValueEditText);
         conditionTypeSpinner = (Spinner) findViewById(R.id.conditionTypeSpinner);
     }

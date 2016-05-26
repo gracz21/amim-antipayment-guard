@@ -2,7 +2,7 @@
 <resources>
     <string name="action_settings">Ustawienia</string>
     <string name="balance">Saldo</string>
-    <string name="hint_activity_add_pay_card_name">Nazwa</string>
+    <string name="name">Nazwa</string>
     <string name="card_no">Numer karty</string>
     <string name="title_activity_add_pay_card">Dodaj kartę płatniczą</string>
     <string name="expiration_date">Data ważności</string>
@@ -24,4 +24,8 @@
     <string name="add">Dodaj</string>
     <string name="amount">Kwota</string>
     <string name="transactionDate">Data trancakcji</string>
+    <string name="date">Data</string>
+    <string name="place">Miejsce</string>
+    <string name="title_activity_add_pay_card_transaction">Dodaj transakcję</string>
+    <string name="description">Opis</string>
 </resources>
