@@ -1,33 +1,27 @@
 package pl.poznan.put.fc.antipaymentGuard.models;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.orm.SugarRecord;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
  * @author Kamil Walkowiak
  */
-@Table(name = "Transactions")
-public class Transaction extends Model {
-    @Column(name = "Date")
+public class PayCardTransaction extends SugarRecord implements Serializable {
     private Date date;
-    @Column(name = "Amount")
     private Double amount;
-    @Column(name = "Place")
     private String place;
-    @Column(name = "Description")
     private String description;
-    @Column(name = "PayCard", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
+
     private PayCard payCard;
 
-    public Transaction() {
+    public PayCardTransaction() {
 
     }
 
-    public Transaction(Date date, Double amount, String place, String description, PayCard payCard) {
+    public PayCardTransaction(Date date, Double amount, String place, String description, PayCard payCard) {
         this.date = date;
         this.amount = amount;
         this.place = place;
@@ -59,8 +53,7 @@ public class Transaction extends Model {
         DecimalFormat df = new DecimalFormat();
         df.setMinimumFractionDigits(2);
         df.setMaximumFractionDigits(2);
-        //TODO currencyName
-        return df.format(amount);
+        return df.format(amount) + " " + payCard.getCurrencyName();
     }
 
     public void setDate(Date date) {

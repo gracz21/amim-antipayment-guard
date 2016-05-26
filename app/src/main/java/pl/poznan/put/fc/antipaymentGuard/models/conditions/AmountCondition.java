@@ -1,17 +1,11 @@
 package pl.poznan.put.fc.antipaymentGuard.models.conditions;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
-
 import java.io.Serializable;
 
 /**
  * @author Kamil Walkowiak
  */
-@Table(name = "AmountConditions")
 public class AmountCondition extends Condition implements Serializable {
-    @Column(name = "Amount")
     private double amount;
 
     public AmountCondition() {

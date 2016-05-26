@@ -1,11 +1,11 @@
 package pl.poznan.put.fc.antipaymentGuard.models.conditions;
 
-import com.activeandroid.Model;
+import com.orm.SugarRecord;
 
 /**
  * @author Kamil Walkowiak
  */
-public abstract class Condition extends Model {
+public abstract class Condition extends SugarRecord {
     public Condition() {
     }
 

@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orm.SugarRecord;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -72,7 +74,9 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                             break;
                         }
                         case 2: {
-                            selectedPayCard.delete();
+                            SugarRecord.delete(selectedPayCard);
+                            payCards.remove(selectedPayCard);
+                            notifyItemRemoved(getLayoutPosition());
                             Toast.makeText(context, "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
                             break;
                         }

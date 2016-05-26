@@ -3,7 +3,7 @@
     package="pl.poznan.put.fc.antipaymentGuard">
 
     <application
-        android:name="com.activeandroid.app.Application"
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -37,18 +37,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.poznan.put.fc.antipaymentGuard.activities.MainActivity" />
         </activity>
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="apg4.db" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1" />
-        <meta-data
-            android:name="AA_MODELS"
-            android:value="pl.poznan.put.fc.antipaymentGuard.models.PayCard,
-            pl.poznan.put.fc.antipaymentGuard.models.Transaction,
-            pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition,
-            pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition" />
+        <meta-data android:name="DATABASE" android:value="apg6.db" />
+        <meta-data android:name="VERSION" android:value="1" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="pl.poznan.put.fc.antipaymentGuard.models" />
     </application>
 
 </manifest>

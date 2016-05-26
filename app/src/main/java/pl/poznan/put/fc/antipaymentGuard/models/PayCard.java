@@ -1,8 +1,6 @@
 package pl.poznan.put.fc.antipaymentGuard.models;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.orm.dsl.Table;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -16,21 +14,17 @@ import pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition;
 /**
  * @author Kamil Walkowiak
  */
-@Table(name = "PayCards")
-public class PayCard extends Model implements Serializable {
-    @Column(name = "Name")
+@Table
+public class PayCard implements Serializable {
+    private Long id;
     private String name;
-    @Column(name = "CardNumber")
     private String cardNumber;
-    @Column(name = "BankName")
     private String bankName;
-    @Column(name = "Balance")
     private double balance;
-    @Column(name = "ExpirationDate")
+    private String currencyName;
     private Date expirationDate;
-    @Column(name="Condition", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
+
     private AmountCondition amountCondition;
-    @Column(name = "NumberCondition", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     private NumberCondition numberCondition;
 
     public PayCard() {
@@ -45,24 +39,42 @@ public class PayCard extends Model implements Serializable {
         this.expirationDate = expirationDate;
     }
 
-    public PayCard(String name, String cardNumber, String bankName, double balance, Date expirationDate, AmountCondition amountCondition) {
+    public PayCard(String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, AmountCondition amountCondition) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.bankName = bankName;
         this.balance = balance;
+        this.currencyName = currencyName;
         this.expirationDate = expirationDate;
         this.amountCondition = amountCondition;
         this.numberCondition = null;
     }
 
-    public PayCard(String name, String cardNumber, String bankName, double balance, Date expirationDate, NumberCondition numberCondition) {
+    public PayCard(String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, NumberCondition numberCondition) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.bankName = bankName;
         this.balance = balance;
+        this.currencyName = currencyName;
         this.expirationDate = expirationDate;
         this.numberCondition = numberCondition;
         this.amountCondition = null;
+    }
+
+    public PayCard(Long id, String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, AmountCondition amountCondition, NumberCondition numberCondition) {
+        this.id = id;
+        this.name = name;
+        this.cardNumber = cardNumber;
+        this.bankName = bankName;
+        this.balance = balance;
+        this.currencyName = currencyName;
+        this.expirationDate = expirationDate;
+        this.amountCondition = amountCondition;
+        this.numberCondition = numberCondition;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -75,6 +87,10 @@ public class PayCard extends Model implements Serializable {
 
     public double getBalance() {
         return balance;
+    }
+
+    public String getCurrencyName() {
+        return currencyName;
     }
 
     public String getBankName() {
@@ -101,16 +117,19 @@ public class PayCard extends Model implements Serializable {
         }
     }
 
-    public List<Transaction> getTransactions() {
-        return getMany(Transaction.class, "PayCard");
+    public List<PayCardTransaction> getTransactions() {
+        return PayCardTransaction.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
     }
 
     public String getBalanceWithCurrencyName() {
         DecimalFormat df = new DecimalFormat();
         df.setMinimumFractionDigits(2);
         df.setMaximumFractionDigits(2);
-        //TODO currencyName
-        return df.format(balance) + " ";
+        return df.format(balance) + " " + currencyName;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -127,6 +146,10 @@ public class PayCard extends Model implements Serializable {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public void setCurrencyName(String currencyName) {
+        this.currencyName = currencyName;
     }
 
     public void setExpirationDate(Date expirationDate) {

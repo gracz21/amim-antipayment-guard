@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.fragments.PayCardDetailsFragment;
 import pl.poznan.put.fc.antipaymentGuard.fragments.TransactionsListFragment;
@@ -30,7 +32,7 @@ public class PayCardSectionAdapter extends FragmentPagerAdapter {
             case 0:
                 return PayCardDetailsFragment.newInstance(payCard);
             case 1:
-                return new TransactionsListFragment();
+                return TransactionsListFragment.newInstance(new ArrayList<>(payCard.getTransactions()));
         }
         return null;
     }

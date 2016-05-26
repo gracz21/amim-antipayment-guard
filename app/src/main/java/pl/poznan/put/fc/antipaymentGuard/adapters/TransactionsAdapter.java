@@ -12,13 +12,13 @@ import java.text.DateFormat;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
-import pl.poznan.put.fc.antipaymentGuard.models.Transaction;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
 /**
  * @author Kamil Walkowiak
  */
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.ViewHolder> {
-    private List<Transaction> transactions;
+    private List<PayCardTransaction> payCardTransactions;
     private Context context;
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -38,8 +38,8 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             itemView.setOnLongClickListener(this);
         }
 
-        public void bind(Transaction transaction) {
-            if(transaction.getAmount() > 0) {
+        public void bind(PayCardTransaction payCardTransaction) {
+            if(payCardTransaction.getAmount() > 0) {
                 iconImageView.setImageResource(R.drawable.ic_transaction_in_48dp);
             } else {
                 iconImageView.setImageResource(R.drawable.ic_transaction_out_48dp);
@@ -48,11 +48,11 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             //TODO title
             titleTextView.setText("Title");
 
-            String amount = context.getString(R.string.amount) + ": " + transaction.getAmountWithCurrencyName();
-            amountTextView.setText(transaction.getAmountWithCurrencyName());
+            String amount = context.getString(R.string.amount) + ": " + payCardTransaction.getAmountWithCurrencyName();
+            amountTextView.setText(payCardTransaction.getAmountWithCurrencyName());
 
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context.getApplicationContext());
-            String date = context.getString(R.string.transactionDate) + ": " + dateFormat.format(transaction.getDate());
+            String date = context.getString(R.string.transactionDate) + ": " + dateFormat.format(payCardTransaction.getDate());
             dateTextView.setText(date);
         }
 
@@ -67,8 +67,8 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         }
     }
 
-    public TransactionsAdapter(List<Transaction> transactions, Context context) {
-        this.transactions = transactions;
+    public TransactionsAdapter(List<PayCardTransaction> payCardTransactions, Context context) {
+        this.payCardTransactions = payCardTransactions;
         this.context = context;
     }
 
@@ -83,11 +83,11 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(transactions.get(position));
+        holder.bind(payCardTransactions.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return transactions.size();
+        return payCardTransactions.size();
     }
 }

@@ -8,11 +8,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.orm.SugarRecord;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,8 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
-import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
 import pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition;
 
 public class AddPayCardActivity extends AppCompatActivity {
@@ -126,14 +127,14 @@ public class AddPayCardActivity extends AppCompatActivity {
                 Double conditionAmount = Double.parseDouble(conditionValue);
                 AmountCondition condition = new AmountCondition(conditionAmount);
                 condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate, condition);
-                payCard.save();
+                PayCard payCard = new PayCard(name, no, bankName, balance, "PLN", expirationDate, condition);
+                SugarRecord.save(payCard);
             } else {
                 int conditionNumber = Integer.parseInt(conditionValue);
                 NumberCondition condition = new NumberCondition(conditionNumber);
                 condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, expirationDate, condition);
-                payCard.save();
+                PayCard payCard = new PayCard(name, no, bankName, balance, "PLN", expirationDate, condition);
+                SugarRecord.save(payCard);
             }
             Toast.makeText(getApplicationContext(), R.string.pay_card_created, Toast.LENGTH_SHORT).show();
             finish();

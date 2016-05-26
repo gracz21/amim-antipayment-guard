@@ -8,13 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
-import com.activeandroid.query.Select;
+import com.orm.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {
         @Override
         protected List<PayCard> doInBackground(Void... params) {
-            return new Select().from(PayCard.class).execute();
+            return Select.from(PayCard.class).list();
         }
 
         @Override
