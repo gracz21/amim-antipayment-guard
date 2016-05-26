@@ -22,4 +22,6 @@
     <string name="title_fragment_pay_card_details">Szczegóły</string>
     <string name="title_fragment_transactions_list">Transakcje</string>
     <string name="add">Dodaj</string>
+    <string name="amount">Kwota</string>
+    <string name="transactionDate">Data trancakcji</string>
 </resources>
