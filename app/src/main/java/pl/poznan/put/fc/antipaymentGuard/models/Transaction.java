@@ -4,6 +4,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
@@ -52,6 +53,14 @@ public class Transaction extends Model {
 
     public PayCard getPayCard() {
         return payCard;
+    }
+
+    public String getAmountWithCurrencyName() {
+        DecimalFormat df = new DecimalFormat();
+        df.setMinimumFractionDigits(2);
+        df.setMaximumFractionDigits(2);
+        //TODO currencyName
+        return df.format(amount);
     }
 
     public void setDate(Date date) {

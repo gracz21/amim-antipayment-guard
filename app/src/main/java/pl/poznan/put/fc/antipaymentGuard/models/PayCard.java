@@ -5,6 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -102,6 +103,14 @@ public class PayCard extends Model implements Serializable {
 
     public List<Transaction> getTransactions() {
         return getMany(Transaction.class, "PayCard");
+    }
+
+    public String getBalanceWithCurrencyName() {
+        DecimalFormat df = new DecimalFormat();
+        df.setMinimumFractionDigits(2);
+        df.setMaximumFractionDigits(2);
+        //TODO currencyName
+        return df.format(balance) + " ";
     }
 
     public void setName(String name) {
