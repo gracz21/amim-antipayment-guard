@@ -3,31 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/payCardIcon"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="16dp"
-
-        android:src="@drawable/ic_credit_card_48dp" />
-
     <TextView
         android:id="@+id/nameTextView"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_toRightOf="@+id/payCardIcon"
-        android:layout_marginBottom="6dip"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
 
-        android:textSize="48sp"
+        android:textSize="@dimen/material_text_display1"
         android:singleLine="true"
+        android:text="New Text" />
+
+    <ImageView
+        android:id="@+id/balanceIconImageView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/nameTextView"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+
+        android:src="@drawable/ic_balance_24dp"/>
+
+    <TextView
+        android:id="@+id/balanceTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/nameTextView"
+        android:layout_toRightOf="@id/balanceIconImageView"
+        android:layout_toEndOf="@id/balanceIconImageView"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/material_text_title"
         android:text="New Text" />
 
     <TextView
@@ -36,34 +52,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@id/payCardIcon"
-        android:layout_marginBottom="17dip"
+        android:layout_below="@id/balanceTextView"
+        android:layout_toRightOf="@id/balanceIconImageView"
+        android:layout_toEndOf="@id/balanceIconImageView"
 
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
         android:text="@string/balance" />
 
-    <TextView
-        android:id="@+id/balanceTextView"
+    <ImageView
+        android:id="@+id/cardNoIconImageView"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@id/payCardIcon"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="17dip"
-
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/noLabelTextView"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@id/balanceLabelTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
 
-        android:textStyle="bold"
-        android:text="@string/card_no" />
+        android:src="@drawable/ic_card_no_24dp"/>
 
     <TextView
         android:id="@+id/noTextView"
@@ -71,19 +80,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@id/balanceTextView"
-        android:layout_alignParentRight="true" />
+        android:layout_below="@id/balanceLabelTextView"
+        android:layout_toRightOf="@id/cardNoIconImageView"
+        android:layout_toEndOf="@id/cardNoIconImageView"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/material_text_title"
+        android:text="New Text"/>
 
     <TextView
-        android:id="@+id/bankNameLabelTextView"
+        android:id="@+id/noLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/noTextView"
+        android:layout_toRightOf="@id/cardNoIconImageView"
+        android:layout_toEndOf="@id/cardNoIconImageView"
+
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:text="@string/card_no" />
+
+    <ImageView
+        android:id="@+id/bankNameIconImageView"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_below="@id/noLabelTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
 
-        android:textStyle="bold"
-        android:text="@string/bank" />
+        android:src="@drawable/ic_bank_24dp"/>
 
     <TextView
         android:id="@+id/bankNameTextView"
@@ -91,19 +125,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/noTextView" />
+        android:layout_below="@id/noLabelTextView"
+        android:layout_toRightOf="@id/bankNameIconImageView"
+        android:layout_toEndOf="@id/bankNameIconImageView"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/material_text_title"
+        android:text="New Text" />
 
     <TextView
-        android:id="@+id/expirationDateLabelTextView"
+        android:id="@+id/bankNameLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/bankNameTextView"
+        android:layout_toRightOf="@id/bankNameIconImageView"
+        android:layout_toEndOf="@id/bankNameIconImageView"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="16dp"
+
+        android:text="@string/bank" />
+
+    <ImageView
+        android:id="@+id/expirationDateIconImageView"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_below="@id/bankNameLabelTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
 
-        android:textStyle="bold"
-        android:text="@string/expiration_date" />
+        android:src="@drawable/ic_date_24dp"/>
 
     <TextView
         android:id="@+id/expirationDateTextView"
@@ -111,8 +170,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/bankNameTextView" />
+        android:layout_below="@id/bankNameLabelTextView"
+        android:layout_toRightOf="@id/expirationDateIconImageView"
+        android:layout_toEndOf="@id/expirationDateIconImageView"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/material_text_title"
+        android:text="New Text" />
+
+    <TextView
+        android:id="@+id/expirationDateLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/expirationDateTextView"
+        android:layout_toRightOf="@id/expirationDateIconImageView"
+        android:layout_toEndOf="@id/expirationDateIconImageView"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="16dp"
+
+        android:text="@string/expiration_date" />
 
 
 </RelativeLayout>
