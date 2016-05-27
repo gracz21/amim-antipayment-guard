@@ -11,6 +11,7 @@ import java.text.DateFormat;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
 
 /**
  * @author Kamil Walkowiak
@@ -38,6 +39,13 @@ public class PayCardDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pay_card_details, container, false);
         String balance = payCard.getBalanceWithCurrencyName();
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(view.getContext().getApplicationContext());
+
+        TextView conditionTypeTextView = (TextView) view.findViewById(R.id.conditionTypeTextView);
+        if(payCard.getCondition().getClass() == AmountCondition.class) {
+            conditionTypeTextView.setText(view.getContext().getString(R.string.condition_transactions_amount));
+        } else {
+            conditionTypeTextView.setText(view.getContext().getString(R.string.condition_transactions_number));
+        }
 
         ((TextView) view.findViewById(R.id.nameTextView)).setText(payCard.getName());
         ((TextView) view.findViewById(R.id.balanceTextView)).setText(balance);
