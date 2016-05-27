@@ -1,214 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nameTextView"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/nameTextView"
 
-        android:layout_marginRight="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:textSize="@dimen/material_text_display1"
-        android:singleLine="true"
-        android:text="New Text" />
+            android:layout_marginRight="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginLeft="72dp"
 
-    <ImageView
-        android:id="@+id/balanceIconImageView"
+            android:textSize="@dimen/material_text_display1"
+            android:singleLine="true"
+            android:text="New Text" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/conditionTypeIconImageView"
 
-        android:layout_below="@id/nameTextView"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:src="@drawable/ic_balance_24dp"/>
+            android:layout_below="@id/nameTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
 
-    <TextView
-        android:id="@+id/balanceTextView"
+            android:src="@drawable/ic_condition_24dp"/>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/conditionTypeTextView"
 
-        android:layout_below="@id/nameTextView"
-        android:layout_toRightOf="@id/balanceIconImageView"
-        android:layout_toEndOf="@id/balanceIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginRight="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+            android:layout_below="@id/nameTextView"
+            android:layout_toRightOf="@id/conditionTypeIconImageView"
+            android:layout_toEndOf="@id/conditionTypeIconImageView"
 
-        android:textColor="@color/colorText"
-        android:textSize="@dimen/material_text_title"
-        android:text="New Text" />
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
 
-    <TextView
-        android:id="@+id/balanceLabelTextView"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/material_text_title"
+            android:text="New Text" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/conditionTypeLabelTextView"
 
-        android:layout_below="@id/balanceTextView"
-        android:layout_toRightOf="@id/balanceIconImageView"
-        android:layout_toEndOf="@id/balanceIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+            android:layout_below="@id/conditionTypeTextView"
+            android:layout_toRightOf="@id/conditionTypeIconImageView"
+            android:layout_toEndOf="@id/conditionTypeIconImageView"
 
-        android:text="@string/balance" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
 
-    <ImageView
-        android:id="@+id/cardNoIconImageView"
+            android:text="@string/condition_type" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/conditionStatusIconImageView"
 
-        android:layout_below="@id/balanceLabelTextView"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:src="@drawable/ic_card_no_24dp"/>
+            android:layout_below="@id/conditionTypeLabelTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
 
-    <TextView
-        android:id="@+id/noTextView"
+            android:src="@drawable/ic_condition_value_24dp"/>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/conditionStatusTextView"
 
-        android:layout_below="@id/balanceLabelTextView"
-        android:layout_toRightOf="@id/cardNoIconImageView"
-        android:layout_toEndOf="@id/cardNoIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+            android:layout_below="@id/conditionTypeLabelTextView"
+            android:layout_toRightOf="@id/conditionStatusIconImageView"
+            android:layout_toEndOf="@id/conditionStatusIconImageView"
 
-        android:textColor="@color/colorText"
-        android:textSize="@dimen/material_text_title"
-        android:text="New Text"/>
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
 
-    <TextView
-        android:id="@+id/noLabelTextView"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/material_text_title"
+            android:text="New Text"/>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/conditionStatusLabelTextView"
 
-        android:layout_below="@id/noTextView"
-        android:layout_toRightOf="@id/cardNoIconImageView"
-        android:layout_toEndOf="@id/cardNoIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+            android:layout_below="@id/conditionStatusTextView"
+            android:layout_toRightOf="@id/conditionStatusIconImageView"
+            android:layout_toEndOf="@id/conditionStatusIconImageView"
 
-        android:text="@string/card_no" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
 
-    <ImageView
-        android:id="@+id/bankNameIconImageView"
+            android:text="@string/condition_status" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <View
+            android:id="@+id/separator"
 
-        android:layout_below="@id/noLabelTextView"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
 
-        android:src="@drawable/ic_bank_24dp"/>
+            android:layout_below="@id/conditionStatusLabelTextView"
 
-    <TextView
-        android:id="@+id/bankNameTextView"
+            android:layout_marginStart="72dp"
+            android:layout_marginLeft="72dp"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:background="#B6B6B6"/>
 
-        android:layout_below="@id/noLabelTextView"
-        android:layout_toRightOf="@id/bankNameIconImageView"
-        android:layout_toEndOf="@id/bankNameIconImageView"
+        <ImageView
+            android:id="@+id/balanceIconImageView"
 
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:textColor="@color/colorText"
-        android:textSize="@dimen/material_text_title"
-        android:text="New Text" />
+            android:layout_below="@id/separator"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
 
-    <TextView
-        android:id="@+id/bankNameLabelTextView"
+            android:src="@drawable/ic_balance_24dp"/>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/balanceTextView"
 
-        android:layout_below="@id/bankNameTextView"
-        android:layout_toRightOf="@id/bankNameIconImageView"
-        android:layout_toEndOf="@id/bankNameIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="16dp"
+            android:layout_below="@id/separator"
+            android:layout_toRightOf="@id/balanceIconImageView"
+            android:layout_toEndOf="@id/balanceIconImageView"
 
-        android:text="@string/bank" />
-
-    <ImageView
-        android:id="@+id/expirationDateIconImageView"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@id/bankNameLabelTextView"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
-
-        android:src="@drawable/ic_date_24dp"/>
-
-    <TextView
-        android:id="@+id/expirationDateTextView"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@id/bankNameLabelTextView"
-        android:layout_toRightOf="@id/expirationDateIconImageView"
-        android:layout_toEndOf="@id/expirationDateIconImageView"
-
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-
-        android:textColor="@color/colorText"
-        android:textSize="@dimen/material_text_title"
-        android:text="New Text" />
-
-    <TextView
-        android:id="@+id/expirationDateLabelTextView"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@id/expirationDateTextView"
-        android:layout_toRightOf="@id/expirationDateIconImageView"
-        android:layout_toEndOf="@id/expirationDateIconImageView"
-
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="16dp"
-
-        android:text="@string/expiration_date" />
+            android:layout_marginRight="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
 
 
-</RelativeLayout>
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/material_text_title"
+            android:text="New Text" />
+
+        <TextView
+            android:id="@+id/balanceLabelTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/balanceTextView"
+            android:layout_toRightOf="@id/balanceIconImageView"
+            android:layout_toEndOf="@id/balanceIconImageView"
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+
+            android:text="@string/balance" />
+
+        <ImageView
+            android:id="@+id/cardNoIconImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/balanceLabelTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+
+            android:src="@drawable/ic_card_no_24dp"/>
+
+        <TextView
+            android:id="@+id/noTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/balanceLabelTextView"
+            android:layout_toRightOf="@id/cardNoIconImageView"
+            android:layout_toEndOf="@id/cardNoIconImageView"
+
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/material_text_title"
+            android:text="New Text"/>
+
+        <TextView
+            android:id="@+id/noLabelTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/noTextView"
+            android:layout_toRightOf="@id/cardNoIconImageView"
+            android:layout_toEndOf="@id/cardNoIconImageView"
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+
+            android:text="@string/card_no" />
+
+        <ImageView
+            android:id="@+id/bankNameIconImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/noLabelTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+
+            android:src="@drawable/ic_bank_24dp"/>
+
+        <TextView
+            android:id="@+id/bankNameTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/noLabelTextView"
+            android:layout_toRightOf="@id/bankNameIconImageView"
+            android:layout_toEndOf="@id/bankNameIconImageView"
+
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/material_text_title"
+            android:text="New Text" />
+
+        <TextView
+            android:id="@+id/bankNameLabelTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/bankNameTextView"
+            android:layout_toRightOf="@id/bankNameIconImageView"
+            android:layout_toEndOf="@id/bankNameIconImageView"
+
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginBottom="16dp"
+
+            android:text="@string/bank" />
+
+        <ImageView
+            android:id="@+id/expirationDateIconImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/bankNameLabelTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+
+            android:src="@drawable/ic_date_24dp"/>
+
+        <TextView
+            android:id="@+id/expirationDateTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/bankNameLabelTextView"
+            android:layout_toRightOf="@id/expirationDateIconImageView"
+            android:layout_toEndOf="@id/expirationDateIconImageView"
+
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/material_text_title"
+            android:text="New Text" />
+
+        <TextView
+            android:id="@+id/expirationDateLabelTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/expirationDateTextView"
+            android:layout_toRightOf="@id/expirationDateIconImageView"
+            android:layout_toEndOf="@id/expirationDateIconImageView"
+
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginBottom="16dp"
+
+            android:text="@string/expiration_date" />
+
+    </RelativeLayout>
+
+</ScrollView>

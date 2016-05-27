@@ -28,4 +28,6 @@
     <string name="place">Miejsce</string>
     <string name="title_activity_add_pay_card_transaction">Dodaj transakcję</string>
     <string name="description">Opis</string>
+    <string name="condition_type">Typ warunku</string>
+    <string name="condition_status">Stan warunku</string>
 </resources>
