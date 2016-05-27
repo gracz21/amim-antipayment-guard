@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.orm.SugarRecord;
@@ -37,7 +37,7 @@ public class AddPayCardActivity extends AppCompatActivity {
     private EditText balanceEditText;
     private EditText expirationDateEditText;
     private EditText conditionValueEditText;
-    private Spinner conditionTypeSpinner;
+    private RadioGroup conditionRadioGroup;
 
     private DatePickerDialog expirationDatePicker;
 
@@ -84,7 +84,7 @@ public class AddPayCardActivity extends AppCompatActivity {
         balanceEditText = (EditText) findViewById(R.id.balanceEditText);
         expirationDateEditText = (EditText) findViewById(R.id.dateEditText);
         conditionValueEditText = (EditText) findViewById(R.id.conditionValueEditText);
-        conditionTypeSpinner = (Spinner) findViewById(R.id.conditionTypeSpinner);
+        conditionRadioGroup = (RadioGroup) findViewById(R.id.conditionRadioGroup);
     }
 
     private void setupDatePickerDialog() {
@@ -123,7 +123,7 @@ public class AddPayCardActivity extends AppCompatActivity {
             }
             String conditionValue = conditionValueEditText.getText().toString();
 
-            if((conditionTypeSpinner.getSelectedItem()).equals(getString(R.string.condition_transactions_amount))) {
+            if(conditionRadioGroup.getCheckedRadioButtonId() == R.id.amountConditionRadioButton) {
                 Double conditionAmount = Double.parseDouble(conditionValue);
                 AmountCondition condition = new AmountCondition(conditionAmount);
                 condition.save();
