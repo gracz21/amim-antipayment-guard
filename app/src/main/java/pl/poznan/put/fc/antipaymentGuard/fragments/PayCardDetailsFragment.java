@@ -40,7 +40,7 @@ public class PayCardDetailsFragment extends Fragment {
         String balance = payCard.getBalanceWithCurrencyName();
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(view.getContext().getApplicationContext());
 
-        TextView conditionTypeTextView = (TextView) view.findViewById(R.id.conditionTypeTextView);
+        TextView conditionTypeTextView = (TextView) view.findViewById(R.id.payCardTextView);
         if(payCard.getCondition().getClass() == AmountCondition.class) {
             conditionTypeTextView.setText(view.getContext().getString(R.string.condition_transactions_amount));
         } else {
@@ -49,7 +49,7 @@ public class PayCardDetailsFragment extends Fragment {
 
         ((TextView) view.findViewById(R.id.nameTextView)).setText(payCard.getName());
         ((TextView) view.findViewById(R.id.balanceTextView)).setText(balance);
-        ((TextView) view.findViewById(R.id.noTextView)).setText(payCard.getCardNumber());
+        ((TextView) view.findViewById(R.id.descriptionTextView)).setText(payCard.getCardNumber());
         ((TextView) view.findViewById(R.id.bankNameTextView)).setText(payCard.getBankName());
         ((TextView) view.findViewById(R.id.expirationDateTextView)).setText(dateFormat.format(payCard.getExpirationDate()));
         return view;
