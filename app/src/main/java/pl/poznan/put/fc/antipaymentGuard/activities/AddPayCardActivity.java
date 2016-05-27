@@ -121,7 +121,7 @@ public class AddPayCardActivity extends AppCompatActivity {
         String name = nameEditText.getText().toString();
         String no = noEditText.getText().toString();
         String bankName = bankNameEditText.getText().toString();
-        Float balance = Float.parseFloat(balanceEditText.getText().toString());
+        Double balance = Double.parseDouble(balanceEditText.getText().toString());
         Date expirationDate = null;
         try {
             if(!expirationDateEditText.getText().toString().isEmpty()) {

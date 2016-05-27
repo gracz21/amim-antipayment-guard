@@ -28,7 +28,7 @@ public class PayCardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        PayCard payCard = (PayCard) getIntent().getSerializableExtra("payCard");
+        final PayCard payCard = (PayCard) getIntent().getSerializableExtra("payCard");
         mSectionsPagerAdapter = new PayCardSectionAdapter(getSupportFragmentManager(), this, payCard);
 
 
@@ -66,7 +66,9 @@ public class PayCardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PayCardActivity.this, AddPayCardTransaction.class));
+                Intent intent = new Intent(PayCardActivity.this, AddPayCardTransaction.class);
+                intent.putExtra("payCard", payCard);
+                startActivity(intent);
             }
         });
 
