@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_below="@+id/placeTextInputLayout"
+            android:layout_below="@id/placeTextInputLayout"
             android:layout_toRightOf="@id/dateIconImageView"
             android:layout_toEndOf="@id/dateIconImageView"
             android:layout_marginStart="20dp"
@@ -120,43 +120,77 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/condition_information"
-            android:id="@+id/conditionSectionName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/dateTextInputLayout"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_marginTop="25dp"/>
+        <ImageView
+            android:id="@+id/conditionIconImageView"
 
-        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/dateTextInputLayout"
+            android:layout_marginTop="20dp"
+
+            android:src="@drawable/ic_condition_24dp"/>
+
+        <RadioGroup
+            android:id="@+id/conditionRadioGroup"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/conditionTypeSpinner"
-            android:entries="@array/conditions_array"
-            android:prompt="@string/condition_prompt"
-            android:layout_below="@+id/conditionSectionName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp" />
+
+            android:layout_below="@id/dateTextInputLayout"
+            android:layout_toRightOf="@id/conditionIconImageView"
+            android:layout_toEndOf="@id/conditionIconImageView"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+
+            android:checkedButton="@+id/amountConditionRadioButton">
+            <RadioButton
+                android:id="@+id/amountConditionRadioButton"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/condition_transactions_amount" />
+            <RadioButton
+                android:id="@+id/numberConditionRadioButton"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/condition_transactions_number" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/conditionValueIconImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/conditionRadioGroup"
+            android:layout_marginTop="20dp"
+
+            android:src="@drawable/ic_condition_value_24dp"/>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/conditionValueTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/conditionTypeSpinner"
-            android:id="@+id/view"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" >
+
+            android:layout_below="@+id/conditionRadioGroup"
+            android:layout_toRightOf="@id/conditionValueIconImageView"
+            android:layout_toEndOf="@id/conditionValueIconImageView"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/conditionValueEditText"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:inputType="numberDecimal"
-                android:ems="10"
-                android:id="@+id/conditionValueEditText"
                 android:hint="@string/hint_activity_add_pay_card_condition_value"
                 android:singleLine="true" />
 
