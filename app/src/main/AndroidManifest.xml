@@ -32,7 +32,8 @@
             android:name=".activities.PayCardActivity"
             android:label="@string/title_activity_pay_card_details"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.poznan.put.fc.antipaymentGuard.activities.MainActivity" />
