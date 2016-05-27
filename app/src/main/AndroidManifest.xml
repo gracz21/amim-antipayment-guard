@@ -39,7 +39,7 @@
                 android:value="pl.poznan.put.fc.antipaymentGuard.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.AddPayCardTransaction"
+            android:name=".activities.AddPayCardTransactionActivity"
             android:label="@string/title_activity_add_pay_card_transaction"
             android:parentActivityName=".activities.PayCardActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -62,7 +62,7 @@
             android:value="pl.poznan.put.fc.antipaymentGuard.models" />
 
         <activity
-            android:name=".activities.PayCardTransaction"
+            android:name=".activities.PayCardTransactionActivity"
             android:label="@string/title_activity_pay_card_transaction"
             android:parentActivityName=".activities.PayCardActivity"
             android:theme="@style/AppTheme.NoActionBar">

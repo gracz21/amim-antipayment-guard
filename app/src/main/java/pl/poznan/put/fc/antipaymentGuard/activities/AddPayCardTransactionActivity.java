@@ -18,7 +18,7 @@ import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
-public class AddPayCardTransaction extends AppCompatActivity {
+public class AddPayCardTransactionActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     private TextInputEditText nameEditText;

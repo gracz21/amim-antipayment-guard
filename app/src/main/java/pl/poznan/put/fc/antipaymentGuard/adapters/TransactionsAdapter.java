@@ -1,6 +1,7 @@
 package pl.poznan.put.fc.antipaymentGuard.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import java.text.DateFormat;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.activities.PayCardTransactionActivity;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
 /**
@@ -57,7 +59,10 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
         @Override
         public void onClick(View v) {
-
+            PayCardTransaction transaction = payCardTransactions.get(getLayoutPosition());
+            Intent intent = new Intent(v.getContext(), PayCardTransactionActivity.class);
+            intent.putExtra("transaction", transaction);
+            v.getContext().startActivity(intent);
         }
 
         @Override

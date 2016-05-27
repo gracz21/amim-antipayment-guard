@@ -66,7 +66,7 @@ public class PayCardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PayCardActivity.this, AddPayCardTransaction.class);
+                Intent intent = new Intent(PayCardActivity.this, AddPayCardTransactionActivity.class);
                 intent.putExtra("payCard", payCard);
                 startActivity(intent);
             }
