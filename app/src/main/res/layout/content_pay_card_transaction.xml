@@ -172,12 +172,59 @@
         android:text="@string/date" />
 
     <ImageView
-        android:id="@+id/descriptionIconImageView"
+        android:id="@+id/placeIconImageView"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_below="@id/dateLabelTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+
+        android:src="@drawable/ic_place_24dp"/>
+
+    <TextView
+        android:id="@+id/placeTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/dateLabelTextView"
+        android:layout_toRightOf="@id/placeIconImageView"
+        android:layout_toEndOf="@id/placeIconImageView"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/material_text_title"
+        android:text="New Text"/>
+
+    <TextView
+        android:id="@+id/placeLabelTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/placeTextView"
+        android:layout_toRightOf="@id/placeIconImageView"
+        android:layout_toEndOf="@id/placeIconImageView"
+
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:text="@string/place" />
+
+    <ImageView
+        android:id="@+id/descriptionIconImageView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/placeLabelTextView"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
@@ -191,7 +238,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@id/dateLabelTextView"
+        android:layout_below="@id/placeLabelTextView"
         android:layout_toRightOf="@id/descriptionIconImageView"
         android:layout_toEndOf="@id/descriptionIconImageView"
 

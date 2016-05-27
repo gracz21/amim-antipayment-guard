@@ -28,6 +28,7 @@ public class PayCardTransactionActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.payCardTextView)).setText(transaction.getPayCard().getName());
         ((TextView) findViewById(R.id.amountTextView)).setText(transaction.getAmountWithCurrencyName());
         ((TextView) findViewById(R.id.dateTextView)).setText(dateFormat.format(transaction.getDate()));
+        ((TextView) findViewById(R.id.placeTextView)).setText(transaction.getPlace());
         ((TextView) findViewById(R.id.descriptionTextView)).setText(transaction.getDescription());
     }
 
