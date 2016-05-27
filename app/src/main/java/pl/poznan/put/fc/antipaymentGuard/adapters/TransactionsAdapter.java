@@ -45,11 +45,10 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
                 iconImageView.setImageResource(R.drawable.ic_transaction_out_48dp);
             }
 
-            //TODO title
-            titleTextView.setText("Title");
+            titleTextView.setText(payCardTransaction.getName());
 
             String amount = context.getString(R.string.amount) + ": " + payCardTransaction.getAmountWithCurrencyName();
-            amountTextView.setText(payCardTransaction.getAmountWithCurrencyName());
+            amountTextView.setText(amount);
 
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context.getApplicationContext());
             String date = context.getString(R.string.transactionDate) + ": " + dateFormat.format(payCardTransaction.getDate());
