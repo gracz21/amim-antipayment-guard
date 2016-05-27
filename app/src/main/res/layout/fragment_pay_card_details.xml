@@ -9,8 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
 
         android:textSize="@dimen/material_text_display1"
         android:singleLine="true"
@@ -23,7 +26,9 @@
         android:layout_height="wrap_content"
 
         android:layout_below="@id/nameTextView"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="24dp"
 
         android:src="@drawable/ic_balance_24dp"/>
@@ -38,7 +43,9 @@
         android:layout_toRightOf="@id/balanceIconImageView"
         android:layout_toEndOf="@id/balanceIconImageView"
 
-        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
 
@@ -69,6 +76,8 @@
         android:layout_height="wrap_content"
 
         android:layout_below="@id/balanceLabelTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
 
@@ -114,6 +123,8 @@
         android:layout_height="wrap_content"
 
         android:layout_below="@id/noLabelTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
 
@@ -159,6 +170,8 @@
         android:layout_height="wrap_content"
 
         android:layout_below="@id/bankNameLabelTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
 
