@@ -15,11 +15,10 @@ import android.widget.Toast;
 
 import com.orm.SugarRecord;
 
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
@@ -41,7 +40,7 @@ public class AddPayCardActivity extends AppCompatActivity {
 
     private DatePickerDialog expirationDatePicker;
 
-    private SimpleDateFormat dateFormatter;
+    private DateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class AddPayCardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
         setupDatePickerDialog();
         setListeners();
@@ -83,6 +82,7 @@ public class AddPayCardActivity extends AppCompatActivity {
         bankNameEditText = (EditText) findViewById(R.id.placeEditText);
         balanceEditText = (EditText) findViewById(R.id.balanceEditText);
         expirationDateEditText = (EditText) findViewById(R.id.dateEditText);
+        expirationDateEditText.setKeyListener(null);
         conditionValueEditText = (EditText) findViewById(R.id.conditionValueEditText);
         conditionRadioGroup = (RadioGroup) findViewById(R.id.conditionRadioGroup);
     }
@@ -106,7 +106,13 @@ public class AddPayCardActivity extends AppCompatActivity {
                 if(hasFocus) {
                     expirationDatePicker.show();
                 }
-                v.clearFocus();
+            }
+        });
+
+        expirationDateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expirationDatePicker.show();
             }
         });
     }
