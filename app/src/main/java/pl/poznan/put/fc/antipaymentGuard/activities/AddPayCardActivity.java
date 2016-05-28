@@ -34,6 +34,7 @@ public class AddPayCardActivity extends AppCompatActivity {
     private EditText noEditText;
     private EditText bankNameEditText;
     private EditText balanceEditText;
+    private EditText currencyEditText;
     private EditText expirationDateEditText;
     private EditText conditionValueEditText;
     private RadioGroup conditionRadioGroup;
@@ -81,6 +82,7 @@ public class AddPayCardActivity extends AppCompatActivity {
         noEditText = (EditText) findViewById(R.id.amountEditText);
         bankNameEditText = (EditText) findViewById(R.id.placeEditText);
         balanceEditText = (EditText) findViewById(R.id.balanceEditText);
+        currencyEditText = (EditText) findViewById(R.id.currencyEditText);
         expirationDateEditText = (EditText) findViewById(R.id.dateEditText);
         expirationDateEditText.setKeyListener(null);
         conditionValueEditText = (EditText) findViewById(R.id.conditionValueEditText);
@@ -122,6 +124,7 @@ public class AddPayCardActivity extends AppCompatActivity {
         String no = noEditText.getText().toString();
         String bankName = bankNameEditText.getText().toString();
         Double balance = Double.parseDouble(balanceEditText.getText().toString());
+        String currency = currencyEditText.getText().toString();
         Date expirationDate = null;
         try {
             if(!expirationDateEditText.getText().toString().isEmpty()) {
@@ -133,13 +136,13 @@ public class AddPayCardActivity extends AppCompatActivity {
                 Double conditionAmount = Double.parseDouble(conditionValue);
                 AmountCondition condition = new AmountCondition(conditionAmount);
                 condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, "PLN", expirationDate, condition);
+                PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
                 SugarRecord.save(payCard);
             } else {
                 int conditionNumber = Integer.parseInt(conditionValue);
                 NumberCondition condition = new NumberCondition(conditionNumber);
                 condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, "PLN", expirationDate, condition);
+                PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
                 SugarRecord.save(payCard);
             }
             Toast.makeText(getApplicationContext(), R.string.pay_card_created, Toast.LENGTH_SHORT).show();

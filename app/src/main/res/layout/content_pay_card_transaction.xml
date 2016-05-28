@@ -89,7 +89,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
 
-        android:src="@drawable/ic_balance_24dp"/>
+        android:src="@drawable/ic_currency_24dp"/>
 
     <TextView
         android:id="@+id/amountTextView"
