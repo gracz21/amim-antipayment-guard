@@ -24,7 +24,7 @@
             android:text="New Text" />
 
         <ImageView
-            android:id="@+id/payCardIconImageView"
+            android:id="@+id/conditionStatusIconImageView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,17 +35,17 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="24dp"
 
-            android:src="@drawable/ic_condition_24dp"/>
+            android:src="@drawable/ic_condition_value_24dp"/>
 
         <TextView
-            android:id="@+id/payCardTextView"
+            android:id="@+id/conditionStatusTextView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_below="@id/nameTextView"
-            android:layout_toRightOf="@id/payCardIconImageView"
-            android:layout_toEndOf="@id/payCardIconImageView"
+            android:layout_toRightOf="@id/conditionStatusIconImageView"
+            android:layout_toEndOf="@id/conditionStatusIconImageView"
 
             android:layout_marginEnd="32dp"
             android:layout_marginTop="24dp"
@@ -57,44 +57,44 @@
             android:text="New Text" />
 
         <TextView
-            android:id="@+id/payCardLabelTextView"
+            android:id="@+id/conditionStatusLabelTextView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@id/payCardTextView"
-            android:layout_toRightOf="@id/payCardIconImageView"
-            android:layout_toEndOf="@id/payCardIconImageView"
+            android:layout_below="@id/conditionStatusTextView"
+            android:layout_toRightOf="@id/conditionStatusIconImageView"
+            android:layout_toEndOf="@id/conditionStatusIconImageView"
 
             android:layout_marginBottom="16dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
 
-            android:text="@string/condition_type" />
+            android:text="@string/condition_status" />
 
         <ImageView
-            android:id="@+id/amountIconImageView"
+            android:id="@+id/conditionTypeIconImageView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@id/payCardLabelTextView"
+            android:layout_below="@id/conditionStatusLabelTextView"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
 
-            android:src="@drawable/ic_condition_value_24dp"/>
+            android:src="@drawable/ic_condition_24dp"/>
 
         <TextView
-            android:id="@+id/amountTextView"
+            android:id="@+id/conditionTypeTextView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@id/payCardLabelTextView"
-            android:layout_toRightOf="@id/amountIconImageView"
-            android:layout_toEndOf="@id/amountIconImageView"
+            android:layout_below="@id/conditionStatusLabelTextView"
+            android:layout_toRightOf="@id/conditionTypeIconImageView"
+            android:layout_toEndOf="@id/conditionTypeIconImageView"
 
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
@@ -104,20 +104,20 @@
             android:text="New Text"/>
 
         <TextView
-            android:id="@+id/amountLabelTextView"
+            android:id="@+id/conditionTypeLabelTextView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@id/amountTextView"
-            android:layout_toRightOf="@id/amountIconImageView"
-            android:layout_toEndOf="@id/amountIconImageView"
+            android:layout_below="@id/conditionTypeTextView"
+            android:layout_toRightOf="@id/conditionTypeIconImageView"
+            android:layout_toEndOf="@id/conditionTypeIconImageView"
 
             android:layout_marginBottom="16dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
 
-            android:text="@string/condition_status" />
+            android:text="@string/condition_type" />
 
         <View
             android:id="@+id/separator"
@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
 
-            android:layout_below="@id/amountLabelTextView"
+            android:layout_below="@id/conditionTypeLabelTextView"
 
             android:layout_marginStart="72dp"
             android:layout_marginLeft="72dp"
