@@ -35,4 +35,5 @@
     <string name="remained">Pozostało</string>
     <string name="condition_fulfilled">Warunek spełniony</string>
     <string name="currency_name">Waluta</string>
+    <string name="transactions">Transakcji</string>
 </resources>

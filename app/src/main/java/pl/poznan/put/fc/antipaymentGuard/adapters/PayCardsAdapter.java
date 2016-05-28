@@ -21,6 +21,7 @@ import java.util.List;
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.activities.PayCardActivity;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
 
 /**
  * @author Kamil Walkowiak
@@ -58,7 +59,12 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                 iconImageView.setImageResource(R.drawable.ic_pay_card_not_fulfilled_48dp);
                 remainedTextView.setTextColor(ContextCompat.getColor(context, R.color.red));
                 status = context.getString(R.string.remained) + ": " + payCard.getConditionStatus()
-                        + "/" + payCard.getCondition().toString() + " " + payCard.getCurrencyName();
+                        + "/" + payCard.getCondition().toString();
+                if(payCard.getCondition().getClass() == AmountCondition.class) {
+                    status += " " + payCard.getCurrencyName();
+                } else {
+                    status += " " + context.getString(R.string.transactions);
+                }
             }
             remainedTextView.setText(status);
 

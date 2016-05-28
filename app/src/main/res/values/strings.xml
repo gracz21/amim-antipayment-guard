@@ -38,4 +38,5 @@
     <string name="remained">Remained</string>
     <string name="condition_fulfilled">Condition fulfilled</string>
     <string name="currency_name">Currency name</string>
+    <string name="transactions">Transactions</string>
 </resources>
