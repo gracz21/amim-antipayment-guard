@@ -85,7 +85,11 @@ public class MainActivity extends AppCompatActivity {
     private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {
         @Override
         protected List<PayCard> doInBackground(Void... params) {
-            return Select.from(PayCard.class).list();
+            List<PayCard> result = Select.from(PayCard.class).list();
+            for(PayCard payCard: result) {
+                payCard.loadTransactions();
+            }
+            return result;
         }
 
         @Override

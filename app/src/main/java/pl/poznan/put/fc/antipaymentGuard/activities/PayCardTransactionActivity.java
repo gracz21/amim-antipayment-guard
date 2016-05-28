@@ -11,7 +11,6 @@ import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
 public class PayCardTransactionActivity extends AppCompatActivity {
-    private PayCardTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +20,7 @@ public class PayCardTransactionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        transaction = (PayCardTransaction) getIntent().getSerializableExtra("transaction");
+        PayCardTransaction transaction = (PayCardTransaction) getIntent().getSerializableExtra("transaction");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
         ((TextView) findViewById(R.id.nameTextView)).setText(transaction.getName());

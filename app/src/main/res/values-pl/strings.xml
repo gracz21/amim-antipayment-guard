@@ -32,4 +32,6 @@
     <string name="condition_status">Stan warunku</string>
     <string name="pay_card">Karta płatnicza</string>
     <string name="title_activity_pay_card_transaction">Szczegóły transakcji</string>
+    <string name="remained">Pozostało</string>
+    <string name="condition_fulfilled">Warunek spełniony</string>
 </resources>

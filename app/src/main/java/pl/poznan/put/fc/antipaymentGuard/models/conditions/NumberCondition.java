@@ -5,27 +5,32 @@ import java.io.Serializable;
 /**
  * @author Kamil Walkowiak
  */
-public class NumberCondition  extends Condition implements Serializable {
-    private int numberOfTransactions;
+public class NumberCondition extends Condition implements Serializable {
+    private int transactionsNumber;
 
     public NumberCondition() {
 
     }
 
-    public NumberCondition(int numberOfTransactions) {
-        this.numberOfTransactions = numberOfTransactions;
+    public NumberCondition(int transactionsNumber) {
+        this.transactionsNumber = transactionsNumber;
     }
 
-    public int getNumberOfTransactions() {
-        return numberOfTransactions;
+    public int getTransactionsNumber() {
+        return transactionsNumber;
     }
 
-    public void setNumberOfTransactions(int numberOfTransactions) {
-        this.numberOfTransactions = numberOfTransactions;
+    public void setTransactionsNumber(int transactionsNumber) {
+        this.transactionsNumber = transactionsNumber;
     }
 
     @Override
     public boolean checkCondition() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(transactionsNumber);
     }
 }

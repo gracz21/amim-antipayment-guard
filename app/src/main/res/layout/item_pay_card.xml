@@ -19,7 +19,7 @@
         android:background="?android:attr/selectableItemBackground" >
 
         <ImageView
-            android:id="@+id/imageButton"
+            android:id="@+id/payCardIconImageView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,8 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_toRightOf="@id/imageButton"
-            android:layout_toEndOf="@id/imageButton"
+            android:layout_toRightOf="@id/payCardIconImageView"
+            android:layout_toEndOf="@id/payCardIconImageView"
 
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text" />
@@ -48,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_toRightOf="@id/imageButton"
-            android:layout_toEndOf="@id/imageButton"
+            android:layout_toRightOf="@id/payCardIconImageView"
+            android:layout_toEndOf="@id/payCardIconImageView"
             android:layout_below="@id/nameTextView"
 
             android:text="New Text" />
@@ -59,9 +59,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_toRightOf="@id/imageButton"
-            android:layout_toEndOf="@id/imageButton"
+            android:layout_toRightOf="@id/payCardIconImageView"
+            android:layout_toEndOf="@id/payCardIconImageView"
             android:layout_below="@id/noLabelTextView"
+
+            android:text="New Text" />
+        <TextView
+            android:id="@+id/remainedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toRightOf="@id/payCardIconImageView"
+            android:layout_toEndOf="@id/payCardIconImageView"
+            android:layout_below="@id/balanceTextView"
 
             android:text="New Text" />
     </RelativeLayout>

@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,21 +30,38 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
     private Context context;
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+        private ImageView iconImageView;
         private TextView nameTextView;
         private TextView noTextView;
         private TextView balanceTextView;
+        private TextView remainedTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            iconImageView = (ImageView) itemView.findViewById(R.id.payCardIconImageView);
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
             noTextView = (TextView) itemView.findViewById(R.id.noLabelTextView);
             balanceTextView = (TextView) itemView.findViewById(R.id.balanceTextView);
+            remainedTextView = (TextView) itemView.findViewById(R.id.remainedTextView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
 
         public void bind(PayCard payCard) {
+            String status;
+            if(payCard.isConditionFulfilled()) {
+                iconImageView.setImageResource(R.drawable.ic_pay_card_fulfilled_48dp);
+                remainedTextView.setTextColor(ContextCompat.getColor(context, R.color.green));
+                status = context.getString(R.string.condition_fulfilled);
+            } else {
+                iconImageView.setImageResource(R.drawable.ic_pay_card_not_fulfilled_48dp);
+                remainedTextView.setTextColor(ContextCompat.getColor(context, R.color.red));
+                status = context.getString(R.string.remained) + ": " + payCard.getConditionStatus()
+                        + "/" + payCard.getCondition().toString() + " " + payCard.getCurrencyName();
+            }
+            remainedTextView.setText(status);
+
             nameTextView.setText(payCard.getName());
 
             String no = context.getString(R.string.card_no) + ": " + payCard.getCardNumber();

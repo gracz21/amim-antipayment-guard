@@ -1,9 +1,11 @@
 package pl.poznan.put.fc.antipaymentGuard.models;
 
+import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,16 +29,17 @@ public class PayCard implements Serializable {
     private AmountCondition amountCondition;
     private NumberCondition numberCondition;
 
+    @Ignore
+    private boolean isConditionFulfilled;
+    @Ignore
+    private int transactionsNumber;
+    @Ignore
+    private double transactionsAmount;
+    @Ignore
+    private ArrayList<PayCardTransaction> transactions;
+
     public PayCard() {
 
-    }
-
-    public PayCard(String name, String cardNumber, String bankName, double balance, Date expirationDate) {
-        this.name = name;
-        this.cardNumber = cardNumber;
-        this.bankName = bankName;
-        this.balance = balance;
-        this.expirationDate = expirationDate;
     }
 
     public PayCard(String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, AmountCondition amountCondition) {
@@ -48,6 +51,9 @@ public class PayCard implements Serializable {
         this.expirationDate = expirationDate;
         this.amountCondition = amountCondition;
         this.numberCondition = null;
+        this.isConditionFulfilled = false;
+        this.transactionsNumber = 0;
+        this.transactionsAmount = 0.0;
     }
 
     public PayCard(String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, NumberCondition numberCondition) {
@@ -59,18 +65,9 @@ public class PayCard implements Serializable {
         this.expirationDate = expirationDate;
         this.numberCondition = numberCondition;
         this.amountCondition = null;
-    }
-
-    public PayCard(Long id, String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, AmountCondition amountCondition, NumberCondition numberCondition) {
-        this.id = id;
-        this.name = name;
-        this.cardNumber = cardNumber;
-        this.bankName = bankName;
-        this.balance = balance;
-        this.currencyName = currencyName;
-        this.expirationDate = expirationDate;
-        this.amountCondition = amountCondition;
-        this.numberCondition = numberCondition;
+        this.isConditionFulfilled = false;
+        this.transactionsNumber = 0;
+        this.transactionsAmount = 0.0;
     }
 
     public Long getId() {
@@ -109,11 +106,34 @@ public class PayCard implements Serializable {
         return numberCondition;
     }
 
+    public boolean isConditionFulfilled() {
+        return isConditionFulfilled;
+    }
+
+    public int getTransactionsNumber() {
+        return transactionsNumber;
+    }
+
+    public double getTransactionsAmount() {
+        return transactionsAmount;
+    }
+
     public Condition getCondition() {
         if(amountCondition != null) {
             return amountCondition;
         } else {
             return numberCondition;
+        }
+    }
+
+    public String getConditionStatus() {
+        if(amountCondition != null) {
+            DecimalFormat df = new DecimalFormat();
+            df.setMinimumFractionDigits(2);
+            df.setMaximumFractionDigits(2);
+            return df.format(transactionsAmount);
+        } else {
+            return Integer.toString(transactionsNumber);
         }
     }
 
@@ -164,5 +184,29 @@ public class PayCard implements Serializable {
     public void setNumberCondition(NumberCondition numberCondition) {
         this.numberCondition = numberCondition;
         this.amountCondition = null;
+    }
+
+    public void loadTransactions() {
+        this.transactions = new ArrayList<>(PayCardTransaction.find(PayCardTransaction.class, "pay_card = ?", getId().toString()));
+    }
+
+    public void registerTransaction(PayCardTransaction transaction) {
+        this.transactions.add(transaction);
+        double amount = transaction.getAmount();
+        if(amount < 0) {
+            this.transactionsNumber++;
+            this.transactionsAmount -= transaction.getAmount();
+        }
+        this.balance += amount;
+    }
+
+    public void removeTransaction(PayCardTransaction transaction) {
+        this.transactions.remove(transaction);
+        double amount = transaction.getAmount();
+        if(amount < 0) {
+            this.transactionsNumber--;
+            this.transactionsAmount += transaction.getAmount();
+        }
+        this.balance -= amount;
     }
 }

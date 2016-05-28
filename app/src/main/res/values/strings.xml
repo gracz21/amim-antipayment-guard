@@ -35,4 +35,6 @@
     <string name="condition_status">Condition status</string>
     <string name="title_activity_pay_card_transaction">Transaction details</string>
     <string name="pay_card">Pay card</string>
+    <string name="remained">Remained</string>
+    <string name="condition_fulfilled">Condition fulfilled</string>
 </resources>
