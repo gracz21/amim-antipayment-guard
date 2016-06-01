@@ -99,6 +99,8 @@ public class AddPayCardActivity extends AppCompatActivity {
                 expirationDateEditText.setText(dateFormatter.format(newDate.getTime()));
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        expirationDatePicker.getDatePicker().setMinDate(new Date().getTime() - 1000);
     }
 
     private void setListeners() {
