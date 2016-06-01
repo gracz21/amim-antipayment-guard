@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         protected List<PayCard> doInBackground(Void... params) {
             List<PayCard> result = Select.from(PayCard.class).list();
             for(PayCard payCard: result) {
-                payCard.loadTransactions();
+                payCard.loadCurrentMonthTransactions();
             }
             return result;
         }

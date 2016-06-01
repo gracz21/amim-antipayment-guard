@@ -6,6 +6,7 @@ import com.orm.dsl.Table;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class PayCard implements Serializable {
     @Ignore
     private double transactionsAmount;
     @Ignore
-    private ArrayList<PayCardTransaction> transactions;
+    private ArrayList<PayCardTransaction> currentMonthTransactions;
 
     public PayCard() {
 
@@ -137,8 +138,13 @@ public class PayCard implements Serializable {
         }
     }
 
-    public List<PayCardTransaction> getTransactions() {
-        return PayCardTransaction.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
+    public List<PayCardTransaction> getTransactions(int month) {
+        Calendar calendar = Calendar.getInstance();
+        if(month == calendar.get(Calendar.MONTH)) {
+            return currentMonthTransactions;
+        } else {
+            return PayCardTransaction.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
+        }
     }
 
     public String getBalanceWithCurrencyName() {
@@ -186,12 +192,20 @@ public class PayCard implements Serializable {
         this.amountCondition = null;
     }
 
-    public void loadTransactions() {
-        this.transactions = new ArrayList<>(PayCardTransaction.find(PayCardTransaction.class, "pay_card = ?", getId().toString()));
+    public void loadCurrentMonthTransactions() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.clear(Calendar.MINUTE);
+        calendar.clear(Calendar.SECOND);
+        calendar.clear(Calendar.MILLISECOND);
+        calendar.set(Calendar.DATE, 1);
+        calendar.getTimeInMillis();
+        this.currentMonthTransactions = new ArrayList<>(PayCardTransaction.find(PayCardTransaction.class, "pay_card = ? and date >= ?",
+                getId().toString(), Long.toString(calendar.getTimeInMillis())));
     }
 
     public void registerTransaction(PayCardTransaction transaction) {
-        this.transactions.add(transaction);
+        this.currentMonthTransactions.add(transaction);
         double amount = transaction.getAmount();
         if(amount < 0) {
             this.transactionsNumber++;
@@ -201,7 +215,7 @@ public class PayCard implements Serializable {
     }
 
     public void removeTransaction(PayCardTransaction transaction) {
-        this.transactions.remove(transaction);
+        this.currentMonthTransactions.remove(transaction);
         double amount = transaction.getAmount();
         if(amount < 0) {
             this.transactionsNumber--;
