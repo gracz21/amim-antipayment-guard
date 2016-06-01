@@ -87,7 +87,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(selectedPayCard.getName());
-            builder.setItems(R.array.pay_cards_options_list, new DialogInterface.OnClickListener() {
+            builder.setItems(R.array.context_options_list, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which) {
@@ -102,7 +102,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                             SugarRecord.delete(selectedPayCard);
                             payCards.remove(selectedPayCard);
                             notifyItemRemoved(getLayoutPosition());
-                            Toast.makeText(context, "Selected pay card has been removed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.pay_card_deleted, Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }

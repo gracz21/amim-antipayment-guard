@@ -15,10 +15,10 @@
     <string name="dialog_pay_cards_options_activity_main_edit">Edytuj</string>
     <string name="dialog_pay_cards_options_activity_main_cancel">Anuluj</string>
     <string name="dialog_pay_cards_options_activity_main_view">Wyberz</string>
-    <string name="pay_card_information">Informacje o karcie płatniczej</string>
+    <string name="pay_card_information">Informacje o karcie</string>
     <string name="condition_information">Informacje o warunku</string>
-    <string name="pay_card_created">Nowa karta płatnicza została dodana</string>
-    <string name="title_activity_pay_card_details">Szczegóły karty płatniczej</string>
+    <string name="pay_card_created">Nowa karta została dodana</string>
+    <string name="title_activity_pay_card_details">Szczegóły karty</string>
     <string name="title_fragment_pay_card_details">Szczegóły</string>
     <string name="title_fragment_transactions_list">Transakcje</string>
     <string name="add">Dodaj</string>
@@ -36,4 +36,6 @@
     <string name="condition_fulfilled">Warunek spełniony</string>
     <string name="currency_name">Waluta</string>
     <string name="transactions">Transakcji</string>
+    <string name="transaction_deleted">Wybrana transakcja została usunięta</string>
+    <string name="pay_card_deleted">Wybrana karta została usunięta</string>
 </resources>

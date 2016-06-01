@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="pay_cards_options_list">
+    <string-array name="context_options_list">
         <item>@string/dialog_pay_cards_options_activity_main_view</item>
         <item>@string/dialog_pay_cards_options_activity_main_edit</item>
         <item>@string/dialog_pay_cards_options_activity_main_delete</item>

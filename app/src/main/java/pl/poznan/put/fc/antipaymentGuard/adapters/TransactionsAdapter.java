@@ -1,6 +1,8 @@
 package pl.poznan.put.fc.antipaymentGuard.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.List;
@@ -67,6 +70,34 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
         @Override
         public boolean onLongClick(View v) {
+            final PayCardTransaction selectedTransaction = payCardTransactions.get(getLayoutPosition());
+            final Context context = v.getContext();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(selectedTransaction.getName());
+            builder.setItems(R.array.context_options_list, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case 0: {
+                            Intent intent = new Intent(context, PayCardTransactionActivity.class);
+                            intent.putExtra("transaction", selectedTransaction);
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case 2: {
+                            selectedTransaction.delete();
+                            payCardTransactions.remove(selectedTransaction);
+                            notifyItemRemoved(getLayoutPosition());
+                            Toast.makeText(context, R.string.transaction_deleted, Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
             return false;
         }
     }

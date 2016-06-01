@@ -39,4 +39,6 @@
     <string name="condition_fulfilled">Condition fulfilled</string>
     <string name="currency_name">Currency name</string>
     <string name="transactions">Transactions</string>
+    <string name="transaction_deleted">Selected transaction has been removed</string>
+    <string name="pay_card_deleted">Selected pay card has been removed</string>
 </resources>
