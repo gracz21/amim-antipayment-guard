@@ -4,14 +4,13 @@ import com.orm.SugarRecord;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
-import java.util.Date;
 
 /**
  * @author Kamil Walkowiak
  */
 public class PayCardTransaction extends SugarRecord implements Serializable {
     private String name;
-    private Date date;
+    private long date;
     private Double amount;
     private String place;
     private String description;
@@ -22,7 +21,7 @@ public class PayCardTransaction extends SugarRecord implements Serializable {
 
     }
 
-    public PayCardTransaction(String name, Date date, Double amount, String place, String description, PayCard payCard) {
+    public PayCardTransaction(String name, long date, Double amount, String place, String description, PayCard payCard) {
         this.name = name;
         this.date = date;
         this.amount = amount;
@@ -35,7 +34,7 @@ public class PayCardTransaction extends SugarRecord implements Serializable {
         return name;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -66,7 +65,7 @@ public class PayCardTransaction extends SugarRecord implements Serializable {
         this.name = name;
     }
 
-    public void setDate(Date date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

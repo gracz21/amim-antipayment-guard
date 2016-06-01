@@ -108,7 +108,7 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         String place = placeEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
 
-        PayCardTransaction transaction = new PayCardTransaction(name, selectedDate, amount, place, description, payCard);
+        PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
         transaction.save();
 
         finish();

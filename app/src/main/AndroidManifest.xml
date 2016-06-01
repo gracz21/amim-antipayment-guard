@@ -50,7 +50,7 @@
 
         <meta-data
             android:name="DATABASE"
-            android:value="apg7.db" />
+            android:value="apg8.db" />
         <meta-data
             android:name="VERSION"
             android:value="1" />
