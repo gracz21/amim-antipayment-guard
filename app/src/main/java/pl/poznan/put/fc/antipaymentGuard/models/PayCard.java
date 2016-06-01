@@ -1,5 +1,6 @@
 package pl.poznan.put.fc.antipaymentGuard.models;
 
+import com.orm.SugarRecord;
 import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 
@@ -143,7 +144,7 @@ public class PayCard implements Serializable {
         if(month == calendar.get(Calendar.MONTH)) {
             return currentMonthTransactions;
         } else {
-            return PayCardTransaction.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
+            return SugarRecord.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
         }
     }
 
@@ -200,8 +201,8 @@ public class PayCard implements Serializable {
         calendar.clear(Calendar.MILLISECOND);
         calendar.set(Calendar.DATE, 1);
         calendar.getTimeInMillis();
-        this.currentMonthTransactions = new ArrayList<>(PayCardTransaction.find(PayCardTransaction.class, "pay_card = ? and date >= ?",
-                getId().toString(), Long.toString(calendar.getTimeInMillis())));
+        this.currentMonthTransactions = new ArrayList<>(SugarRecord.find(PayCardTransaction.class, "pay_card = ? and date >= ?",
+                id.toString(), Long.toString(calendar.getTimeInMillis())));
     }
 
     public void registerTransaction(PayCardTransaction transaction) {

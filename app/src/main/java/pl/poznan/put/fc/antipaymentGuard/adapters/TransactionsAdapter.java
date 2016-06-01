@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orm.SugarRecord;
+
 import java.text.DateFormat;
 import java.util.List;
 
@@ -86,7 +88,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
                             break;
                         }
                         case 2: {
-                            selectedTransaction.delete();
+                            SugarRecord.delete(selectedTransaction);
                             payCardTransactions.remove(selectedTransaction);
                             notifyItemRemoved(getLayoutPosition());
                             Toast.makeText(context, R.string.transaction_deleted, Toast.LENGTH_SHORT).show();

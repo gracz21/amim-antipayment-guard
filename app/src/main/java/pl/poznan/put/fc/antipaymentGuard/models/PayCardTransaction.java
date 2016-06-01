@@ -1,6 +1,6 @@
 package pl.poznan.put.fc.antipaymentGuard.models;
 
-import com.orm.SugarRecord;
+import com.orm.dsl.Table;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -8,7 +8,9 @@ import java.text.DecimalFormat;
 /**
  * @author Kamil Walkowiak
  */
-public class PayCardTransaction extends SugarRecord implements Serializable {
+@Table
+public class PayCardTransaction implements Serializable {
+    private Long id;
     private String name;
     private long date;
     private Double amount;
@@ -28,6 +30,10 @@ public class PayCardTransaction extends SugarRecord implements Serializable {
         this.place = place;
         this.description = description;
         this.payCard = payCard;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -59,6 +65,10 @@ public class PayCardTransaction extends SugarRecord implements Serializable {
         df.setMinimumFractionDigits(2);
         df.setMaximumFractionDigits(2);
         return df.format(amount) + " " + payCard.getCurrencyName();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setName(String name) {

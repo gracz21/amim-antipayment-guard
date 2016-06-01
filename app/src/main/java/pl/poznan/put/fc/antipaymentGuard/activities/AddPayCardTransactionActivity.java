@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 
+import com.orm.SugarRecord;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -109,7 +111,7 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         String description = descriptionEditText.getText().toString();
 
         PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
-        transaction.save();
+        SugarRecord.save(transaction);
 
         finish();
     }
