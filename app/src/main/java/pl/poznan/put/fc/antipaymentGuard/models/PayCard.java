@@ -203,6 +203,12 @@ public class PayCard implements Serializable {
         calendar.getTimeInMillis();
         this.currentMonthTransactions = new ArrayList<>(SugarRecord.find(PayCardTransaction.class, "pay_card = ? and date >= ?",
                 id.toString(), Long.toString(calendar.getTimeInMillis())));
+        for(PayCardTransaction transaction: currentMonthTransactions) {
+            if(transaction.getAmount() < 0) {
+                this.transactionsAmount -= transaction.getAmount();
+                this.transactionsNumber++;
+            }
+        }
     }
 
     public void registerTransaction(PayCardTransaction transaction) {
