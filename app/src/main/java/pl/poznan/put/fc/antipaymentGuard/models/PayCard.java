@@ -27,6 +27,7 @@ public class PayCard implements Serializable {
     private double balance;
     private String currencyName;
     private Date expirationDate;
+    private Date createdAt;
 
     private AmountCondition amountCondition;
     private NumberCondition numberCondition;
@@ -56,6 +57,7 @@ public class PayCard implements Serializable {
         this.isConditionFulfilled = false;
         this.transactionsNumber = 0;
         this.transactionsAmount = 0.0;
+        this.createdAt = new Date();
     }
 
     public PayCard(String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, NumberCondition numberCondition) {
@@ -70,6 +72,7 @@ public class PayCard implements Serializable {
         this.isConditionFulfilled = false;
         this.transactionsNumber = 0;
         this.transactionsAmount = 0.0;
+        this.createdAt = new Date();
     }
 
     public Long getId() {
@@ -106,6 +109,10 @@ public class PayCard implements Serializable {
 
     public NumberCondition getNumberCondition() {
         return numberCondition;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     public boolean isConditionFulfilled() {
@@ -193,6 +200,10 @@ public class PayCard implements Serializable {
         this.amountCondition = null;
     }
 
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public void loadCurrentMonthTransactions() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -200,7 +211,6 @@ public class PayCard implements Serializable {
         calendar.clear(Calendar.SECOND);
         calendar.clear(Calendar.MILLISECOND);
         calendar.set(Calendar.DATE, 1);
-        calendar.getTimeInMillis();
         this.currentMonthTransactions = new ArrayList<>(SugarRecord.find(PayCardTransaction.class, "pay_card = ? and date >= ?",
                 id.toString(), Long.toString(calendar.getTimeInMillis())));
         for(PayCardTransaction transaction: currentMonthTransactions) {

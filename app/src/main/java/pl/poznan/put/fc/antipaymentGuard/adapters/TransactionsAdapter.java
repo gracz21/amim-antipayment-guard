@@ -19,12 +19,14 @@ import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.activities.PayCardTransactionActivity;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
 /**
  * @author Kamil Walkowiak
  */
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.ViewHolder> {
+    private PayCard payCard;
     private List<PayCardTransaction> payCardTransactions;
     private Context context;
 
@@ -88,7 +90,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
                             break;
                         }
                         case 2: {
-                            selectedTransaction.getPayCard().removeTransaction(selectedTransaction);
+                            payCard.removeTransaction(selectedTransaction);
                             SugarRecord.delete(selectedTransaction);
                             payCardTransactions.remove(selectedTransaction);
                             notifyItemRemoved(getLayoutPosition());
@@ -105,7 +107,8 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         }
     }
 
-    public TransactionsAdapter(List<PayCardTransaction> payCardTransactions, Context context) {
+    public TransactionsAdapter(PayCard payCard, List<PayCardTransaction> payCardTransactions, Context context) {
+        this.payCard = payCard;
         this.payCardTransactions = payCardTransactions;
         this.context = context;
     }

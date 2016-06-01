@@ -101,10 +101,6 @@ public class MainActivity extends AppCompatActivity {
             }
             payCards.addAll(loadedPayCards);
             payCardAdapter.notifyItemRangeInserted(0, loadedPayCards.size());
-//            for(PayCard payCard: loadedPayCards) {
-//                Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
-//                Toast.makeText(getApplicationContext(), payCard.getCondition().getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
-//            }
         }
     }
 }

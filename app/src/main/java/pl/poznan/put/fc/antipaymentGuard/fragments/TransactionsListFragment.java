@@ -8,8 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
@@ -24,6 +28,8 @@ public class TransactionsListFragment extends Fragment {
     private static final String payCardArgKey = "payCard";
     private PayCard payCard;
     private List<PayCardTransaction> payCardTransactions;
+
+    private Spinner monthSpinner;
 
     TransactionsAdapter transactionsAdapter;
 
@@ -51,14 +57,47 @@ public class TransactionsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transactions_list, container, false);
 
+        monthSpinner = (Spinner) view.findViewById(R.id.monthSpinner);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this.getContext(),
+                android.R.layout.simple_spinner_item, generateMonthsList());
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        monthSpinner.setAdapter(dataAdapter);
+
         payCardTransactions = new ArrayList<>();
-        transactionsAdapter = new TransactionsAdapter(payCardTransactions, getContext());
+        transactionsAdapter = new TransactionsAdapter(payCard, payCardTransactions, getContext());
         RecyclerView rvTransactions = (RecyclerView) view.findViewById(R.id.transactionsRecyclerView);
         rvTransactions.setAdapter(transactionsAdapter);
         rvTransactions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvTransactions.setHasFixedSize(true);
 
         return view;
+    }
+
+    private List<String> generateMonthsList() {
+        List<String> result = new ArrayList<>();
+
+        Calendar until = Calendar.getInstance();
+        until.setTime(payCard.getCreatedAt());
+        setupCalendar(until);
+
+        Calendar calendar = Calendar.getInstance();
+        setupCalendar(calendar);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM yyyy");
+
+        for(; calendar.getTimeInMillis() >= until.getTimeInMillis(); calendar.add(Calendar.MONTH, -1)) {
+            result.add(dateFormat.format(calendar.getTime()));
+        }
+
+        return result;
+    }
+
+    private void setupCalendar(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.clear(Calendar.MINUTE);
+        calendar.clear(Calendar.SECOND);
+        calendar.clear(Calendar.MILLISECOND);
+        calendar.set(Calendar.DATE, 1);
     }
 
     private class FetchTransactionsTask extends AsyncTask<Void, Void, List<PayCardTransaction>> {
@@ -76,10 +115,6 @@ public class TransactionsListFragment extends Fragment {
             }
             payCardTransactions.addAll(loadedTransactions);
             transactionsAdapter.notifyItemRangeInserted(0, loadedTransactions.size());
-//            for(PayCard payCard: loadedTransactions) {
-//                Log.d("Condition: ", payCard.getCondition().getClass().getSimpleName());
-//                Toast.makeText(getApplicationContext(), payCard.getCondition().getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
-//            }
         }
     }
 }
