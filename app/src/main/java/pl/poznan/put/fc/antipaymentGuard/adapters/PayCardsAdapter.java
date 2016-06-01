@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.orm.SugarRecord;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
@@ -73,10 +72,7 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
             String no = context.getString(R.string.card_no) + ": " + payCard.getCardNumber();
             noTextView.setText(no);
 
-            DecimalFormat df = new DecimalFormat();
-            df.setMinimumFractionDigits(2);
-            df.setMaximumFractionDigits(2);
-            String balance = context.getString(R.string.balance) + ": " + df.format(payCard.getBalance());
+            String balance = context.getString(R.string.balance) + ": " + payCard.getBalanceWithCurrencyName();
             balanceTextView.setText(balance);
         }
 
