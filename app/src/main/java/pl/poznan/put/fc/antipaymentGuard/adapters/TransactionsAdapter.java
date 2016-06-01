@@ -88,6 +88,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
                             break;
                         }
                         case 2: {
+                            selectedTransaction.getPayCard().removeTransaction(selectedTransaction);
                             SugarRecord.delete(selectedTransaction);
                             payCardTransactions.remove(selectedTransaction);
                             notifyItemRemoved(getLayoutPosition());

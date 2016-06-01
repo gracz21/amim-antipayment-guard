@@ -112,6 +112,7 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
 
         PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
         SugarRecord.save(transaction);
+        payCard.registerTransaction(transaction);
 
         finish();
     }
