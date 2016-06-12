@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.orm.SugarRecord;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -96,23 +95,19 @@ public class AddPayCardActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        DecimalFormat df = new DecimalFormat();
-        df.setMinimumFractionDigits(2);
-        df.setMaximumFractionDigits(2);
-
         nameEditText.setText(payCard.getName());
         noEditText.setText(payCard.getCardNumber());
         bankNameEditText.setText(payCard.getBankName());
-        balanceEditText.setText(df.format(payCard.getBalance()));
+        balanceEditText.setText(Double.toString(payCard.getBalance()));
         currencyEditText.setText(payCard.getCurrencyName());
         expirationDateEditText.setText(dateFormat.format(payCard.getExpirationDate()));
         Condition condition = payCard.getCondition();
         if(condition.getClass() == AmountCondition.class) {
             conditionRadioGroup.check(R.id.amountConditionRadioButton);
-            conditionValueEditText.setText(df.format(((AmountCondition)condition).getAmount()));
+            conditionValueEditText.setText(Double.toString(((AmountCondition)condition).getAmount()));
         } else {
             conditionRadioGroup.check(R.id.numberConditionRadioButton);
-            conditionValueEditText.setText(((NumberCondition)condition).getTransactionsNumber());
+            conditionValueEditText.setText(Integer.toString(((NumberCondition)condition).getTransactionsNumber()));
         }
     }
 
