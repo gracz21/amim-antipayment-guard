@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
-import pl.poznan.put.fc.antipaymentGuard.adapters.TransactionsAdapter;
+import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardTransactionsAdapter;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
@@ -31,7 +31,7 @@ public class TransactionsListFragment extends Fragment {
 
     private Spinner monthSpinner;
 
-    TransactionsAdapter transactionsAdapter;
+    PayCardTransactionsAdapter payCardTransactionsAdapter;
 
     public static TransactionsListFragment newInstance(PayCard payCard) {
         Bundle bundle = new Bundle();
@@ -64,9 +64,9 @@ public class TransactionsListFragment extends Fragment {
         monthSpinner.setAdapter(dataAdapter);
 
         payCardTransactions = new ArrayList<>();
-        transactionsAdapter = new TransactionsAdapter(payCard, payCardTransactions, getContext());
+        payCardTransactionsAdapter = new PayCardTransactionsAdapter(payCard, payCardTransactions, getContext());
         RecyclerView rvTransactions = (RecyclerView) view.findViewById(R.id.transactionsRecyclerView);
-        rvTransactions.setAdapter(transactionsAdapter);
+        rvTransactions.setAdapter(payCardTransactionsAdapter);
         rvTransactions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvTransactions.setHasFixedSize(true);
 
@@ -111,10 +111,10 @@ public class TransactionsListFragment extends Fragment {
             int size = payCardTransactions.size();
             if(size != 0) {
                 payCardTransactions.clear();
-                transactionsAdapter.notifyItemRangeRemoved(0, size);
+                payCardTransactionsAdapter.notifyItemRangeRemoved(0, size);
             }
             payCardTransactions.addAll(loadedTransactions);
-            transactionsAdapter.notifyItemRangeInserted(0, loadedTransactions.size());
+            payCardTransactionsAdapter.notifyItemRangeInserted(0, loadedTransactions.size());
         }
     }
 }

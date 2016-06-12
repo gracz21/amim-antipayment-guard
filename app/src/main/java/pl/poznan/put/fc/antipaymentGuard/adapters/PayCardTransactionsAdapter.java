@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.activities.AddPayCardTransactionActivity;
 import pl.poznan.put.fc.antipaymentGuard.activities.PayCardTransactionActivity;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
@@ -25,7 +26,7 @@ import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 /**
  * @author Kamil Walkowiak
  */
-public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.ViewHolder> {
+public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTransactionsAdapter.ViewHolder> {
     private PayCard payCard;
     private List<PayCardTransaction> payCardTransactions;
     private Context context;
@@ -89,6 +90,13 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
                             context.startActivity(intent);
                             break;
                         }
+                        case 1: {
+                            long transactionId = payCardTransactions.get(getLayoutPosition()).getId();
+                            Intent intent = new Intent(context, AddPayCardTransactionActivity.class);
+                            intent.putExtra("transactionId", transactionId);
+                            context.startActivity(intent);
+                            break;
+                        }
                         case 2: {
                             payCard.removeTransaction(selectedTransaction);
                             SugarRecord.delete(selectedTransaction);
@@ -107,7 +115,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         }
     }
 
-    public TransactionsAdapter(PayCard payCard, List<PayCardTransaction> payCardTransactions, Context context) {
+    public PayCardTransactionsAdapter(PayCard payCard, List<PayCardTransaction> payCardTransactions, Context context) {
         this.payCard = payCard;
         this.payCardTransactions = payCardTransactions;
         this.context = context;

@@ -29,8 +29,11 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
     private TextInputEditText placeEditText;
     private TextInputEditText descriptionEditText;
 
+    private DateFormat dateFormat;
     private Date selectedDate;
+
     private PayCard payCard;
+    private PayCardTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,13 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        payCard = (PayCard) getIntent().getSerializableExtra("payCard");
+        Bundle bundle = getIntent().getExtras();
+        if(bundle.containsKey("transactionId")) {
+            transaction = SugarRecord.findById(PayCardTransaction.class, bundle.getLong("transactionId"));
+            setupView();
+        } else {
+            payCard = (PayCard) bundle.getSerializable("payCard");
+        }
     }
 
     @Override
@@ -72,9 +81,17 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         descriptionEditText = (TextInputEditText) findViewById(R.id.descriptionEditText);
     }
 
+    private void setupView() {
+        nameEditText.setText(transaction.getName());
+        amountEditText.setText(Double.toString(transaction.getAmount()));
+        dateEditText.setText(dateFormat.format(transaction.getDate()));
+        placeEditText.setText(transaction.getPlace());
+        descriptionEditText.setText(transaction.getDescription());
+    }
+
     private void setupDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
-        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         final DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -111,9 +128,17 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         String place = placeEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
 
-        PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
-        SugarRecord.save(transaction);
-        payCard.registerTransaction(transaction);
+        if(transaction != null) {
+            transaction.setName(name);
+            transaction.setAmount(amount);
+            transaction.setPlace(place);
+            transaction.setDescription(description);
+            SugarRecord.save(transaction);
+        } else {
+            PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
+            SugarRecord.save(transaction);
+            payCard.registerTransaction(transaction);
+        }
 
         finish();
     }
