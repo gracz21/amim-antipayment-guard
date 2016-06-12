@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import com.orm.SugarRecord;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,8 +38,9 @@ public class AddPayCardActivity extends AppCompatActivity {
     private RadioGroup conditionRadioGroup;
 
     private DatePickerDialog expirationDatePicker;
+    private Date expirationDate;
 
-    private DateFormat dateFormatter;
+    private PayCard payCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +51,6 @@ public class AddPayCardActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        dateFormatter = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
         setupDatePickerDialog();
         setListeners();
@@ -91,12 +88,14 @@ public class AddPayCardActivity extends AppCompatActivity {
 
     private void setupDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
+        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         expirationDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                expirationDateEditText.setText(dateFormatter.format(newDate.getTime()));
+                Calendar date = Calendar.getInstance();
+                date.set(year, monthOfYear, dayOfMonth);
+                expirationDate = date.getTime();
+                expirationDateEditText.setText(dateFormat.format(date.getTime()));
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
@@ -127,30 +126,22 @@ public class AddPayCardActivity extends AppCompatActivity {
         String bankName = bankNameEditText.getText().toString();
         Double balance = Double.parseDouble(balanceEditText.getText().toString());
         String currency = currencyEditText.getText().toString();
-        Date expirationDate = null;
-        try {
-            if(!expirationDateEditText.getText().toString().isEmpty()) {
-                expirationDate = dateFormatter.parse(expirationDateEditText.getText().toString());
-            }
-            String conditionValue = conditionValueEditText.getText().toString();
+        String conditionValue = conditionValueEditText.getText().toString();
 
-            if(conditionRadioGroup.getCheckedRadioButtonId() == R.id.amountConditionRadioButton) {
-                Double conditionAmount = Double.parseDouble(conditionValue);
-                AmountCondition condition = new AmountCondition(conditionAmount);
-                condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
-                SugarRecord.save(payCard);
-            } else {
-                int conditionNumber = Integer.parseInt(conditionValue);
-                NumberCondition condition = new NumberCondition(conditionNumber);
-                condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
-                SugarRecord.save(payCard);
-            }
-            Toast.makeText(getApplicationContext(), R.string.pay_card_created, Toast.LENGTH_SHORT).show();
-            finish();
-        } catch (ParseException e) {
-            Log.e(LOG_TAG, e.getMessage(), e);
+        if(conditionRadioGroup.getCheckedRadioButtonId() == R.id.amountConditionRadioButton) {
+            Double conditionAmount = Double.parseDouble(conditionValue);
+            AmountCondition condition = new AmountCondition(conditionAmount);
+            condition.save();
+            PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
+            SugarRecord.save(payCard);
+        } else {
+            int conditionNumber = Integer.parseInt(conditionValue);
+            NumberCondition condition = new NumberCondition(conditionNumber);
+            condition.save();
+            PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
+            SugarRecord.save(payCard);
         }
+        Toast.makeText(getApplicationContext(), R.string.pay_card_created, Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
