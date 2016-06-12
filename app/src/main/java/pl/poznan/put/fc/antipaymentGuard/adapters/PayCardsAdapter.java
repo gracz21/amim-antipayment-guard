@@ -18,6 +18,7 @@ import com.orm.SugarRecord;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
+import pl.poznan.put.fc.antipaymentGuard.activities.AddPayCardActivity;
 import pl.poznan.put.fc.antipaymentGuard.activities.PayCardActivity;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
@@ -91,6 +92,13 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                             PayCard selectedPayCard = payCards.get(getLayoutPosition());
                             Intent intent = new Intent(context, PayCardActivity.class);
                             intent.putExtra("payCard", selectedPayCard);
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case 1: {
+                            long selectedPayCardId = payCards.get(getLayoutPosition()).getId();
+                            Intent intent = new Intent(context, AddPayCardActivity.class);
+                            intent.putExtra("payCardId", selectedPayCardId);
                             context.startActivity(intent);
                             break;
                         }
