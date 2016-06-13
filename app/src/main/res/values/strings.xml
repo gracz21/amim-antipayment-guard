@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">Antipayment Guard</string>
-    <string name="action_settings">Settings</string>
 
     <string name="dialog_pay_cards_options_activity_main_view">View</string>
     <string name="dialog_pay_cards_options_activity_main_edit">Edit</string>
@@ -41,4 +40,6 @@
     <string name="transactions">Transactions</string>
     <string name="transaction_deleted">Selected transaction has been removed</string>
     <string name="pay_card_deleted">Selected pay card has been removed</string>
+    <string name="backup">Backup to Google Drive</string>
+    <string name="load">Load from Google Drive</string>
 </resources>

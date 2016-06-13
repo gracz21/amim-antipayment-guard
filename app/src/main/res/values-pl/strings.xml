@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings">Ustawienia</string>
     <string name="balance">Saldo</string>
     <string name="name">Nazwa</string>
     <string name="card_no">Numer karty</string>
@@ -38,4 +37,6 @@
     <string name="transactions">Transakcji</string>
     <string name="transaction_deleted">Wybrana transakcja została usunięta</string>
     <string name="pay_card_deleted">Wybrana karta została usunięta</string>
+    <string name="backup">Zapisz na Google Drive</string>
+    <string name="load">Wyczytaj z Google Drive</string>
 </resources>
