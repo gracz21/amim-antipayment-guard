@@ -39,4 +39,8 @@
     <string name="pay_card_deleted">Wybrana karta została usunięta</string>
     <string name="backup">Zapisz na Google Drive</string>
     <string name="load">Wyczytaj z Google Drive</string>
+    <string name="backup_error">Błąd w utworzeniu pliku</string>
+    <string name="backup_success">Zapis kopii bazy zakończony sukcesem</string>
+    <string name="restore_error">Błąd w trakcie przywracania bazy</string>
+    <string name="restore_success">Baza danych została przywrócona\nUruchom aplikację ponownie</string>
 </resources>

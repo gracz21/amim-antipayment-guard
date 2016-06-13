@@ -42,4 +42,8 @@
     <string name="pay_card_deleted">Selected pay card has been removed</string>
     <string name="backup">Backup to Google Drive</string>
     <string name="load">Load from Google Drive</string>
+    <string name="restore_error">Error while trying to restore the database</string>
+    <string name="restore_success">Database have been restored\nRestart app to see changes</string>
+    <string name="backup_error">Error while trying to create the file</string>
+    <string name="backup_success">Database backup successful</string>
 </resources>

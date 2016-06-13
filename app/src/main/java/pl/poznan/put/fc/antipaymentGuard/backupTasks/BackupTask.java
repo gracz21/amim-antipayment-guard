@@ -20,6 +20,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+import pl.poznan.put.fc.antipaymentGuard.R;
+
 /**
  * @author Kamil Walkowiak
  */
@@ -79,9 +81,9 @@ public class BackupTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         if(result == -1) {
-            Toast.makeText(context, "Error while trying to create the file", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.backup_error, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(context, "Database backup successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.backup_success, Toast.LENGTH_LONG).show();
         }
     }
 }

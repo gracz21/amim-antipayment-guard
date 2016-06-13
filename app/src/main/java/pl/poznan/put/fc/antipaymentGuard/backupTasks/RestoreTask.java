@@ -1,8 +1,6 @@
 package pl.poznan.put.fc.antipaymentGuard.backupTasks;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
@@ -20,7 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
-import pl.poznan.put.fc.antipaymentGuard.activities.MainActivity;
+import pl.poznan.put.fc.antipaymentGuard.R;
 
 /**
  * @author Kamil Walkowiak
@@ -71,9 +69,9 @@ public class RestoreTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         if(result == -1) {
-            Toast.makeText(context, "Error while trying to restore the database", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.restore_error, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(context, "Database have been restored.\nRestart app to see changes", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.restore_success, Toast.LENGTH_LONG).show();
         }
     }
 }

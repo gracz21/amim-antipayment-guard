@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Toast.makeText(MainActivity.this, "CONNECTED!!!!", Toast.LENGTH_LONG).show();
         switch (actionId) {
             case BACKUP_ACTION:
                 (new BackupTask(this, mGoogleApiClient)).execute();
