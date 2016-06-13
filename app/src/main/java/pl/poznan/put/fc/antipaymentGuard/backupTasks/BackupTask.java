@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
 /**
@@ -50,10 +49,9 @@ public class BackupTask extends AsyncTask<Void, Void, Void> {
                         }
                         Log.i(TAG, "New contents created.");
                         final DriveContents driveContents = driveContentsResult.getDriveContents();
-                        OutputStream outputStream = driveContentsResult.getDriveContents().getOutputStream();
+                        FileChannel destFileChannel = ((FileOutputStream)driveContentsResult.getDriveContents().getOutputStream()).getChannel();
                         try {
                             FileChannel sourceFileChannel = new FileInputStream(file).getChannel();
-                            FileChannel destFileChannel = ((FileOutputStream)outputStream).getChannel();
                             destFileChannel.transferFrom(sourceFileChannel, 0, sourceFileChannel.size());
                             sourceFileChannel.close();
                             destFileChannel.close();

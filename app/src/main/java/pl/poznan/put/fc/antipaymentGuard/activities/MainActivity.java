@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             case 1:
                 if (resultCode == RESULT_OK) {
                     DriveId driveId = data.getParcelableExtra(OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
-                    //(new RestoreTask(this, mGoogleApiClient, driveId)).execute();
+                    (new RestoreTask(this, mGoogleApiClient, driveId)).execute();
                 }
                 break;
             default:
