@@ -51,15 +51,14 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
         public void bind(PayCard payCard) {
             String status;
-            if(payCard.isConditionFulfilled()) {
+            if(payCard.getCondition().checkCondition()) {
                 iconImageView.setImageResource(R.drawable.ic_pay_card_fulfilled_48dp);
                 remainedTextView.setTextColor(ContextCompat.getColor(context, R.color.green));
                 status = context.getString(R.string.condition_fulfilled);
             } else {
                 iconImageView.setImageResource(R.drawable.ic_pay_card_not_fulfilled_48dp);
                 remainedTextView.setTextColor(ContextCompat.getColor(context, R.color.red));
-                status = context.getString(R.string.remained) + ": " + payCard.getConditionStatus()
-                        + "/" + payCard.getCondition().toString();
+                status = context.getString(R.string.remained) + ": " + payCard.getCondition().getStatusString();
                 if(payCard.getCondition().getClass() == AmountCondition.class) {
                     status += " " + payCard.getCurrencyName();
                 } else {
@@ -89,9 +88,9 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which) {
                         case 0: {
-                            PayCard selectedPayCard = payCards.get(getLayoutPosition());
+                            long selectedPayCardId = payCards.get(getLayoutPosition()).getId();
                             Intent intent = new Intent(context, PayCardActivity.class);
-                            intent.putExtra("payCard", selectedPayCard);
+                            intent.putExtra("payCardId", selectedPayCardId);
                             context.startActivity(intent);
                             break;
                         }
@@ -120,9 +119,9 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            PayCard selectedPayCard = payCards.get(getLayoutPosition());
+            long selectedPayCardId = payCards.get(getLayoutPosition()).getId();
             Intent intent = new Intent(v.getContext(), PayCardActivity.class);
-            intent.putExtra("payCard", selectedPayCard);
+            intent.putExtra("payCardId", selectedPayCardId);
             v.getContext().startActivity(intent);
         }
     }

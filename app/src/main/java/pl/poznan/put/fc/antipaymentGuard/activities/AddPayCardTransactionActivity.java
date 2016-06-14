@@ -51,7 +51,7 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
             transaction = SugarRecord.findById(PayCardTransaction.class, bundle.getLong("transactionId"));
             setupView();
         } else {
-            payCard = (PayCard) bundle.getSerializable("payCard");
+            payCard = SugarRecord.findById(PayCard.class, bundle.getLong("payCardId"));
         }
     }
 
@@ -137,7 +137,7 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         } else {
             PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
             SugarRecord.save(transaction);
-            payCard.registerTransaction(transaction);
+            payCard.addTransaction(transaction);
         }
 
         finish();

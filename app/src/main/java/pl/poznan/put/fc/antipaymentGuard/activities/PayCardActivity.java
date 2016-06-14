@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.orm.SugarRecord;
+
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardSectionAdapter;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
@@ -26,7 +28,7 @@ public class PayCardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final PayCard payCard = (PayCard) getIntent().getSerializableExtra("payCard");
+        final PayCard payCard = SugarRecord.findById(PayCard.class, getIntent().getExtras().getLong("payCardId"));
         mSectionsPagerAdapter = new PayCardSectionAdapter(getSupportFragmentManager(), this, payCard);
 
 
@@ -65,7 +67,7 @@ public class PayCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PayCardActivity.this, AddPayCardTransactionActivity.class);
-                intent.putExtra("payCard", payCard);
+                intent.putExtra("payCardId", payCard.getId());
                 startActivity(intent);
             }
         });

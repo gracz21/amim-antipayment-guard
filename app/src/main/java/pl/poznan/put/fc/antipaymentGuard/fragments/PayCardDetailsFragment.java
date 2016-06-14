@@ -52,13 +52,13 @@ public class PayCardDetailsFragment extends Fragment {
 
         TextView conditionStatusTextView = (TextView) view.findViewById(R.id.conditionStatusTextView);
         ImageView conditionStatusIcon = (ImageView) view.findViewById(R.id.conditionStatusIconImageView);
-        String status = payCard.getConditionStatus() + "/" + payCard.getCondition().toString();
+        String status = payCard.getCondition().getStatusString();
         if(payCard.getCondition().getClass() == AmountCondition.class) {
             status += " " + payCard.getCurrencyName();
         } else {
             status += " " + context.getString(R.string.transactions);
         }
-        if(payCard.isConditionFulfilled()) {
+        if(payCard.getCondition().checkCondition()) {
             conditionStatusIcon.setImageResource(R.drawable.ic_condition_fulfilled_24dp);
             conditionStatusTextView.setTextColor(ContextCompat.getColor(context, R.color.green));
             status = context.getString(R.string.condition_fulfilled);

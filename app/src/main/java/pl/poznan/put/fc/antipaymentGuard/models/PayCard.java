@@ -33,12 +33,6 @@ public class PayCard implements Serializable {
     private NumberCondition numberCondition;
 
     @Ignore
-    private boolean isConditionFulfilled;
-    @Ignore
-    private int transactionsNumber;
-    @Ignore
-    private double transactionsAmount;
-    @Ignore
     private ArrayList<PayCardTransaction> currentMonthTransactions;
 
     public PayCard() {
@@ -54,9 +48,6 @@ public class PayCard implements Serializable {
         this.expirationDate = expirationDate;
         this.amountCondition = amountCondition;
         this.numberCondition = null;
-        this.isConditionFulfilled = false;
-        this.transactionsNumber = 0;
-        this.transactionsAmount = 0.0;
         this.createdAt = new Date();
     }
 
@@ -69,9 +60,6 @@ public class PayCard implements Serializable {
         this.expirationDate = expirationDate;
         this.numberCondition = numberCondition;
         this.amountCondition = null;
-        this.isConditionFulfilled = false;
-        this.transactionsNumber = 0;
-        this.transactionsAmount = 0.0;
         this.createdAt = new Date();
     }
 
@@ -115,18 +103,6 @@ public class PayCard implements Serializable {
         return createdAt;
     }
 
-    public boolean isConditionFulfilled() {
-        return isConditionFulfilled;
-    }
-
-    public int getTransactionsNumber() {
-        return transactionsNumber;
-    }
-
-    public double getTransactionsAmount() {
-        return transactionsAmount;
-    }
-
     public Condition getCondition() {
         if(amountCondition != null) {
             return amountCondition;
@@ -135,24 +111,8 @@ public class PayCard implements Serializable {
         }
     }
 
-    public String getConditionStatus() {
-        if(amountCondition != null) {
-            DecimalFormat df = new DecimalFormat();
-            df.setMinimumFractionDigits(2);
-            df.setMaximumFractionDigits(2);
-            return df.format(transactionsAmount);
-        } else {
-            return Integer.toString(transactionsNumber);
-        }
-    }
-
     public List<PayCardTransaction> getTransactions(int month) {
-        Calendar calendar = Calendar.getInstance();
-        if(month == calendar.get(Calendar.MONTH)) {
-            return currentMonthTransactions;
-        } else {
-            return SugarRecord.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
-        }
+        return SugarRecord.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
     }
 
     public String getBalanceWithCurrencyName() {
@@ -213,31 +173,31 @@ public class PayCard implements Serializable {
         calendar.set(Calendar.DATE, 1);
         this.currentMonthTransactions = new ArrayList<>(SugarRecord.find(PayCardTransaction.class, "pay_card = ? and date >= ?",
                 id.toString(), Long.toString(calendar.getTimeInMillis())));
-        for(PayCardTransaction transaction: currentMonthTransactions) {
-            if(transaction.getAmount() < 0) {
-                this.transactionsAmount -= transaction.getAmount();
-                this.transactionsNumber++;
-            }
-        }
+//        for(PayCardTransaction transaction: currentMonthTransactions) {
+//            if(transaction.getAmount() < 0) {
+//                this.transactionsAmount -= transaction.getAmount();
+//                this.transactionsNumber++;
+//            }
+//        }
     }
 
-    public void registerTransaction(PayCardTransaction transaction) {
-        this.currentMonthTransactions.add(transaction);
-        double amount = transaction.getAmount();
-        if(amount < 0) {
-            this.transactionsNumber++;
-            this.transactionsAmount -= transaction.getAmount();
+    public void addTransaction(PayCardTransaction transaction) {
+        this.balance += transaction.getAmount();
+        SugarRecord.save(this);
+        if(amountCondition != null) {
+            amountCondition.addTransaction(transaction);
+        } else {
+            numberCondition.addTransaction(transaction);
         }
-        this.balance += amount;
     }
 
     public void removeTransaction(PayCardTransaction transaction) {
-        this.currentMonthTransactions.remove(transaction);
-        double amount = transaction.getAmount();
-        if(amount < 0) {
-            this.transactionsNumber--;
-            this.transactionsAmount += transaction.getAmount();
+        this.balance -= transaction.getAmount();
+        SugarRecord.save(this);
+        if(amountCondition != null) {
+            amountCondition.removeTransaction(transaction);
+        } else {
+            numberCondition.removeTransaction(transaction);
         }
-        this.balance -= amount;
     }
 }

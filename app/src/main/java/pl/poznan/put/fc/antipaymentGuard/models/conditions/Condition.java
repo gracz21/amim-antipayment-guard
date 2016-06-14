@@ -1,13 +1,17 @@
 package pl.poznan.put.fc.antipaymentGuard.models.conditions;
 
-import com.orm.SugarRecord;
+import java.io.Serializable;
+import java.util.List;
+
+import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
 /**
  * @author Kamil Walkowiak
  */
-public abstract class Condition extends SugarRecord {
-    public Condition() {
-    }
-
-    public abstract boolean checkCondition();
+public interface Condition extends Serializable {
+    void calculateConditionStatus(List<PayCardTransaction> transactions);
+    void addTransaction(PayCardTransaction transaction);
+    void removeTransaction(PayCardTransaction transaction);
+    String getStatusString();
+    boolean checkCondition();
 }

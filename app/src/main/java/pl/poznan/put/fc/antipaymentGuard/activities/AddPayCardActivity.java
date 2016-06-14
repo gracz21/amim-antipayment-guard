@@ -104,10 +104,10 @@ public class AddPayCardActivity extends AppCompatActivity {
         Condition condition = payCard.getCondition();
         if(condition.getClass() == AmountCondition.class) {
             conditionRadioGroup.check(R.id.amountConditionRadioButton);
-            conditionValueEditText.setText(Double.toString(((AmountCondition)condition).getAmount()));
+            conditionValueEditText.setText(Double.toString(((AmountCondition)condition).getConditionValue()));
         } else {
             conditionRadioGroup.check(R.id.numberConditionRadioButton);
-            conditionValueEditText.setText(Integer.toString(((NumberCondition)condition).getTransactionsNumber()));
+            conditionValueEditText.setText(Integer.toString(((NumberCondition)condition).getConditionValue()));
         }
     }
 
@@ -162,23 +162,23 @@ public class AddPayCardActivity extends AppCompatActivity {
             if(conditionRadioGroup.getCheckedRadioButtonId() == R.id.amountConditionRadioButton) {
                 Double conditionAmount = Double.parseDouble(conditionValue);
                 if (condition.getClass() == AmountCondition.class) {
-                    ((AmountCondition)condition).setAmount(conditionAmount);
-                    condition.save();
+                    ((AmountCondition)condition).setConditionValue(conditionAmount);
+                    ((AmountCondition)condition).save();
                 } else {
-                    condition.delete();
+                    ((AmountCondition)condition).delete();
                     condition = new AmountCondition(conditionAmount);
-                    condition.save();
+                    ((AmountCondition)condition).save();
                     payCard.setAmountCondition((AmountCondition)condition);
                 }
             } else {
                 int conditionNumber = Integer.parseInt(conditionValue);
                 if (condition.getClass() == NumberCondition.class) {
-                    ((NumberCondition)condition).setTransactionsNumber(conditionNumber);
-                    condition.save();
+                    ((NumberCondition)condition).setConditionValue(conditionNumber);
+                    ((NumberCondition)condition).save();
                 } else {
-                    condition.delete();
+                    ((NumberCondition)condition).delete();
                     condition = new NumberCondition(conditionNumber);
-                    condition.save();
+                    ((NumberCondition)condition).save();
                     payCard.setNumberCondition((NumberCondition)condition);
                 }
             }
