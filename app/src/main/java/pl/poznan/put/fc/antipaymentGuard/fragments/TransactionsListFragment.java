@@ -32,6 +32,7 @@ public class TransactionsListFragment extends Fragment {
     private PayCard payCard;
     private List<PayCardTransaction> payCardTransactions;
 
+    private SimpleDateFormat monthFormatter;
     private Spinner monthSpinner;
 
     PayCardTransactionsAdapter payCardTransactionsAdapter;
@@ -47,6 +48,7 @@ public class TransactionsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        monthFormatter = new SimpleDateFormat("MMM yyyy");
         payCard = (PayCard) getArguments().getSerializable(payCardArgKey);
     }
 
@@ -60,9 +62,7 @@ public class TransactionsListFragment extends Fragment {
         calendar.clear(Calendar.MILLISECOND);
         calendar.set(Calendar.DATE, 1);
         Date startDate = calendar.getTime();
-        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-        Date endDate = calendar.getTime();
-        (new FetchTransactionsTask()).execute(startDate, endDate);
+        (new FetchTransactionsTask()).execute(startDate);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class TransactionsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_transactions_list, container, false);
 
         final List<String> months = generateMonthsList();
-        months.add("May 2016");
+        //months.add("May 2016");
         monthSpinner = (Spinner) view.findViewById(R.id.monthSpinner);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this.getContext(),
                 android.R.layout.simple_spinner_item, months);
@@ -79,18 +79,14 @@ public class TransactionsListFragment extends Fragment {
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM yyyy");
+
                 Date startDate = null;
                 try {
-                    startDate = dateFormat.parse(months.get(position));
+                    startDate = monthFormatter.parse(months.get(position));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(startDate);
-                calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-                Date endDate = calendar.getTime();
-                (new FetchTransactionsTask()).execute(startDate, endDate);
+                (new FetchTransactionsTask()).execute(startDate);
             }
 
             @Override
@@ -117,10 +113,8 @@ public class TransactionsListFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         setupCalendar(calendar);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM yyyy");
-
         for(; calendar.getTimeInMillis() >= until.getTimeInMillis(); calendar.add(Calendar.MONTH, -1)) {
-            result.add(dateFormat.format(calendar.getTime()));
+            result.add(monthFormatter.format(calendar.getTime()));
         }
 
         return result;
@@ -137,7 +131,7 @@ public class TransactionsListFragment extends Fragment {
     private class FetchTransactionsTask extends AsyncTask<Date, Void, List<PayCardTransaction>> {
         @Override
         protected List<PayCardTransaction> doInBackground(Date... params) {
-            return payCard.getTransactions(params[0], params[1]);
+            return payCard.getTransactionsFromMonth(params[0]);
         }
 
         @Override

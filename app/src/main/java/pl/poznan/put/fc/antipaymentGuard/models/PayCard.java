@@ -5,6 +5,7 @@ import com.orm.dsl.Table;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -105,7 +106,11 @@ public class PayCard implements Serializable {
         }
     }
 
-    public List<PayCardTransaction> getTransactions(Date startDate, Date endDate) {
+    public List<PayCardTransaction> getTransactionsFromMonth(Date startDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+        Date endDate = calendar.getTime();
         return SugarRecord.find(PayCardTransaction.class, "pay_card = ? and date >= ? and date <= ?",
                 id.toString(),
                 Long.toString(startDate.getTime()),
