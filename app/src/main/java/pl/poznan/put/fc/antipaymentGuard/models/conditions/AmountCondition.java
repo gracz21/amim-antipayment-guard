@@ -78,4 +78,9 @@ public class AmountCondition extends SugarRecord implements Condition {
     public boolean checkCondition() {
         return false;
     }
+
+    @Override
+    public void resetCondition() {
+        conditionStatus = 0;
+    }
 }

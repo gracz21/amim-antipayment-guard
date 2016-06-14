@@ -1,5 +1,8 @@
 package pl.poznan.put.fc.antipaymentGuard.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.AsyncTask;
@@ -32,6 +35,7 @@ import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardsAdapter;
 import pl.poznan.put.fc.antipaymentGuard.backupTasks.BackupTask;
 import pl.poznan.put.fc.antipaymentGuard.backupTasks.RestoreTask;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.services.NotificationService;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MainActivity";
@@ -66,6 +70,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         rvPayCards.setHasFixedSize(true);
 
         setListeners();
+
+        Intent intent = new Intent(this, NotificationService.class);
+        PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10*1000, pintent);
     }
 
     @Override

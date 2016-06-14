@@ -43,4 +43,5 @@
     <string name="backup_success">Zapis kopii bazy zakończony sukcesem</string>
     <string name="restore_error">Błąd w trakcie przywracania bazy</string>
     <string name="restore_success">Baza danych została przywrócona\nUruchom aplikację ponownie</string>
+    <string name="condition_not_fulfilled">Warunek niespełniony</string>
 </resources>

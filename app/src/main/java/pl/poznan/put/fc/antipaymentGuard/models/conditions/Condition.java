@@ -14,4 +14,5 @@ public interface Condition extends Serializable {
     void removeTransaction(PayCardTransaction transaction);
     String getStatusString();
     boolean checkCondition();
+    void resetCondition();
 }
