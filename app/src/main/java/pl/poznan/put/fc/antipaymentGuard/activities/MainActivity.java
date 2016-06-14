@@ -177,11 +177,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private class FetchPayCardsTask extends AsyncTask<Void, Void, List<PayCard>> {
         @Override
         protected List<PayCard> doInBackground(Void... params) {
-            List<PayCard> result = Select.from(PayCard.class).list();
-            for(PayCard payCard: result) {
-                payCard.loadCurrentMonthTransactions();
-            }
-            return result;
+            return Select.from(PayCard.class).list();
         }
 
         @Override

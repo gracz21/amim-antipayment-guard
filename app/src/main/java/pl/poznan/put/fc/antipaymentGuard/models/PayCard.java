@@ -1,13 +1,10 @@
 package pl.poznan.put.fc.antipaymentGuard.models;
 
 import com.orm.SugarRecord;
-import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +28,6 @@ public class PayCard implements Serializable {
 
     private AmountCondition amountCondition;
     private NumberCondition numberCondition;
-
-    @Ignore
-    private ArrayList<PayCardTransaction> currentMonthTransactions;
 
     public PayCard() {
 
@@ -111,8 +105,11 @@ public class PayCard implements Serializable {
         }
     }
 
-    public List<PayCardTransaction> getTransactions(int month) {
-        return SugarRecord.find(PayCardTransaction.class, "pay_card = ?", getId().toString());
+    public List<PayCardTransaction> getTransactions(Date startDate, Date endDate) {
+        return SugarRecord.find(PayCardTransaction.class, "pay_card = ? and date >= ? and date <= ?",
+                id.toString(),
+                Long.toString(startDate.getTime()),
+                Long.toString(endDate.getTime()));
     }
 
     public String getBalanceWithCurrencyName() {
@@ -162,23 +159,6 @@ public class PayCard implements Serializable {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public void loadCurrentMonthTransactions() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.clear(Calendar.MINUTE);
-        calendar.clear(Calendar.SECOND);
-        calendar.clear(Calendar.MILLISECOND);
-        calendar.set(Calendar.DATE, 1);
-        this.currentMonthTransactions = new ArrayList<>(SugarRecord.find(PayCardTransaction.class, "pay_card = ? and date >= ?",
-                id.toString(), Long.toString(calendar.getTimeInMillis())));
-//        for(PayCardTransaction transaction: currentMonthTransactions) {
-//            if(transaction.getAmount() < 0) {
-//                this.transactionsAmount -= transaction.getAmount();
-//                this.transactionsNumber++;
-//            }
-//        }
     }
 
     public void addTransaction(PayCardTransaction transaction) {
