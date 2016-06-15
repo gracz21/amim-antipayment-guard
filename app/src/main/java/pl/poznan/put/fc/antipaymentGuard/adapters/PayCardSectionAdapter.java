@@ -28,7 +28,7 @@ public class PayCardSectionAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return PayCardDetailsFragment.newInstance(payCard);
+                return PayCardDetailsFragment.newInstance(payCard.getId());
             case 1:
                 return TransactionsListFragment.newInstance(payCard.getId());
         }

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orm.SugarRecord;
+
 import java.text.DateFormat;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
@@ -20,13 +22,18 @@ import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
  * @author Kamil Walkowiak
  */
 public class PayCardDetailsFragment extends Fragment {
-    private static final String payCardArgKey = "payCard";
+    private static final String payCardArgKey = "payCardId";
+    private long payCardId;
     private PayCard payCard;
     private static PayCardDetailsFragment fragment;
+    private TextView balanceTextView;
+    private TextView conditionStatusTextView;
+    private ImageView conditionStatusIcon;
+    private Context context;
 
-    public static PayCardDetailsFragment newInstance(PayCard payCard) {
+    public static PayCardDetailsFragment newInstance(long payCardId) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(payCardArgKey, payCard);
+        bundle.putSerializable(payCardArgKey, payCardId);
         if(fragment == null) {
             fragment = new PayCardDetailsFragment();
         }
@@ -37,13 +44,21 @@ public class PayCardDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        payCard = (PayCard) getArguments().get(payCardArgKey);
+        payCardId = getArguments().getLong(payCardArgKey);
+        payCard = SugarRecord.findById(PayCard.class, payCardId);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        payCard = SugarRecord.findById(PayCard.class, payCardId);
+        setupBalanceAndConditionStatusView();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pay_card_details, container, false);
-        Context context = view.getContext();
+        context = view.getContext();
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context.getApplicationContext());
 
         TextView conditionTypeTextView = (TextView) view.findViewById(R.id.conditionTypeTextView);
@@ -53,8 +68,20 @@ public class PayCardDetailsFragment extends Fragment {
             conditionTypeTextView.setText(context.getString(R.string.condition_transactions_number));
         }
 
-        TextView conditionStatusTextView = (TextView) view.findViewById(R.id.conditionStatusTextView);
-        ImageView conditionStatusIcon = (ImageView) view.findViewById(R.id.conditionStatusIconImageView);
+        conditionStatusTextView = (TextView) view.findViewById(R.id.conditionStatusTextView);
+        conditionStatusIcon = (ImageView) view.findViewById(R.id.conditionStatusIconImageView);
+        balanceTextView = (TextView) view.findViewById(R.id.balanceTextView);
+
+        setupBalanceAndConditionStatusView();
+
+        ((TextView) view.findViewById(R.id.nameTextView)).setText(payCard.getName());
+        ((TextView) view.findViewById(R.id.descriptionTextView)).setText(payCard.getCardNumber());
+        ((TextView) view.findViewById(R.id.bankNameTextView)).setText(payCard.getBankName());
+        ((TextView) view.findViewById(R.id.expirationDateTextView)).setText(dateFormat.format(payCard.getExpirationDate()));
+        return view;
+    }
+
+    private void setupBalanceAndConditionStatusView() {
         String status = payCard.getCondition().getStatusString();
         if(payCard.getCondition().getClass() == AmountCondition.class) {
             status += " " + payCard.getCurrencyName();
@@ -71,11 +98,6 @@ public class PayCardDetailsFragment extends Fragment {
         }
         conditionStatusTextView.setText(status);
 
-        ((TextView) view.findViewById(R.id.nameTextView)).setText(payCard.getName());
-        ((TextView) view.findViewById(R.id.balanceTextView)).setText(payCard.getBalanceWithCurrencyName());
-        ((TextView) view.findViewById(R.id.descriptionTextView)).setText(payCard.getCardNumber());
-        ((TextView) view.findViewById(R.id.bankNameTextView)).setText(payCard.getBankName());
-        ((TextView) view.findViewById(R.id.expirationDateTextView)).setText(dateFormat.format(payCard.getExpirationDate()));
-        return view;
+        balanceTextView.setText(payCard.getBalanceWithCurrencyName());
     }
 }
