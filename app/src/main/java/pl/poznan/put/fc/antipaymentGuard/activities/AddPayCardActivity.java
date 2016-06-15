@@ -17,12 +17,15 @@ import com.orm.SugarRecord;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
+import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
 import pl.poznan.put.fc.antipaymentGuard.models.conditions.Condition;
 import pl.poznan.put.fc.antipaymentGuard.models.conditions.NumberCondition;
+import pl.poznan.put.fc.antipaymentGuard.utils.CurrentMonthStartDateUtil;
 
 public class AddPayCardActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -165,10 +168,13 @@ public class AddPayCardActivity extends AppCompatActivity {
                     ((AmountCondition)condition).setConditionValue(conditionAmount);
                     ((AmountCondition)condition).save();
                 } else {
-                    ((AmountCondition)condition).delete();
+                    ((NumberCondition)condition).delete();
                     condition = new AmountCondition(conditionAmount);
                     ((AmountCondition)condition).save();
                     payCard.setAmountCondition((AmountCondition)condition);
+                    List<PayCardTransaction> transactions = payCard.
+                            getTransactionsFromMonth(CurrentMonthStartDateUtil.getCurrentMonthStartDate());
+                    condition.calculateConditionStatus(transactions);
                 }
             } else {
                 int conditionNumber = Integer.parseInt(conditionValue);
@@ -176,10 +182,13 @@ public class AddPayCardActivity extends AppCompatActivity {
                     ((NumberCondition)condition).setConditionValue(conditionNumber);
                     ((NumberCondition)condition).save();
                 } else {
-                    ((NumberCondition)condition).delete();
+                    ((AmountCondition)condition).delete();
                     condition = new NumberCondition(conditionNumber);
                     ((NumberCondition)condition).save();
                     payCard.setNumberCondition((NumberCondition)condition);
+                    List<PayCardTransaction> transactions = payCard.
+                            getTransactionsFromMonth(CurrentMonthStartDateUtil.getCurrentMonthStartDate());
+                    condition.calculateConditionStatus(transactions);
                 }
             }
 

@@ -39,7 +39,7 @@ public class RestoreTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        final File file = context.getDatabasePath("apg10.db");
+        final File file = context.getDatabasePath("apg11.db");
 
         DriveFile backup = Drive.DriveApi.getFile(googleApiClient, driveId);
         backup.open(googleApiClient, DriveFile.MODE_READ_ONLY, null).setResultCallback(new ResultCallback<DriveApi.DriveContentsResult>() {

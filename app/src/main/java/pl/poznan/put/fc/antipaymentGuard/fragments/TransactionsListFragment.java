@@ -23,6 +23,7 @@ import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.adapters.PayCardTransactionsAdapter;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
+import pl.poznan.put.fc.antipaymentGuard.utils.CurrentMonthStartDateUtil;
 
 /**
  * @author Kamil Walkowiak
@@ -55,13 +56,8 @@ public class TransactionsListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.clear(Calendar.MINUTE);
-        calendar.clear(Calendar.SECOND);
-        calendar.clear(Calendar.MILLISECOND);
-        calendar.set(Calendar.DATE, 1);
-        Date startDate = calendar.getTime();
+
+        Date startDate = CurrentMonthStartDateUtil.getCurrentMonthStartDate();
         (new FetchTransactionsTask()).execute(startDate);
     }
 

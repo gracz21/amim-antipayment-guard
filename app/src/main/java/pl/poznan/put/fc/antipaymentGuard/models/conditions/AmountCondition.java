@@ -44,7 +44,7 @@ public class AmountCondition extends SugarRecord implements Condition {
         conditionStatus = 0;
         for(PayCardTransaction transaction: transactions) {
             if(transaction.getAmount() < 0) {
-                conditionStatus += transaction.getAmount();
+                conditionStatus -= transaction.getAmount();
             }
         }
         this.save();
@@ -53,7 +53,7 @@ public class AmountCondition extends SugarRecord implements Condition {
     @Override
     public void addTransaction(PayCardTransaction transaction) {
         if(transaction.getAmount() < 0) {
-            conditionStatus += transaction.getAmount();
+            conditionStatus -= transaction.getAmount();
         }
         this.save();
     }
@@ -61,7 +61,7 @@ public class AmountCondition extends SugarRecord implements Condition {
     @Override
     public void removeTransaction(PayCardTransaction transaction) {
         if(transaction.getAmount() < 0) {
-            conditionStatus -= transaction.getAmount();
+            conditionStatus += transaction.getAmount();
         }
         this.save();
     }
@@ -76,7 +76,7 @@ public class AmountCondition extends SugarRecord implements Condition {
 
     @Override
     public boolean checkCondition() {
-        return false;
+        return conditionValue <= conditionStatus;
     }
 
     @Override

@@ -72,7 +72,7 @@ public class NumberCondition extends SugarRecord implements Condition {
 
     @Override
     public boolean checkCondition() {
-        return false;
+        return conditionValue <= conditionStatus;
     }
 
     @Override
