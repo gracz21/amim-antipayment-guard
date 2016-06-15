@@ -78,5 +78,6 @@ public class NumberCondition extends SugarRecord implements Condition {
     @Override
     public void resetCondition() {
         conditionStatus = 0;
+        this.save();
     }
 }

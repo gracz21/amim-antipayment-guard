@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 
 import com.orm.SugarRecord;
 
@@ -57,8 +56,6 @@ public class NotificationService extends IntentService {
                 mBuilder.setContentIntent(resultPendingIntent);
                 NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 mNotificationManager.notify(new Random().nextInt(), mBuilder.build());
-
-                Log.d("TMMMMMMMMMMMMMMMMMMMP", payCard.getName());
             }
         }
     }

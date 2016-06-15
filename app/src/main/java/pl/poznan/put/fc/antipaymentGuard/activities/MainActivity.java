@@ -28,6 +28,7 @@ import com.google.android.gms.drive.OpenFileActivityBuilder;
 import com.orm.query.Select;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import pl.poznan.put.fc.antipaymentGuard.R;
@@ -36,6 +37,8 @@ import pl.poznan.put.fc.antipaymentGuard.backupTasks.BackupTask;
 import pl.poznan.put.fc.antipaymentGuard.backupTasks.RestoreTask;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.services.NotificationService;
+import pl.poznan.put.fc.antipaymentGuard.services.ResetConditionsService;
+import pl.poznan.put.fc.antipaymentGuard.utils.CurrentMonthStartDateUtil;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MainActivity";
@@ -70,11 +73,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         rvPayCards.setHasFixedSize(true);
 
         setListeners();
-
-        Intent intent = new Intent(this, NotificationService.class);
-        PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10*1000, pintent);
+        setupNotificationService();
+        setupResetConditionService();
     }
 
     @Override
@@ -131,6 +131,29 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 startActivity(new Intent(MainActivity.this, AddPayCardActivity.class));
             }
         });
+    }
+
+    private void setupNotificationService() {
+        Intent intent = new Intent(this, NotificationService.class);
+        PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10*1000, pintent);
+    }
+
+    private void setupResetConditionService() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(CurrentMonthStartDateUtil.getCurrentMonthStartDate());
+        calendar.add(Calendar.MONTH, 1);
+        long notificationTime = calendar.getTimeInMillis();
+
+        calendar.add(Calendar.MONTH, 1);
+        long nextNotificationTime = calendar.getTimeInMillis();
+
+        Intent intent = new Intent(this, ResetConditionsService.class);
+        PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notificationTime - System.currentTimeMillis(),
+                nextNotificationTime - notificationTime, pintent);
     }
 
     private void connectToGoogleDrive() {
