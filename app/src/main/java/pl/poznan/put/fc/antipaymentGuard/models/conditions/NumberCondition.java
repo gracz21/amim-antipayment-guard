@@ -53,16 +53,16 @@ public class NumberCondition extends SugarRecord implements Condition {
     public void addTransaction(PayCardTransaction transaction) {
         if(transaction.getAmount() < 0) {
             conditionStatus++;
+            this.save();
         }
-        this.save();
     }
 
     @Override
     public void removeTransaction(PayCardTransaction transaction) {
         if(transaction.getAmount() < 0) {
             conditionStatus--;
+            this.save();
         }
-        this.save();
     }
 
     @Override

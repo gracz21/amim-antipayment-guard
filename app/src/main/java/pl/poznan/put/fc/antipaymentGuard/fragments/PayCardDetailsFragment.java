@@ -22,13 +22,16 @@ import pl.poznan.put.fc.antipaymentGuard.models.conditions.AmountCondition;
 public class PayCardDetailsFragment extends Fragment {
     private static final String payCardArgKey = "payCard";
     private PayCard payCard;
+    private static PayCardDetailsFragment fragment;
 
     public static PayCardDetailsFragment newInstance(PayCard payCard) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(payCardArgKey, payCard);
-        PayCardDetailsFragment bankAccountDetailsFragment = new PayCardDetailsFragment();
-        bankAccountDetailsFragment.setArguments(bundle);
-        return bankAccountDetailsFragment;
+        if(fragment == null) {
+            fragment = new PayCardDetailsFragment();
+        }
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

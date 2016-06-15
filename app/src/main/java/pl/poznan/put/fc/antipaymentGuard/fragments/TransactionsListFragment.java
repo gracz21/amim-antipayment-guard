@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.orm.SugarRecord;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,8 +31,9 @@ import pl.poznan.put.fc.antipaymentGuard.utils.CurrentMonthStartDateUtil;
  * @author Kamil Walkowiak
  */
 public class TransactionsListFragment extends Fragment {
-    private static final String payCardArgKey = "payCard";
+    private static final String payCardArgKey = "payCardId";
     private PayCard payCard;
+    private long payCardId;
     private List<PayCardTransaction> payCardTransactions;
 
     private SimpleDateFormat monthFormatter;
@@ -38,9 +41,9 @@ public class TransactionsListFragment extends Fragment {
 
     PayCardTransactionsAdapter payCardTransactionsAdapter;
 
-    public static TransactionsListFragment newInstance(PayCard payCard) {
+    public static TransactionsListFragment newInstance(long payCardId) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(payCardArgKey, payCard);
+        bundle.putSerializable(payCardArgKey, payCardId);
         TransactionsListFragment transactionsListFragment = new TransactionsListFragment();
         transactionsListFragment.setArguments(bundle);
         return transactionsListFragment;
@@ -50,13 +53,15 @@ public class TransactionsListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         monthFormatter = new SimpleDateFormat("MMM yyyy");
-        payCard = (PayCard) getArguments().getSerializable(payCardArgKey);
+        payCardId = getArguments().getLong(payCardArgKey);
+        payCard = SugarRecord.findById(PayCard.class, payCardId);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
+        payCard = SugarRecord.findById(PayCard.class, payCardId);
         Date startDate = CurrentMonthStartDateUtil.getCurrentMonthStartDate();
         (new FetchTransactionsTask()).execute(startDate);
     }

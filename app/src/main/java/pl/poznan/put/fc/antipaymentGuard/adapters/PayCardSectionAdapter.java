@@ -30,7 +30,7 @@ public class PayCardSectionAdapter extends FragmentPagerAdapter {
             case 0:
                 return PayCardDetailsFragment.newInstance(payCard);
             case 1:
-                return TransactionsListFragment.newInstance(payCard);
+                return TransactionsListFragment.newInstance(payCard.getId());
         }
         return null;
     }

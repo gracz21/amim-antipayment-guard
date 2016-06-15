@@ -149,11 +149,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         calendar.add(Calendar.MONTH, 1);
         long nextNotificationTime = calendar.getTimeInMillis();
 
+        Log.d("Cos", Long.toString(notificationTime - System.currentTimeMillis()));
+
         Intent intent = new Intent(this, ResetConditionsService.class);
         PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notificationTime - System.currentTimeMillis(),
-                nextNotificationTime - notificationTime, pintent);
+        //AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notificationTime - System.currentTimeMillis(),
+                //nextNotificationTime - notificationTime, pintent);
     }
 
     private void connectToGoogleDrive() {
