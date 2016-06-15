@@ -49,6 +49,7 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle.containsKey("transactionId")) {
             transaction = SugarRecord.findById(PayCardTransaction.class, bundle.getLong("transactionId"));
+            payCard = transaction.getPayCard();
             setupView();
         } else {
             payCard = SugarRecord.findById(PayCard.class, bundle.getLong("payCardId"));
@@ -129,11 +130,13 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         String description = descriptionEditText.getText().toString();
 
         if(transaction != null) {
+            payCard.removeTransaction(transaction);
             transaction.setName(name);
             transaction.setAmount(amount);
             transaction.setPlace(place);
             transaction.setDescription(description);
             SugarRecord.save(transaction);
+            payCard.addTransaction(transaction);
         } else {
             PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
             SugarRecord.save(transaction);
