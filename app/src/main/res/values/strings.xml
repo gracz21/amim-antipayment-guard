@@ -47,4 +47,5 @@
     <string name="backup_error">Error while trying to create the file</string>
     <string name="backup_success">Database backup successful</string>
     <string name="condition_not_fulfilled">Condition not fulfilled</string>
+    <string name="not_valid">Can\'t be empty</string>
 </resources>

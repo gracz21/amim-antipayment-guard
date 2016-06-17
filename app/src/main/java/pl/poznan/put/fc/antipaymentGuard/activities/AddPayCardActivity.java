@@ -2,8 +2,10 @@ package pl.poznan.put.fc.antipaymentGuard.activities;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,11 @@ import pl.poznan.put.fc.antipaymentGuard.utils.CurrentMonthStartDateUtil;
 
 public class AddPayCardActivity extends AppCompatActivity {
     private Toolbar toolbar;
+
+    private TextInputLayout nameTextInputLayout;
+    private TextInputLayout noTextInputLayout;
+    private TextInputLayout currencyNameTextInputLayout;
+    private TextInputLayout conditionValueTextInputLayout;
 
     private EditText nameEditText;
     private EditText noEditText;
@@ -75,7 +82,9 @@ public class AddPayCardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_add) {
-            addNewPayCard();
+            if(validate()) {
+                addNewPayCard();
+            }
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -85,14 +94,31 @@ public class AddPayCardActivity extends AppCompatActivity {
     private void findViewsByIds() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        nameTextInputLayout = (TextInputLayout) findViewById(R.id.nameTextInputLayout);
+        noTextInputLayout = (TextInputLayout) findViewById(R.id.noTextInputLayout);
+        currencyNameTextInputLayout = (TextInputLayout) findViewById(R.id.currencyTextInputLayout);
+        conditionValueTextInputLayout = (TextInputLayout) findViewById(R.id.conditionValueTextInputLayout);
+
         nameEditText = (EditText) findViewById(R.id.nameEditText);
-        noEditText = (EditText) findViewById(R.id.amountEditText);
+        noEditText = (EditText) findViewById(R.id.noTextInputEditText);
         bankNameEditText = (EditText) findViewById(R.id.placeEditText);
         currencyEditText = (EditText) findViewById(R.id.currencyEditText);
         expirationDateEditText = (EditText) findViewById(R.id.dateEditText);
         expirationDateEditText.setKeyListener(null);
         conditionValueEditText = (EditText) findViewById(R.id.conditionValueEditText);
         conditionRadioGroup = (RadioGroup) findViewById(R.id.conditionRadioGroup);
+
+        conditionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                conditionValueEditText.setText("");
+                if(checkedId == R.id.amountConditionRadioButton) {
+                    conditionValueEditText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+                } else {
+                    conditionValueEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                }
+            }
+        });
     }
 
     private void setupViews() {
@@ -100,7 +126,9 @@ public class AddPayCardActivity extends AppCompatActivity {
         noEditText.setText(payCard.getCardNumber());
         bankNameEditText.setText(payCard.getBankName());
         currencyEditText.setText(payCard.getCurrencyName());
-        expirationDateEditText.setText(dateFormat.format(payCard.getExpirationDate()));
+        if(payCard.getExpirationDate() != null) {
+            expirationDateEditText.setText(dateFormat.format(payCard.getExpirationDate()));
+        }
         Condition condition = payCard.getCondition();
         if(condition.getClass() == AmountCondition.class) {
             conditionRadioGroup.check(R.id.amountConditionRadioButton);
@@ -142,6 +170,29 @@ public class AddPayCardActivity extends AppCompatActivity {
                 expirationDatePicker.show();
             }
         });
+    }
+
+    private boolean validate() {
+        boolean valid = true;
+        String info = getString(R.string.not_valid);
+        if(nameEditText.getText().length() == 0) {
+            nameTextInputLayout.setError(info);
+            valid = false;
+        }
+        if(noEditText.getText().length() == 0) {
+            noTextInputLayout.setError(info);
+            valid = false;
+        }
+        if(currencyEditText.getText().length() == 0) {
+            currencyNameTextInputLayout.setError(info);
+            valid = false;
+        }
+        if(conditionValueEditText.getText().length() == 0) {
+            conditionValueTextInputLayout.setError(info);
+            valid = false;
+        }
+
+        return valid;
     }
 
     private void addNewPayCard() {
