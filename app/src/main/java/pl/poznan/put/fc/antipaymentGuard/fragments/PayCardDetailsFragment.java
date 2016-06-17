@@ -48,7 +48,6 @@ public class PayCardDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        payCard = SugarRecord.findById(PayCard.class, payCardId);
         updateBalanceAndConditionStatusView();
     }
 
@@ -78,7 +77,9 @@ public class PayCardDetailsFragment extends Fragment {
         return view;
     }
 
-    private void updateBalanceAndConditionStatusView() {
+    public void updateBalanceAndConditionStatusView() {
+        payCard = SugarRecord.findById(PayCard.class, payCardId);
+
         String status = payCard.getCondition().getStatusString();
         if(payCard.getCondition().getClass() == AmountCondition.class) {
             status += " " + payCard.getCurrencyName();

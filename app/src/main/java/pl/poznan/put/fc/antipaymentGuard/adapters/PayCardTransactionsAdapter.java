@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import java.util.List;
 import pl.poznan.put.fc.antipaymentGuard.R;
 import pl.poznan.put.fc.antipaymentGuard.activities.AddPayCardTransactionActivity;
 import pl.poznan.put.fc.antipaymentGuard.activities.PayCardTransactionActivity;
+import pl.poznan.put.fc.antipaymentGuard.fragments.PayCardDetailsFragment;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCard;
 import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
@@ -102,6 +105,10 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
                             SugarRecord.delete(selectedTransaction);
                             payCardTransactions.remove(selectedTransaction);
                             notifyItemRemoved(getLayoutPosition());
+                            FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
+                            String tag = "android:switcher:" + R.id.container + ":" + 0;
+                            PayCardDetailsFragment payCardDetailsFragment = (PayCardDetailsFragment) manager.findFragmentByTag(tag);
+                            payCardDetailsFragment.updateBalanceAndConditionStatusView();
                             Toast.makeText(context, R.string.transaction_deleted, Toast.LENGTH_SHORT).show();
                             break;
                         }
