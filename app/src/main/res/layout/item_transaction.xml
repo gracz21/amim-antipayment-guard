@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
 
-            android:src="@drawable/ic_transaction_in_48dp"/>
+            android:src="@drawable/ic_transaction_out_48dp"/>
 
         <TextView
             android:id="@+id/transactionTitleTextView"

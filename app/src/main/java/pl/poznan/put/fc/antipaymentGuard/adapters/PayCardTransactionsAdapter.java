@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +34,6 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
     private Context context;
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private ImageView iconImageView;
         private TextView titleTextView;
         private TextView amountTextView;
         private TextView dateTextView;
@@ -43,7 +41,6 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
         public ViewHolder(View itemView) {
             super(itemView);
 
-            iconImageView = (ImageView) itemView.findViewById(R.id.transactionIconImageView);
             titleTextView = (TextView) itemView.findViewById(R.id.transactionTitleTextView);
             amountTextView = (TextView) itemView.findViewById(R.id.transactionAmountTextVew);
             dateTextView = (TextView) itemView.findViewById(R.id.transactionDateTextVew);
@@ -52,12 +49,6 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
         }
 
         public void bind(PayCardTransaction payCardTransaction) {
-            if(payCardTransaction.getAmount() > 0) {
-                iconImageView.setImageResource(R.drawable.ic_transaction_in_48dp);
-            } else {
-                iconImageView.setImageResource(R.drawable.ic_transaction_out_48dp);
-            }
-
             titleTextView.setText(payCardTransaction.getName());
 
             String amount = context.getString(R.string.amount) + ": " + payCardTransaction.getAmountWithCurrencyName();
@@ -101,7 +92,7 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
                             break;
                         }
                         case 2: {
-                            payCard.removeTransaction(selectedTransaction);
+                            payCard.getCondition().removeTransaction(selectedTransaction);
                             SugarRecord.delete(selectedTransaction);
                             payCardTransactions.remove(selectedTransaction);
                             notifyItemRemoved(getLayoutPosition());
@@ -122,8 +113,7 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
         }
     }
 
-    public PayCardTransactionsAdapter(PayCard payCard, List<PayCardTransaction> payCardTransactions, Context context) {
-        this.payCard = payCard;
+    public PayCardTransactionsAdapter(List<PayCardTransaction> payCardTransactions, Context context) {
         this.payCardTransactions = payCardTransactions;
         this.context = context;
     }
@@ -145,5 +135,9 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
     @Override
     public int getItemCount() {
         return payCardTransactions.size();
+    }
+
+    public void setPayCard(PayCard payCard) {
+        this.payCard = payCard;
     }
 }

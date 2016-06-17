@@ -133,18 +133,18 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
         String description = descriptionEditText.getText().toString();
 
         if(transaction != null) {
-            payCard.removeTransaction(transaction);
+            payCard.getCondition().removeTransaction(transaction);
             transaction.setName(name);
             transaction.setAmount(amount);
             transaction.setPlace(place);
             transaction.setDescription(description);
             transaction.setDate(selectedDate.getTime());
             SugarRecord.save(transaction);
-            payCard.addTransaction(transaction);
+            payCard.getCondition().addTransaction(transaction);
         } else {
             PayCardTransaction transaction = new PayCardTransaction(name, selectedDate.getTime(), amount, place, description, payCard);
             SugarRecord.save(transaction);
-            payCard.addTransaction(transaction);
+            payCard.getCondition().addTransaction(transaction);
         }
 
         finish();

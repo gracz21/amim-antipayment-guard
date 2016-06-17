@@ -62,6 +62,7 @@ public class TransactionsListFragment extends Fragment {
         super.onResume();
 
         payCard = SugarRecord.findById(PayCard.class, payCardId);
+        payCardTransactionsAdapter.setPayCard(payCard);
         Date startDate = CurrentMonthStartDateUtil.getCurrentMonthStartDate();
         (new FetchTransactionsTask()).execute(startDate);
     }
@@ -94,7 +95,7 @@ public class TransactionsListFragment extends Fragment {
         });
 
         payCardTransactions = new ArrayList<>();
-        payCardTransactionsAdapter = new PayCardTransactionsAdapter(payCard, payCardTransactions, getContext());
+        payCardTransactionsAdapter = new PayCardTransactionsAdapter(payCardTransactions, getContext());
         RecyclerView rvTransactions = (RecyclerView) view.findViewById(R.id.transactionsRecyclerView);
         rvTransactions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvTransactions.setAdapter(payCardTransactionsAdapter);

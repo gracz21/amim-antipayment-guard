@@ -41,29 +41,23 @@ public class AmountCondition extends SugarRecord implements Condition {
 
     @Override
     public void calculateConditionStatus(List<PayCardTransaction> transactions) {
-        conditionStatus = 0;
+        this.conditionStatus = 0;
         for(PayCardTransaction transaction: transactions) {
-            if(transaction.getAmount() < 0) {
-                conditionStatus -= transaction.getAmount();
-            }
+            this.conditionStatus += transaction.getAmount();
         }
         this.save();
     }
 
     @Override
     public void addTransaction(PayCardTransaction transaction) {
-        if(transaction.getAmount() < 0) {
-            conditionStatus -= transaction.getAmount();
-            this.save();
-        }
+        this.conditionStatus += transaction.getAmount();
+        this.save();
     }
 
     @Override
     public void removeTransaction(PayCardTransaction transaction) {
-        if(transaction.getAmount() < 0) {
-            conditionStatus += transaction.getAmount();
-            this.save();
-        }
+        this.conditionStatus -= transaction.getAmount();
+        this.save();
     }
 
     @Override

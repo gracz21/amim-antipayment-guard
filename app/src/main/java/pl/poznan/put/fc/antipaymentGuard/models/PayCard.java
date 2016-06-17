@@ -147,21 +147,4 @@ public class PayCard implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public void addTransaction(PayCardTransaction transaction) {
-        SugarRecord.save(this);
-        if(amountCondition != null) {
-            amountCondition.addTransaction(transaction);
-        } else {
-            numberCondition.addTransaction(transaction);
-        }
-    }
-
-    public void removeTransaction(PayCardTransaction transaction) {
-        SugarRecord.save(this);
-        if(amountCondition != null) {
-            amountCondition.removeTransaction(transaction);
-        } else {
-            numberCondition.removeTransaction(transaction);
-        }
-    }
 }
