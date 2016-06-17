@@ -4,7 +4,6 @@ import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +21,6 @@ public class PayCard implements Serializable {
     private String name;
     private String cardNumber;
     private String bankName;
-    private double balance;
     private String currencyName;
     private Date expirationDate;
     private Date createdAt;
@@ -34,11 +32,10 @@ public class PayCard implements Serializable {
 
     }
 
-    public PayCard(String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, AmountCondition amountCondition) {
+    public PayCard(String name, String cardNumber, String bankName, String currencyName, Date expirationDate, AmountCondition amountCondition) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.bankName = bankName;
-        this.balance = balance;
         this.currencyName = currencyName;
         this.expirationDate = expirationDate;
         this.amountCondition = amountCondition;
@@ -46,11 +43,10 @@ public class PayCard implements Serializable {
         this.createdAt = new Date();
     }
 
-    public PayCard(String name, String cardNumber, String bankName, double balance, String currencyName, Date expirationDate, NumberCondition numberCondition) {
+    public PayCard(String name, String cardNumber, String bankName, String currencyName, Date expirationDate, NumberCondition numberCondition) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.bankName = bankName;
-        this.balance = balance;
         this.currencyName = currencyName;
         this.expirationDate = expirationDate;
         this.numberCondition = numberCondition;
@@ -68,10 +64,6 @@ public class PayCard implements Serializable {
 
     public String getCardNumber() {
         return cardNumber;
-    }
-
-    public double getBalance() {
-        return balance;
     }
 
     public String getCurrencyName() {
@@ -117,13 +109,6 @@ public class PayCard implements Serializable {
                 Long.toString(endDate.getTime()));
     }
 
-    public String getBalanceWithCurrencyName() {
-        DecimalFormat df = new DecimalFormat();
-        df.setMinimumFractionDigits(2);
-        df.setMaximumFractionDigits(2);
-        return df.format(balance) + " " + currencyName;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -138,10 +123,6 @@ public class PayCard implements Serializable {
 
     public void setBankName(String bankName) {
         this.bankName = bankName;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public void setCurrencyName(String currencyName) {
@@ -167,7 +148,6 @@ public class PayCard implements Serializable {
     }
 
     public void addTransaction(PayCardTransaction transaction) {
-        this.balance += transaction.getAmount();
         SugarRecord.save(this);
         if(amountCondition != null) {
             amountCondition.addTransaction(transaction);
@@ -177,7 +157,6 @@ public class PayCard implements Serializable {
     }
 
     public void removeTransaction(PayCardTransaction transaction) {
-        this.balance -= transaction.getAmount();
         SugarRecord.save(this);
         if(amountCondition != null) {
             amountCondition.removeTransaction(transaction);

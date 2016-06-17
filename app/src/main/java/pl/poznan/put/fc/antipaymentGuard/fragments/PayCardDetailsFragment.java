@@ -25,7 +25,6 @@ public class PayCardDetailsFragment extends Fragment {
     private static final String payCardArgKey = "payCardId";
     private long payCardId;
     private PayCard payCard;
-    private TextView balanceTextView;
     private TextView conditionStatusTextView;
     private ImageView conditionStatusIcon;
     private Context context;
@@ -48,7 +47,7 @@ public class PayCardDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        updateBalanceAndConditionStatusView();
+        updateConditionStatusView();
     }
 
     @Override
@@ -66,9 +65,8 @@ public class PayCardDetailsFragment extends Fragment {
 
         conditionStatusTextView = (TextView) view.findViewById(R.id.conditionStatusTextView);
         conditionStatusIcon = (ImageView) view.findViewById(R.id.conditionStatusIconImageView);
-        balanceTextView = (TextView) view.findViewById(R.id.balanceTextView);
 
-        updateBalanceAndConditionStatusView();
+        updateConditionStatusView();
 
         ((TextView) view.findViewById(R.id.nameTextView)).setText(payCard.getName());
         ((TextView) view.findViewById(R.id.descriptionTextView)).setText(payCard.getCardNumber());
@@ -77,7 +75,7 @@ public class PayCardDetailsFragment extends Fragment {
         return view;
     }
 
-    public void updateBalanceAndConditionStatusView() {
+    public void updateConditionStatusView() {
         payCard = SugarRecord.findById(PayCard.class, payCardId);
 
         String status = payCard.getCondition().getStatusString();
@@ -95,7 +93,5 @@ public class PayCardDetailsFragment extends Fragment {
             conditionStatusTextView.setTextColor(ContextCompat.getColor(context, R.color.red));
         }
         conditionStatusTextView.setText(status);
-
-        balanceTextView.setText(payCard.getBalanceWithCurrencyName());
     }
 }

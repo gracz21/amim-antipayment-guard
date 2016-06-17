@@ -34,7 +34,6 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
         private ImageView iconImageView;
         private TextView nameTextView;
         private TextView noTextView;
-        private TextView balanceTextView;
         private TextView remainedTextView;
 
         public ViewHolder(View itemView) {
@@ -43,7 +42,6 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
             iconImageView = (ImageView) itemView.findViewById(R.id.payCardIconImageView);
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
             noTextView = (TextView) itemView.findViewById(R.id.noLabelTextView);
-            balanceTextView = (TextView) itemView.findViewById(R.id.balanceTextView);
             remainedTextView = (TextView) itemView.findViewById(R.id.remainedTextView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -71,9 +69,6 @@ public class PayCardsAdapter extends RecyclerView.Adapter<PayCardsAdapter.ViewHo
 
             String no = context.getString(R.string.card_no) + ": " + payCard.getCardNumber();
             noTextView.setText(no);
-
-            String balance = context.getString(R.string.balance) + ": " + payCard.getBalanceWithCurrencyName();
-            balanceTextView.setText(balance);
         }
 
         @Override

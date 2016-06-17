@@ -108,7 +108,7 @@ public class PayCardTransactionsAdapter extends RecyclerView.Adapter<PayCardTran
                             FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
                             String tag = "android:switcher:" + R.id.container + ":" + 0;
                             PayCardDetailsFragment payCardDetailsFragment = (PayCardDetailsFragment) manager.findFragmentByTag(tag);
-                            payCardDetailsFragment.updateBalanceAndConditionStatusView();
+                            payCardDetailsFragment.updateConditionStatusView();
                             Toast.makeText(context, R.string.transaction_deleted, Toast.LENGTH_SHORT).show();
                             break;
                         }

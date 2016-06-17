@@ -33,7 +33,6 @@ public class AddPayCardActivity extends AppCompatActivity {
     private EditText nameEditText;
     private EditText noEditText;
     private EditText bankNameEditText;
-    private EditText balanceEditText;
     private EditText currencyEditText;
     private EditText expirationDateEditText;
     private EditText conditionValueEditText;
@@ -89,7 +88,6 @@ public class AddPayCardActivity extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         noEditText = (EditText) findViewById(R.id.amountEditText);
         bankNameEditText = (EditText) findViewById(R.id.placeEditText);
-        balanceEditText = (EditText) findViewById(R.id.balanceEditText);
         currencyEditText = (EditText) findViewById(R.id.currencyEditText);
         expirationDateEditText = (EditText) findViewById(R.id.dateEditText);
         expirationDateEditText.setKeyListener(null);
@@ -101,7 +99,6 @@ public class AddPayCardActivity extends AppCompatActivity {
         nameEditText.setText(payCard.getName());
         noEditText.setText(payCard.getCardNumber());
         bankNameEditText.setText(payCard.getBankName());
-        balanceEditText.setText(Double.toString(payCard.getBalance()));
         currencyEditText.setText(payCard.getCurrencyName());
         expirationDateEditText.setText(dateFormat.format(payCard.getExpirationDate()));
         Condition condition = payCard.getCondition();
@@ -151,7 +148,6 @@ public class AddPayCardActivity extends AppCompatActivity {
         String name = nameEditText.getText().toString();
         String no = noEditText.getText().toString();
         String bankName = bankNameEditText.getText().toString();
-        Double balance = Double.parseDouble(balanceEditText.getText().toString());
         String currency = currencyEditText.getText().toString();
         String conditionValue = conditionValueEditText.getText().toString();
 
@@ -159,7 +155,6 @@ public class AddPayCardActivity extends AppCompatActivity {
             payCard.setName(name);
             payCard.setCardNumber(no);
             payCard.setBankName(bankName);
-            payCard.setBalance(balance);
             payCard.setCurrencyName(currency);
             Condition condition = payCard.getCondition();
             if(conditionRadioGroup.getCheckedRadioButtonId() == R.id.amountConditionRadioButton) {
@@ -198,13 +193,13 @@ public class AddPayCardActivity extends AppCompatActivity {
                 Double conditionAmount = Double.parseDouble(conditionValue);
                 AmountCondition condition = new AmountCondition(conditionAmount);
                 condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
+                PayCard payCard = new PayCard(name, no, bankName, currency, expirationDate, condition);
                 SugarRecord.save(payCard);
             } else {
                 int conditionNumber = Integer.parseInt(conditionValue);
                 NumberCondition condition = new NumberCondition(conditionNumber);
                 condition.save();
-                PayCard payCard = new PayCard(name, no, bankName, balance, currency, expirationDate, condition);
+                PayCard payCard = new PayCard(name, no, bankName, currency, expirationDate, condition);
                 SugarRecord.save(payCard);
             }
             Toast.makeText(getApplicationContext(), R.string.pay_card_created, Toast.LENGTH_SHORT).show();

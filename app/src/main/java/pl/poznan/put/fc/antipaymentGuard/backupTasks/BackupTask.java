@@ -39,7 +39,7 @@ public class BackupTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        final File file = context.getDatabasePath("apg11.db");
+        final File file = context.getDatabasePath("apg12.db");
 
         Drive.DriveApi.newDriveContents(googleApiClient)
                 .setResultCallback(new ResultCallback<DriveApi.DriveContentsResult>() {

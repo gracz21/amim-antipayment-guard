@@ -55,23 +55,13 @@
             android:text="New Text" />
 
         <TextView
-            android:id="@+id/balanceTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_toRightOf="@id/payCardIconImageView"
-            android:layout_toEndOf="@id/payCardIconImageView"
-            android:layout_below="@id/noLabelTextView"
-
-            android:text="New Text" />
-        <TextView
             android:id="@+id/remainedTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_toRightOf="@id/payCardIconImageView"
             android:layout_toEndOf="@id/payCardIconImageView"
-            android:layout_below="@id/balanceTextView"
+            android:layout_below="@id/noLabelTextView"
 
             android:text="New Text" />
     </RelativeLayout>

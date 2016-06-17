@@ -133,7 +133,7 @@
             android:background="#B6B6B6"/>
 
         <ImageView
-            android:id="@+id/balanceIconImageView"
+            android:id="@+id/descriptionIconImageView"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -144,57 +144,6 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
 
-            android:src="@drawable/ic_balance_24dp"/>
-
-        <TextView
-            android:id="@+id/balanceTextView"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_below="@id/separator"
-            android:layout_toRightOf="@id/balanceIconImageView"
-            android:layout_toEndOf="@id/balanceIconImageView"
-
-            android:layout_marginRight="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-
-
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/material_text_title"
-            android:text="New Text" />
-
-        <TextView
-            android:id="@+id/balanceLabelTextView"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_below="@id/balanceTextView"
-            android:layout_toRightOf="@id/balanceIconImageView"
-            android:layout_toEndOf="@id/balanceIconImageView"
-
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-
-            android:text="@string/balance" />
-
-        <ImageView
-            android:id="@+id/descriptionIconImageView"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_below="@id/balanceLabelTextView"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-
             android:src="@drawable/ic_card_no_24dp"/>
 
         <TextView
@@ -203,10 +152,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@id/balanceLabelTextView"
+            android:layout_below="@id/separator"
             android:layout_toRightOf="@id/descriptionIconImageView"
             android:layout_toEndOf="@id/descriptionIconImageView"
 
+            android:layout_marginRight="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
 
