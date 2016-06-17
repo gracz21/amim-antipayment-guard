@@ -71,7 +71,6 @@ public class TransactionsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_transactions_list, container, false);
 
         final List<String> months = generateMonthsList();
-        //months.add("May 2016");
         monthSpinner = (Spinner) view.findViewById(R.id.monthSpinner);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this.getContext(),
                 android.R.layout.simple_spinner_item, months);

@@ -25,7 +25,6 @@ public class PayCardDetailsFragment extends Fragment {
     private static final String payCardArgKey = "payCardId";
     private long payCardId;
     private PayCard payCard;
-    private static PayCardDetailsFragment fragment;
     private TextView balanceTextView;
     private TextView conditionStatusTextView;
     private ImageView conditionStatusIcon;
@@ -34,11 +33,9 @@ public class PayCardDetailsFragment extends Fragment {
     public static PayCardDetailsFragment newInstance(long payCardId) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(payCardArgKey, payCardId);
-        if(fragment == null) {
-            fragment = new PayCardDetailsFragment();
-        }
-        fragment.setArguments(bundle);
-        return fragment;
+        PayCardDetailsFragment bankAccountDetailsFragment = new PayCardDetailsFragment();
+        bankAccountDetailsFragment.setArguments(bundle);
+        return bankAccountDetailsFragment;
     }
 
     @Override
