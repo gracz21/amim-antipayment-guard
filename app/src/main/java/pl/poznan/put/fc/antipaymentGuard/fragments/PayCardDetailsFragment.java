@@ -70,8 +70,24 @@ public class PayCardDetailsFragment extends Fragment {
 
         ((TextView) view.findViewById(R.id.nameTextView)).setText(payCard.getName());
         ((TextView) view.findViewById(R.id.descriptionTextView)).setText(payCard.getCardNumber());
-        ((TextView) view.findViewById(R.id.bankNameTextView)).setText(payCard.getBankName());
-        ((TextView) view.findViewById(R.id.expirationDateTextView)).setText(dateFormat.format(payCard.getExpirationDate()));
+
+        TextView bankNameTextView = (TextView) view.findViewById(R.id.bankNameTextView);
+        if(payCard.getBankName() != null && payCard.getBankName().length() > 0) {
+            bankNameTextView.setText(payCard.getBankName());
+        } else {
+            bankNameTextView.setVisibility(View.GONE);
+            (view.findViewById(R.id.bankNameIconImageView)).setVisibility(View.GONE);
+            (view.findViewById(R.id.bankNameLabelTextView)).setVisibility(View.GONE);
+        }
+
+        TextView expirationDateTextView = (TextView) view.findViewById(R.id.expirationDateTextView);
+        if(payCard.getExpirationDate() != null) {
+            expirationDateTextView.setText(dateFormat.format(payCard.getExpirationDate()));
+        } else {
+            expirationDateTextView.setVisibility(View.GONE);
+            (view.findViewById(R.id.expirationDateIconImageView)).setVisibility(View.GONE);
+            (view.findViewById(R.id.expirationDateLabelTextView)).setVisibility(View.GONE);
+        }
         return view;
     }
 

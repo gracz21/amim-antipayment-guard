@@ -44,5 +44,5 @@
     <string name="restore_error">Błąd w trakcie przywracania bazy</string>
     <string name="restore_success">Baza danych została przywrócona\nUruchom aplikację ponownie</string>
     <string name="condition_not_fulfilled">Warunek niespełniony</string>
-    <string name="not_valid">Nie może być pusty</string>
+    <string name="not_valid">Nie może być puste</string>
 </resources>
