@@ -219,10 +219,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             int size = payCards.size();
             if(size != 0) {
                 payCards.clear();
-                payCardAdapter.notifyItemRangeRemoved(0, size);
+                payCardAdapter.notifyDataSetChanged();
             }
             payCards.addAll(loadedPayCards);
-            payCardAdapter.notifyItemRangeInserted(0, loadedPayCards.size());
+            payCardAdapter.notifyDataSetChanged();
         }
     }
 }
