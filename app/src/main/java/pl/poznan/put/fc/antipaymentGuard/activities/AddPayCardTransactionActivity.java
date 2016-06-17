@@ -3,6 +3,7 @@ package pl.poznan.put.fc.antipaymentGuard.activities;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,6 +23,9 @@ import pl.poznan.put.fc.antipaymentGuard.models.PayCardTransaction;
 
 public class AddPayCardTransactionActivity extends AppCompatActivity {
     private Toolbar toolbar;
+
+    private TextInputLayout nameTextInputLayout;
+    private TextInputLayout amountTextInputLayout;
 
     private TextInputEditText nameEditText;
     private TextInputEditText amountEditText;
@@ -68,7 +72,9 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_add) {
-            addNewPayCardTransaction();
+            if(validate()) {
+                addNewPayCardTransaction();
+            }
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -77,6 +83,9 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
 
     private void findViewsByIds() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        nameTextInputLayout = (TextInputLayout) findViewById(R.id.nameTextInputLayout);
+        amountTextInputLayout = (TextInputLayout) findViewById(R.id.amountTextInputLayout);
 
         nameEditText = (TextInputEditText) findViewById(R.id.nameEditText);
         amountEditText = (TextInputEditText) findViewById(R.id.amountEditText);
@@ -124,6 +133,22 @@ public class AddPayCardTransactionActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+    }
+
+    private boolean validate() {
+        boolean valid = true;
+        String info = getString(R.string.not_valid);
+
+        if(nameEditText.length() == 0) {
+            nameTextInputLayout.setError(info);
+            valid = false;
+        }
+        if(amountEditText.length() == 0) {
+            amountTextInputLayout.setError(info);
+            valid = false;
+        }
+
+        return valid;
     }
 
     private void addNewPayCardTransaction() {

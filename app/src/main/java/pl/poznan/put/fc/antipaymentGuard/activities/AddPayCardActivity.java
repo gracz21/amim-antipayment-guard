@@ -175,19 +175,19 @@ public class AddPayCardActivity extends AppCompatActivity {
     private boolean validate() {
         boolean valid = true;
         String info = getString(R.string.not_valid);
-        if(nameEditText.getText().length() == 0) {
+        if(nameEditText.length() == 0) {
             nameTextInputLayout.setError(info);
             valid = false;
         }
-        if(noEditText.getText().length() == 0) {
+        if(noEditText.length() == 0) {
             noTextInputLayout.setError(info);
             valid = false;
         }
-        if(currencyEditText.getText().length() == 0) {
+        if(currencyEditText.length() == 0) {
             currencyNameTextInputLayout.setError(info);
             valid = false;
         }
-        if(conditionValueEditText.getText().length() == 0) {
+        if(conditionValueEditText.length() == 0) {
             conditionValueTextInputLayout.setError(info);
             valid = false;
         }
