@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class TransactionsListFragment extends Fragment {
         payCard = SugarRecord.findById(PayCard.class, payCardId);
         Date startDate = CurrentMonthStartDateUtil.getCurrentMonthStartDate();
         (new FetchTransactionsTask()).execute(startDate);
+        Log.d("TMP", "Debug");
     }
 
     @Override
@@ -96,8 +98,8 @@ public class TransactionsListFragment extends Fragment {
         payCardTransactions = new ArrayList<>();
         payCardTransactionsAdapter = new PayCardTransactionsAdapter(payCard, payCardTransactions, getContext());
         RecyclerView rvTransactions = (RecyclerView) view.findViewById(R.id.transactionsRecyclerView);
-        rvTransactions.setAdapter(payCardTransactionsAdapter);
         rvTransactions.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvTransactions.setAdapter(payCardTransactionsAdapter);
         rvTransactions.setHasFixedSize(true);
 
         return view;
@@ -139,10 +141,10 @@ public class TransactionsListFragment extends Fragment {
             int size = payCardTransactions.size();
             if(size != 0) {
                 payCardTransactions.clear();
-                payCardTransactionsAdapter.notifyItemRangeRemoved(0, size);
+                payCardTransactionsAdapter.notifyDataSetChanged();
             }
             payCardTransactions.addAll(loadedTransactions);
-            payCardTransactionsAdapter.notifyItemRangeInserted(0, loadedTransactions.size());
+            payCardTransactionsAdapter.notifyDataSetChanged();
         }
     }
 }
