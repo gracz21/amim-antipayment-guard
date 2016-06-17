@@ -49,7 +49,7 @@ public class PayCardDetailsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         payCard = SugarRecord.findById(PayCard.class, payCardId);
-        setupBalanceAndConditionStatusView();
+        updateBalanceAndConditionStatusView();
     }
 
     @Override
@@ -69,7 +69,7 @@ public class PayCardDetailsFragment extends Fragment {
         conditionStatusIcon = (ImageView) view.findViewById(R.id.conditionStatusIconImageView);
         balanceTextView = (TextView) view.findViewById(R.id.balanceTextView);
 
-        setupBalanceAndConditionStatusView();
+        updateBalanceAndConditionStatusView();
 
         ((TextView) view.findViewById(R.id.nameTextView)).setText(payCard.getName());
         ((TextView) view.findViewById(R.id.descriptionTextView)).setText(payCard.getCardNumber());
@@ -78,7 +78,7 @@ public class PayCardDetailsFragment extends Fragment {
         return view;
     }
 
-    private void setupBalanceAndConditionStatusView() {
+    private void updateBalanceAndConditionStatusView() {
         String status = payCard.getCondition().getStatusString();
         if(payCard.getCondition().getClass() == AmountCondition.class) {
             status += " " + payCard.getCurrencyName();

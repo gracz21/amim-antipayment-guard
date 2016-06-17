@@ -31,7 +31,7 @@ public class NotificationService extends IntentService {
         List<PayCard> payCards = SugarRecord.listAll(PayCard.class);
         for(PayCard payCard: payCards){
             if(!payCard.getCondition().checkCondition()) {
-                String notificationMessage = payCard.getName() + ": " + payCard.getCondition().getStatusString();
+                String notificationMessage = payCard.getName() + "\n" + payCard.getCondition().getStatusString();
                 if(payCard.getCondition().getClass() == AmountCondition.class) {
                     notificationMessage += " " + payCard.getCurrencyName();
                 } else {
@@ -42,7 +42,7 @@ public class NotificationService extends IntentService {
                                 .setAutoCancel(true)
                                 .setSmallIcon(R.drawable.ic_condition_not_fulfilled_24dp)
                                 .setContentTitle(getApplicationContext().getString(R.string.condition_not_fulfilled))
-                                .setContentText(notificationMessage);
+                                .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationMessage));
 
                 Intent resultIntent = new Intent(this, PayCardActivity.class);
                 resultIntent.putExtra("payCardId", payCard.getId());
